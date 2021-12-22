@@ -1,6 +1,6 @@
 {
   "name": "convert-units",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Convert between quantities in different units",
   "main": "lib",
   "dependencies": {
@@ -25,6 +25,6 @@
     "ratio",
     "fraction"
   ],
-  "author": "Ben Ng <me@benng.me> (http://benng.me)",
+  "author": "H Pandala",
   "license": "MIT"
 }
