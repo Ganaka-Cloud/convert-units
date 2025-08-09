@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0] - 2025-08-09
+
+- Currency conversions anchored to GBP:
+  - Added `lib/definitions/currency.js` containing uppercase three-letter currency codes with ratios derived from GBP API.
+  - Registered `Currency` measure and updated tests to dynamically include all currency codes.
+- Automatic currency updates:
+  - Added `lib/utils/currencyUpdater.js` to regenerate currency definitions from `@fawazahmed0/currency-api`.
+  - Scheduler runs on initialization and daily at 4:00 AM local time.
+- Documentation:
+  - Added `docs/currency.md` explaining usage and initialization of the updater.
+
 ## [2.4.0] - 2025-08-09
 
 - Modernize codebase to ES6+ (no TypeScript):

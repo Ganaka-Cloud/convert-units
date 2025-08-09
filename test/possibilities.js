@@ -4,6 +4,15 @@ var convert = require('../lib')
 
 assert.options.strict = true;
 
+function getCurrencyCodes() {
+  try {
+    const defs = require('../lib/definitions/currency');
+    return Object.keys(defs.currency);
+  } catch (_) {
+    return [];
+  }
+}
+
 tests['l possibilities'] = function () {
   var actual = convert().from('l').possibilities()
     , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3' ];
@@ -301,6 +310,8 @@ tests['all possibilities'] = function () {
         'yd', 'yd/s2', 'yd/yd', 'yd2', 'yd3', 'yd3/h', 'yd3/min', 'yd3/s', 'year',
         'zcm3', 'zft3', 'zin3', 'zm3', 'zmm3', 'μNm', 'μg', 'μm', 'μs'
   ];
+  // merge currency codes
+  expected = expected.concat(getCurrencyCodes());
   try {
     assert.deepEqual(actual.sort(), expected.sort());
   }

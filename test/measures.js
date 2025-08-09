@@ -4,7 +4,7 @@ var convert = require('../lib')
 
 tests['measures'] = function () {
   var actual = convert().measures()
-    , expected = [ 'Length', 'Acceleration', 'Area-moment', 'Area', 'Force', 'Mass', 'Moment', 'Mass-moment', 'Section-modulus', 'Thermal-expansion', 'Thermal-conductivity', 'Specific-heat-capacity', 'Stefan-Boltzmann', 'Stress-Intensity-Factor', 'J-integral', 'Crack-growth-rate-CorrParam', 'Percent', 'Density', 'Boltzmann', 'Volume', 'Each', 'Temperature', 'LinearCTE', 'Time', 'Digital', 'PartsPer', 'Speed', 'Pace', 'Pressure', 'Current', 'Voltage', 'Power', 'ReactivePower', 'ApparentPower', 'Energy', 'ReactiveEnergy', 'VolumeFlowRate', 'Illuminance', 'Frequency', 'Angle' ];
+    , expected = [ 'Length', 'Acceleration', 'Area-moment', 'Area', 'Force', 'Mass', 'Moment', 'Mass-moment', 'Section-modulus', 'Thermal-expansion', 'Thermal-conductivity', 'Specific-heat-capacity', 'Stefan-Boltzmann', 'Stress-Intensity-Factor', 'J-integral', 'Crack-growth-rate-CorrParam', 'Percent', 'Density', 'Boltzmann', 'Volume', 'Each', 'Temperature', 'LinearCTE', 'Time', 'Digital', 'PartsPer', 'Speed', 'Pace', 'Pressure', 'Current', 'Voltage', 'Power', 'ReactivePower', 'ApparentPower', 'Energy', 'ReactiveEnergy', 'VolumeFlowRate', 'Illuminance', 'Frequency', 'Angle', 'Currency' ];
   assert.deepEqual(actual, expected);
 };
 
