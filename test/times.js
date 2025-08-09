@@ -11,8 +11,8 @@ tests['s to ns'] = function() {
     , 'Expected: ' + expected +', Actual: ' + actual);
 }
 
-tests['s to mu'] = function() {
-  assert.strictEqual( convert(1).from('s').to('mu'), 1000000 );
+tests['s to μs'] = function() {
+  assert.strictEqual( convert(1).from('s').to('μs'), 1000000 );
 };
 
 tests['s to ms'] = function () {
