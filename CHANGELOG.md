@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.1] - 2025-08-09
+
+- Cleanup: Removed server-side `lib/utils/currencyUpdater.js` as browser/Vue apps use in-memory updates.
+
 ## [2.5.0] - 2025-08-09
 
 - Currency conversions anchored to GBP:
