@@ -246,11 +246,140 @@ return _unitCache[abbr] || null;
 
 ## Verification
 
-1. **All existing tests pass:** `npm test` (46 test files)
-2. **New unit tests:** One test file per new measure, testing anchor conversions and cross-system where applicable
-3. **Parametric prefix test:** `test/si-prefixes.js` — for every `expandSI` call, verify all generated units round-trip correctly
-4. **Collision check:** `npm run check:collisions` — zero collisions
-5. **Registry consistency:** `test/registry-consistency.js` — verify `dist/units-registry.json` matches live library output
-6. **LaTeX backward compatibility:** verify all 562 existing `latexUnits.json` entries are preserved in generated output
-7. **Lint + format:** `npm run ci:lint` passes
-8. **Cross-validation with Pint:** For overlapping units, verify conversion results match Python Pint within 1e-9 relative error
+### Phase 0: Audit Existing `to_anchor` Values Against Pint
+
+Before adding new units, verify that the existing ~308 non-currency units already in convert-units use conversion factors that agree with Python Pint. This catches any legacy inaccuracies inherited from the original fork.
+
+**Method:**
+
+1. **Generate a Pint reference dataset** — a Python script (`scripts/gen-pint-reference.py`) that:
+   - Imports `pint`, creates a `UnitRegistry`
+   - For each unit abbreviation that exists in both convert-units and Pint, computes `1 <unit> → <anchor unit>` (e.g., `1 km → ? m`, `1 psi → ? Pa`)
+   - Outputs `pint-reference.json`: `{ "Length": { "km": { "to_anchor_pint": 1000.0, "anchor": "m" }, ... }, ... }`
+
+2. **Run a comparison script** (`scripts/verify-against-pint.js`) that:
+   - Loads `pint-reference.json` and the live convert-units definitions
+   - For each overlapping unit, computes relative error: `|to_anchor_cu - to_anchor_pint| / to_anchor_pint`
+   - Reports discrepancies exceeding 1e-6 (one part per million)
+   - Classifies results as: EXACT MATCH (error = 0), ACCEPTABLE (error < 1e-6), REVIEW (1e-6 < error < 1e-3), WRONG (error > 1e-3)
+
+3. **Fix any WRONG or REVIEW values** — update `to_anchor` in the existing definition files to match NIST/BIPM reference values (which Pint uses).
+
+**Expected overlap by measure (approximate):**
+
+| Measure | convert-units units | Likely Pint overlap | Notes |
+|---|---|---|---|
+| Length | nm, μm, mm, cm, m, km, in, ft, yd, mi, nMi | All | Core SI + imperial |
+| Mass | mg, g, kg, mt, oz, lb, t | All | Check mt vs metric ton |
+| Volume | mm3, cm3, ml, l, kl, m3, tsp, Tbs, fl-oz, cup, pnt, qt, gal | Most | US vs UK fluid measures may differ |
+| Temperature | C, K, F, R | All | Verify transform functions match |
+| Pressure | Pa, hPa, kPa, MPa, bar, psi, torr | Most | torr definition may vary slightly |
+| Energy | J, kJ, Wh, kWh, MWh, BTU | Most | BTU has multiple definitions (IT, th, mean) |
+| Force | N, daN, kN, dyn, lbf, kgf | Most | kgf: verify 9.80665 exact |
+| Power | W, kW, MW, GW, hp | Most | hp: verify which definition (mech vs metric) |
+| Speed | m/s, km/h, mph, knot, ft/s | All | — |
+| Frequency | Hz, kHz, MHz, GHz, THz | All | Pure SI multiples |
+| Current | A, mA, kA | All | Pure SI |
+| Voltage | V, mV, kV | All | Pure SI |
+| Time | s, min, h, d, week, month, year | Most | month/year definitions vary |
+| Angle | deg, rad, grad, arcmin, arcsec | All | — |
+| Digital | b, Kb, Mb, Gb, Tb, B, KB, MB, GB, TB | Some | Pint may not cover all binary variants |
+
+Units unique to convert-units (engineering-specific like area-moment, section-modulus, stress-intensity-factor, J-integral, Stefan-Boltzmann, crack-growth-rate) will not have Pint equivalents — these are skipped in the comparison.
+
+**Acceptance criteria:** All overlapping units either EXACT MATCH or ACCEPTABLE (< 1e-6 relative error). Any REVIEW/WRONG entries fixed before proceeding to new unit additions.
+
+### Phase 1: Test Convention in convert-units
+
+All tests follow the existing patterns established in the codebase. The test framework uses Jake (task runner) + Node.js built-in `assert` module. Tests are CommonJS modules exporting a `tests` object.
+
+**Test file template (one per measure):**
+
+```js
+var convert = require("../lib"),
+  assert = require("assert"),
+  tests = {},
+  ACCURACY = 1 / 1000,
+  percentError = require("../lib/percentError");
+
+// --- Identity tests (same-unit) ---
+tests["N to N"] = function () {
+  assert.strictEqual(convert(1).from("N").to("N"), 1);
+};
+
+// --- Within-system tests (exact ratios) ---
+tests["kN to N"] = function () {
+  assert.strictEqual(convert(1).from("kN").to("N"), 1000);
+};
+
+tests["N to kN"] = function () {
+  assert.strictEqual(convert(1).from("N").to("kN"), 1 / 1000);
+};
+
+// --- Cross-system tests (expect < 0.1% error) ---
+tests["N to lbf"] = function () {
+  var expected = 0.224809,
+    actual = convert(1).from("N").to("lbf");
+  assert.ok(
+    percentError(expected, actual) < ACCURACY,
+    "Expected: " + expected + ", Actual: " + actual
+  );
+};
+
+// --- Round-trip tests (A → B → A should recover original) ---
+tests["N to lbf and back"] = function () {
+  var expected = 100,
+    actual = convert(convert(100).from("N").to("lbf")).from("lbf").to("N");
+  assert.ok(
+    percentError(expected, actual) < ACCURACY,
+    "Expected: " + expected + ", Actual: " + actual
+  );
+};
+
+module.exports = tests;
+```
+
+**Test categories per measure:**
+
+| Category | Method | When to use |
+|---|---|---|
+| **Identity** | `assert.strictEqual(convert(x).from(u).to(u), x)` | Every unit — verifies no corruption |
+| **Within-system exact** | `assert.strictEqual(convert(1).from(a).to(b), ratio)` | Units in the same system where `to_anchor` ratio is exact (e.g., km → m = 1000) |
+| **Cross-system approximate** | `percentError(expected, actual) < ACCURACY` | Metric ↔ imperial where anchor ratio introduces floating-point error; ACCURACY = 1/1000 (0.1%) |
+| **Round-trip** | Convert A → B → A, verify < 0.1% error | Every cross-system pair — catches asymmetric transform bugs |
+| **Edge values** | Test with 0, negative, very large, very small values | Temperature (0°C, -273.15°C), logarithmic (0 dBW), and any unit with `anchor_shift` |
+| **Pint cross-validation** | Compare against `pint-reference.json` values | Every unit that overlaps with Pint — exact factor comparison, not just conversion result |
+
+**`percentError` utility** ([lib/percentError.js](lib/percentError.js)):
+```js
+module.exports = (expected, actual) => Math.abs((expected - actual) / actual);
+```
+
+### Phase 2: Tests for New and Extended Units
+
+1. **Per-measure test files** — one `test/<measure>.js` per new measure (14 files), following the template above. Minimum coverage per file:
+   - 1 identity test per unit
+   - Within-system conversion for each unit to/from anchor
+   - Cross-system round-trip if applicable
+   - Edge value tests for non-linear measures (logarithmic, any with `anchor_shift`)
+
+2. **Extended measure tests** — for the 9 existing measures receiving new units, add new test cases to the existing test files (e.g., add `atm to Pa` test in `test/pressures.js`)
+
+3. **Parametric prefix test** (`test/si-prefixes.js`) — programmatically verify every `expandSI`-generated unit:
+   ```js
+   // For each measure that uses expandSI:
+   //   For each prefixed unit (e.g., μN, mN, kN):
+   //     1. Convert 1 <prefix><base> to <base> — verify equals prefix factor
+   //     2. Convert 1 <base> to <prefix><base> — verify equals 1/prefix factor
+   //     3. Round-trip: <prefix><base> → <base> → <prefix><base> — verify identity
+   ```
+
+4. **Pint cross-validation for new units** — extend `pint-reference.json` to include all newly added units that exist in Pint. Run `scripts/verify-against-pint.js` — all new units must be EXACT MATCH or ACCEPTABLE.
+
+### Phase 3: Infrastructure & CI Tests
+
+5. **Collision check:** `npm run check:collisions` — zero abbreviation collisions across all measures
+6. **Registry consistency:** `test/registry-consistency.js` — verify `dist/units-registry.json` matches live library output (catches stale JSON)
+7. **LaTeX backward compatibility:** verify all 562 existing `latexUnits.json` entries are preserved in generated output
+8. **Lint + format:** `npm run ci:lint` passes
+9. **All existing tests pass:** `npm test` — all 46 existing test files continue to pass (regression guard)
