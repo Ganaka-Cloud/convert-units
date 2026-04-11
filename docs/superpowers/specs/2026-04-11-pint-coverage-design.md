@@ -6,7 +6,7 @@
 
 ## Context
 
-The Ganaka UI workspace-block-composition spec (Activity A, Agent 5) calls for extending `@pandala/convert-units` from 42 measures / ~596 units to 50+ measures / 1000+ units, achieving Python Pint-level unit coverage for conversion only (no dimensional analysis). The library serves as the single source of truth for both the JS frontend (ganaka-ui) and the future Go DimEngine.
+The Ganaka UI workspace-block-composition spec (Activity A, Agent 5) calls for extending `@pandala/convert-units` from 42 measures / ~590 units to 50+ measures / 1000+ units, achieving Python Pint-level unit coverage for conversion only (no dimensional analysis). The library serves as the single source of truth for both the JS frontend (ganaka-ui) and the future Go DimEngine.
 
 Currently, ganaka-ui depends on the public API (`.from().to()`, `.possibilities()`, `.describe()`, `.measures()`, `.list()`) and two hand-maintained JSON files (`latexUnits.json`, `latexUnitTypes.json`) that map unit abbreviations to LaTeX display strings. The only internal dependency is `currencyInit.js` which directly imports `lib/definitions/currency.js`.
 
@@ -33,7 +33,7 @@ expandSI(baseAbbr, baseName, baseToAnchor, prefixes, options?)
 **Returns:** A flat object in the exact shape the engine expects:
 ```js
 {
-  "μN": { name: { singular: "Micronewton", plural: "Micronewtons" }, to_anchor: 1e-6, _latex: "$\\mu N$" },
+  "μN": { name: { singular: "Micronewton", plural: "Micronewtons" }, to_anchor: 1e-6, _latex: "${\\mu}N$" },
   "mN": { name: { singular: "Millinewton", plural: "Millinewtons" }, to_anchor: 1e-3, _latex: "$mN$" },
   "N":  { name: { singular: "Newton",      plural: "Newtons" },      to_anchor: 1,    _latex: "$N$" },
   "kN": { name: { singular: "Kilonewton",  plural: "Kilonewtons" },  to_anchor: 1e3,  _latex: "$kN$" },
@@ -51,7 +51,7 @@ expandSI(baseAbbr, baseName, baseToAnchor, prefixes, options?)
 | f | femto | 10⁻¹⁵ | `$f$` |
 | p | pico | 10⁻¹² | `$p$` |
 | n | nano | 10⁻⁹ | `$n$` |
-| μ | micro | 10⁻⁶ | `$\\mu$` |
+| μ | micro | 10⁻⁶ | `${\\mu}` |
 | m | milli | 10⁻³ | `$m$` |
 | c | centi | 10⁻² | `$c$` |
 | d | deci | 10⁻¹ | `$d$` |
@@ -80,7 +80,7 @@ Spread puts expanded units first; manual entries defined after the spread overri
 
 **`_latex` metadata:** Each unit definition gains an optional `_latex` property. The conversion engine ignores it (it only reads `name`, `to_anchor`, `anchor_shift`). The JSON export script reads it.
 
-### 2. New Measures (14 new definition files + 1 fix)
+### 2. New Measures (15 new definition files + 1 fix)
 
 All registered in `lib/index.js` with `require()` statements.
 
@@ -100,7 +100,8 @@ All registered in `lib/index.js` with `require()` statements.
 | Electric Field | `electric-field.js` | V/m (1) | V/m + SI prefixes | metric | — |
 | Electric Charge | `charge.js` (fix existing) | C (1) | C + SI prefixes, Ah, mAh | metric | Fix: remove copy-paste acceleration units from imperial section |
 | Substance Flow | `substance-flow.js` | mol/s (1) | mol/s, mol/min, mol/L | metric | — |
-| Logarithmic | `logarithmic.js` | dBW (1) | dBW, dBm, dB, Np (neper) | special | Non-linear: requires `transform` functions |
+| Logarithmic Power | `logarithmic-power.js` | dBW (1) | dBW, dBm | metric | Uses `anchor_shift` for dBm (see below) |
+| Logarithmic Ratio | `logarithmic-ratio.js` | dB (1) | dB, Np | metric | Linear ratio: 1 Np = 8.686 dB |
 
 **Logarithmic units — special handling:**
 
@@ -110,11 +111,15 @@ There are two distinct use cases:
 1. **Absolute power levels** (dBW, dBm): These have a fixed reference and can be inter-converted. Anchor: dBW. dBm → dBW via `anchor_shift: -30` (since dBm = dBW + 30). This uses the existing `anchor_shift` mechanism, same as temperature — no `transform` needed.
 2. **Neper ↔ dB**: Np → dB is a linear scaling (`1 Np = 8.685889638 dB`), so it uses a standard `to_anchor` ratio within a single system.
 
-Note: bare "dB" is a relative/dimensionless ratio and cannot be converted to an absolute level like dBW. It will exist in the Logarithmic measure for Np ↔ dB conversion only, not for dB → dBW conversion. The measure will be split into two systems:
-- `absolute`: dBW (anchor), dBm (anchor_shift: 30)
-- `relative`: dB (anchor), Np (to_anchor: 8.685889638)
+Note: bare "dB" is a relative/dimensionless ratio and cannot be converted to an absolute level like dBW.
 
-Cross-system conversion between absolute and relative is **not supported** (they are physically incompatible without a reference power). The engine will throw "Cannot convert incompatible measures" if attempted — which is correct behavior.
+**Important engine constraint:** The conversion engine allows cross-system conversion within the same measure via `_anchors` ratio/transform — it does NOT block it. The "Cannot convert incompatible measures" error only fires when `origin.measure !== destination.measure` (different measures entirely). Therefore, putting absolute and relative dB units in different systems of the same measure would cause the engine to silently produce wrong results (it would attempt a ratio-based conversion between dBW and dB).
+
+**Solution:** Split into two separate measures:
+- **`Logarithmic-power`** (single system `metric`): dBW (anchor, `to_anchor: 1`), dBm (`anchor_shift: 30`, `to_anchor: 1`). Converting dBm ↔ dBW uses the existing `anchor_shift` mechanism.
+- **`Logarithmic-ratio`** (single system `metric`): dB (anchor, `to_anchor: 1`), Np (`to_anchor: 8.685889638`). Converting Np ↔ dB is a simple linear ratio.
+
+This way, attempting `convert(0).from('dBm').to('dB')` correctly throws "Cannot convert incompatible measures of Logarithmic-ratio and Logarithmic-power".
 
 ### 3. Extensions to Existing Measures
 
@@ -129,8 +134,8 @@ Additive changes only — append new units to existing definition files. No exis
 | Power | `power.js` | hp-mech (745.7 W), hp-met (735.499 W), hp-elec (746 W), hp-boiler (9809.5 W), tonRef (3516.85 W) | metric + imperial |
 | Length | `length.js` | Å (1e-10 m), ly (9.461e15 m), AU (1.496e11 m), pc (3.086e16 m) | metric |
 | Length | `length.js` | fathom (6 ft), furlong (660 ft), chain (66 ft) | imperial |
-| Mass | `mass.js` | u/Da (1.66054e-27 kg), grain (6.47989e-5 kg) | metric |
-| Mass | `mass.js` | slug (14.5939 kg as imperial), stone (14 lb), grain (1/7000 lb) | imperial |
+| Mass | `mass.js` | u (1.66054e-27 kg), Da (1.66054e-27 kg) | metric |
+| Mass | `mass.js` | slug (14.5939 kg-equivalent), stone (14 lb), grain (1/7000 lb) | imperial |
 | Volume | `volume.js` | gill, barrel-oil, barrel-beer, bushel, peck, fl-oz-UK | imperial |
 | Time | `time.js` | fortnight (1.2096e6 s), shake (1e-8 s), svedberg (1e-13 s), yr-julian (3.15576e7 s) | metric |
 | Force | `force.js` | pond (9.80665e-3 N), kp (9.80665 N) | metric |
@@ -174,20 +179,27 @@ Loads `lib/index.js`, iterates all measures/systems/units, and outputs three fil
   "latexUnits": {
     "m": "$m$",
     "km": "$km$",
-    "μN": "$\\mu N$"
+    "μm": "${\\mu}m$",
+    "μN": "${\\mu}N$"
   }
 }
 ```
 
+**LaTeX convention (must match existing ganaka-ui patterns):** Micro uses `${\\mu}` prefix (e.g., `"${\\mu}m$"` not `"$\\mu m$"`). Superscripts use `^{n}` (e.g., `"$m^{2}$"`). Fractions use dot separator (e.g., `"$km.h^{-1}$"` for km/h). The generator must follow these conventions — not invent new ones — to be a drop-in replacement.
+
 **`dist/latexUnitTypes.json`** — drop-in for ganaka-ui:
 ```json
-[
-  { "id": 1, "name": "Length", "siunit": "m", "imperialunit": "ft" },
-  { "id": 44, "name": "Viscosity", "siunit": "Pa·s", "imperialunit": "" }
-]
+{
+  "latexUnitTypes": [
+    { "id": 0, "name": "-Select-", "siunit": "--", "imperialunit": "--" },
+    { "id": 1, "name": "--", "siunit": "--", "imperialunit": "--" },
+    { "id": 2, "name": "Length", "siunit": "m", "imperialunit": "ft" },
+    { "id": 44, "name": "Viscosity", "siunit": "Pa·s", "imperialunit": "" }
+  ]
+}
 ```
 
-Existing IDs preserved; new measures get sequential IDs starting after the current max.
+The wrapper key `"latexUnitTypes"` and the placeholder entries (id 0: "-Select-", id 1: "--") must be preserved exactly — ganaka-ui components depend on them. Existing IDs preserved; new measures get sequential IDs starting after the current max (currently 42 for Currency).
 
 **npm scripts:**
 ```json
@@ -227,18 +239,52 @@ return _unitCache[abbr] || null;
 - Exits with non-zero code if collisions found
 - Run in CI alongside lint and tests
 
-### 7. What Does NOT Change
+### 7. ganaka-ui Compatibility
 
-- **Public API:** `.from().to()`, `.possibilities()`, `.describe()`, `.measures()`, `.list()`, `.toBest()` — all signatures and return shapes identical
-- **Currency definitions:** `lib/definitions/currency.js` structure unchanged; ganaka-ui's `currencyInit.js` mutation pattern continues working
-- **Engine logic:** `lib/index.js` `Converter.to()` method unchanged — `to_anchor`, `anchor_shift`, `transform` all work as before
-- **Package name:** Stays `convert-units` in package.json (scoped name handled at publish time)
+ganaka-ui (18 files) depends on convert-units through these integration points:
 
-### 8. Risks and Mitigations
+**Public API (no changes needed):**
+- `.from(abbr).to(abbr)` — returns number. Unchanged.
+- `.possibilities(measure)` — returns `string[]` of abbreviations. Will return more entries (new units) but same shape. Measure names must remain PascalCase (e.g., `"Length"`, `"Pressure"`) to match ganaka-ui's `.describe().measure` lookups.
+- `.describe(abbr)` — returns `{ abbr, measure, system, singular, plural }`. ganaka-ui only accesses `.measure`. Unchanged.
+- `.measures()` — returns `string[]` of measure names. Will return more entries (new measures). Unchanged shape.
+- `.list()`, `.toBest()` — unchanged signatures and return shapes.
+
+**Internal dependency — `currencyInit.js`:**
+- Imports `@pandala/convert-units/lib/definitions/currency.js` directly via dynamic `import()`
+- Accesses `defs.currency` (the unit map) and `defs._anchors` (the anchor config)
+- Mutates in-place: deletes all keys from `defs.currency`, then `Object.assign(targetMap, updated)`
+- Sets `anchors.currency.unit = 'GBP'` and `anchors.currency.ratio = 1`
+- **Guarantee:** `currency.js` will NOT use `expandSI` and its export structure (`{ currency: {...}, _anchors: {...} }`) will remain identical.
+
+**JSON files (generated replacements):**
+- `latexUnits.json`: wrapper structure `{ "latexUnits": { ... } }` must be preserved. All 562 existing entries must appear in the generated output with identical LaTeX strings. New units are additive.
+- `latexUnitTypes.json`: wrapper structure `{ "latexUnitTypes": [...] }` must be preserved. Placeholder entries (id 0: "-Select-", id 1: "--") must be preserved. All existing IDs (2-42) must remain unchanged. New measures get IDs 43+.
+
+**What does NOT change:**
+- Public API signatures and return shapes
+- Currency definition structure
+- Engine logic (`Converter.to()` method)
+- Package name (stays `convert-units`; scoped name handled at publish time)
+- Existing measure names (PascalCase keys in `measures` object)
+- Existing unit abbreviations and their `to_anchor` values (unless corrected by Pint cross-validation in Phase 0)
+
+### 8. Known Abbreviation Collision Risks
+
+The following single-character abbreviations are already in use across existing measures: `m` (meter), `N` (newton), `g` (gram), `t` (metric ton), `l` (liter), `C` (celsius), `K` (kelvin), `F` (fahrenheit), `R` (rankine), `s` (second), `h` (hour), `d` (day), `b` (bit), `B` (byte), `A` (ampere), `V` (volt), `W` (watt), `J` (joule).
+
+New measures must avoid these. Key decisions:
+- **Tesla** (`T`): Safe — `T` is not currently used. But note: `T` is also the tera prefix symbol. Definition files using `expandSI` on Tesla must NOT include `T` as a prefix (that would create `TT`). Tesla itself is defined manually, not via prefix expansion.
+- **Gauss** (`G`): Safe — `G` is not currently used. Same prefix concern as Tesla (`G` is giga). Gauss is defined manually.
+- **Coulomb** (`c`): The existing `charge.js` uses lowercase `c`. This is safe since `C` (uppercase) is Celsius. However, `c` is also the `centi` prefix symbol — definition files that expand with `centi` prefix on a unit whose abbreviation starts with `c` could collide. The collision checker script will catch these.
+- **Becquerel** (`Bq`): Safe — multi-character, no collision.
+- **Weber** (`Wb`): Safe — multi-character, no collision.
+
+### 9. Risks and Mitigations
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Abbreviation collisions across measures | `getUnit()` returns wrong measure | Collision checker in CI; manual audit of all new abbreviations |
+| Abbreviation collisions across measures | `getUnit()` returns wrong measure | Collision checker in CI; manual audit of all new abbreviations (see section 8 above) |
 | Logarithmic transform complexity | Incorrect dB conversions | Cross-validate against Pint's dB conversion test cases |
 | `charge.js` has copy-paste bug (imperial section has acceleration units) | Wiring it into index.js would expose broken units | Fix imperial section before wiring; add tests |
 | LaTeX generation doesn't match ganaka-ui expectations | Broken unit display | Compare generated output against existing `latexUnits.json`; ensure all 562 existing entries preserved |
@@ -357,7 +403,7 @@ module.exports = (expected, actual) => Math.abs((expected - actual) / actual);
 
 ### Phase 2: Tests for New and Extended Units
 
-1. **Per-measure test files** — one `test/<measure>.js` per new measure (14 files), following the template above. Minimum coverage per file:
+1. **Per-measure test files** — one `test/<measure>.js` per new measure (15 new + 1 fixed = 16 files), following the template above. Minimum coverage per file:
    - 1 identity test per unit
    - Within-system conversion for each unit to/from anchor
    - Cross-system round-trip if applicable
