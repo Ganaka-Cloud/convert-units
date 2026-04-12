@@ -127,4 +127,44 @@ tests['gal to l'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New imperial units: gill, bbl-oil, bbl-beer, bu, pk, fl-oz-UK
+// imperial anchor = fl-oz
+tests['gill to fl-oz'] = function () {
+  assert.strictEqual( convert(1).from('gill').to('fl-oz') , 4);
+};
+
+tests['fl-oz to gill'] = function () {
+  assert.strictEqual( convert(4).from('fl-oz').to('gill') , 1);
+};
+
+tests['bbl-oil to gal'] = function () {
+  assert.strictEqual( convert(1).from('bbl-oil').to('gal') , 42);
+};
+
+tests['bbl-beer to gal'] = function () {
+  assert.strictEqual( convert(1).from('bbl-beer').to('gal') , 31);
+};
+
+tests['bu to pk'] = function () {
+  assert.strictEqual( convert(1).from('bu').to('pk') , 4);
+};
+
+tests['pk to bu'] = function () {
+  assert.strictEqual( convert(4).from('pk').to('bu') , 1);
+};
+
+tests['bu to gal'] = function () {
+  var expected = 9.30918
+    , actual = convert(1).from('bu').to('gal');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['fl-oz-UK to fl-oz'] = function () {
+  var expected = 0.96076
+    , actual = convert(1).from('fl-oz-UK').to('fl-oz');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

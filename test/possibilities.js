@@ -15,19 +15,19 @@ function getCurrencyCodes() {
 
 tests['l possibilities'] = function () {
   var actual = convert().from('l').possibilities()
-    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3' ];
+    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3', 'gill', 'bbl-oil', 'bbl-beer', 'bu', 'pk', 'fl-oz-UK' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['kg possibilities'] = function () {
   var actual = convert().from('kg').possibilities()
-    , expected = [ 'μg', 'mg', 'g', 'kg', 'mt', 'oz', 'lb', 't' ];
+    , expected = [ 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'oz', 'lb', 't', 'stone', 'grain', 'slug' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['m possibilities'] = function () {
   var actual = convert().from('m').possibilities()
-    , expected = [ 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi' ];
+    , expected = [ 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -39,13 +39,13 @@ tests['each possibilities'] = function () {
 
 tests['mass possibilities'] = function () {
   var actual = convert().possibilities('Mass')
-    , expected = [ 'μg', 'mg', 'g', 'kg', 'mt', 'oz', 'lb', 't' ];
+    , expected = [ 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'oz', 'lb', 't', 'stone', 'grain', 'slug' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['volume possibilities'] = function () {
   var actual = convert().possibilities('Volume')
-    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3' ];
+    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3', 'gill', 'bbl-oil', 'bbl-beer', 'bu', 'pk', 'fl-oz-UK' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -57,7 +57,7 @@ tests['volume flow rate possibilities'] = function () {
 
 tests['length possibilities'] = function () {
   var actual = convert().possibilities('Length')
-    , expected = [ 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi' ];
+    , expected = [ 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -69,7 +69,7 @@ tests['temperature possibilities'] = function () {
 
 tests['time possibilities'] = function () {
   var actual = convert().possibilities('Time')
-    , expected = ['ns', 'μs', 'ms', 's', 'min', 'h', 'd', 'week', 'month', 'year'];
+    , expected = ['ns', 'μs', 'ms', 's', 'min', 'h', 'd', 'week', 'month', 'year', 'fortnight', 'shake', 'svedberg', 'yr-julian'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -87,7 +87,7 @@ tests['partsPer possibilities'] = function() {
 
 tests['pressure possibilities'] = function() {
   var actual = convert().possibilities('Pressure')
-    , expected = [ 'Pa', 'kPa', 'MPa', 'GPa', 'hPa', 'bar', 'torr', 'psi', 'ksi'];
+    , expected = [ 'Pa', 'kPa', 'MPa', 'GPa', 'hPa', 'bar', 'torr', 'atm', 'mmHg', 'cmH2O', 'mbar', 'psi', 'ksi', 'inHg', 'inH2O'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -111,7 +111,7 @@ tests['voltage possibilities'] = function() {
 
 tests['power possibilities'] = function() {
   var actual = convert().possibilities('Power')
-    , expected = [ 'W', 'mW', 'kW', 'MW', 'GW'];
+    , expected = [ 'W', 'mW', 'kW', 'MW', 'GW', 'hp-mech', 'hp-met', 'hp-elec', 'hp-boiler', 'tonRef'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -129,7 +129,7 @@ tests['apparent power possibilities'] = function() {
 
 tests['energy possibilities'] = function() {
   var actual = convert().possibilities('Energy')
-    , expected = [ 'Wh', 'mWh', 'kWh', 'MWh', 'GWh', 'J', 'kJ', 'Btu(IT)'];
+    , expected = [ 'Wh', 'mWh', 'kWh', 'MWh', 'GWh', 'J', 'kJ', 'cal', 'kcal', 'erg', 'eV', 'keV', 'MeV', 'therm', 'quad', 'toe', 'Btu(IT)'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -171,7 +171,7 @@ tests['area possibilities'] = function() {
 
 tests['force possibilities'] = function() {
   var actual = convert().possibilities('Force')
-    , expected = [ 'dyn', 'N', 'daN', 'kN', 'kgf', 'tfM', 'lbf', 'kipf', 'pdl', 'tfs', 'tfl'];
+    , expected = [ 'dyn', 'N', 'daN', 'kN', 'kgf', 'tfM', 'pond', 'kp', 'lbf', 'kipf', 'pdl', 'tfs', 'tfl'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -284,30 +284,34 @@ tests['all possibilities'] = function () {
         'Pa', 'Pa-sqrt(m)', 'R', 'TB', 'THz', 'Tb', 'Tbs', 'Tbs/s',
         'V', 'VA', 'VAR', 'VARh',
         'W', 'W/cm/C', 'W/m/C', 'W/m/K', 'W/m2/K4', 'W/mm/C', 'Wh',
-        'ac', 'arcmin', 'arcsec',
-        'b', 'bar',
-        'cW/m/C', 'cl', 'cl/s', 'cm', 'cm/cm', 'cm/s2', 'cm2', 'cm3', 'cm3/s', 'cm4',
+        'ac', 'arcmin', 'arcsec', 'atm',
+        'AU',
+        'Å',
+        'b', 'bar', 'bbl-beer', 'bbl-oil', 'bu',
+        'cW/m/C', 'cal', 'chain', 'cl', 'cl/s', 'cmH2O', 'cm', 'cm/cm', 'cm/s2', 'cm2', 'cm3', 'cm3/s', 'cm4',
         'cup', 'cup/s',
-        'd', 'daN', 'deg', 'deg/s', 'dl', 'dl/s', 'dm/s2', 'dyn', 'dz',
-        'ea', 'ev/K',
-        'fl-oz', 'fl-oz/h', 'fl-oz/min', 'fl-oz/s', 'ft', 'ft-cd', 'ft-lb/R', 'ft-lbs/sqin', 'ft-us', 'ft-us/ft-us', 'ft/ft', 'ft/s', 'ft/s2', 'ft2', 'ft3', 'ft3/h', 'ft3/min', 'ft3/s', 'ft4',
-        'g', 'g-force', 'g-force:US', 'gal', 'gal/h', 'gal/min', 'gal/s', 'gpcc', 'gpcm', 'gpl', 'grad',
-        'h', 'hPa', 'hPa-sqrt(m)', 'ha',
-        'in', 'in/in', 'in/s2', 'in2', 'in3', 'in3/h', 'in3/min', 'in3/s', 'in4',
-        'kA', 'kHz', 'kJ', 'kJ/kg/C', 'kJ/kg/K', 'kJ/sqm', 'kN', 'kNm', 'kPa', 'kPa-sqrt(m)', 'kV', 'kVA', 'kVAR', 'kVARh', 'kW', 'kW/m/C', 'kW/m/K', 'kWh',
+        'Da', 'd', 'daN', 'deg', 'deg/s', 'dl', 'dl/s', 'dm/s2', 'dyn', 'dz',
+        'ea', 'eV', 'erg', 'ev/K',
+        'fl-oz', 'fl-oz-UK', 'fl-oz/h', 'fl-oz/min', 'fl-oz/s', 'fortnight', 'ft', 'ft-cd', 'ft-lb/R', 'ft-lbs/sqin', 'ft-us', 'ft-us/ft-us', 'ft/ft', 'ft/s', 'ft/s2', 'ft2', 'ft3', 'ft3/h', 'ft3/min', 'ft3/s', 'ft4', 'fathom', 'furlong',
+        'g', 'g-force', 'g-force:US', 'gal', 'gal/h', 'gal/min', 'gal/s', 'gill', 'gpcc', 'gpcm', 'gpl', 'grad', 'grain',
+        'h', 'hPa', 'hPa-sqrt(m)', 'ha', 'hp-boiler', 'hp-elec', 'hp-mech', 'hp-met',
+        'in', 'in/in', 'inH2O', 'inHg', 'in/s2', 'in2', 'in3', 'in3/h', 'in3/min', 'in3/s', 'in4',
+        'kA', 'kHz', 'kJ', 'kJ/kg/C', 'kJ/kg/K', 'kJ/sqm', 'kN', 'kNm', 'kPa', 'kPa-sqrt(m)', 'kV', 'kVA', 'kVAR', 'kVARh', 'kW', 'kW/m/C', 'kW/m/K', 'kWh', 'kp', 'kcal', 'keV',
         'kg', 'kgcm2', 'kgf', 'kgf-m/kg/C', 'kgfm', 'kgfms2', 'kgm2', 'kgmm2', 'kgpcm', 'kgpl', 'kipf',
         'kl', 'kl/h', 'kl/min', 'kl/s', 'km', 'km/h', 'km/s2', 'km2', 'km3', 'km3/s', 'knot', 'ksi', 'ksi-sqr(in)',
-        'l', 'l/h', 'l/min', 'l/s', 'lb', 'lb-ft2', 'lb-in2', 'lbf', 'lbf-ft', 'lbf-fts2', 'lbf-in', 'lbf-ins2', 'lblpg', 'lbpcft', 'lbpcin', 'lbpcy', 'lbspg', 'lx',
-        'm', 'm/h', 'm/m', 'm/s', 'm/s2', 'm2', 'm3', 'm3/h', 'm3/min', 'm3/s', 'm4', 'mA', 'mHz', 'mJ/kg/C', 'mJ/kg/K', 'mV', 'mVA', 'mVAR', 'mVARh', 'mW', 'mW/m/C', 'mWh', 'mg', 'mi', 'mi/s2', 'mi2', 'min', 'min/km', 'min/mi', 'ml', 'ml/s', 'mm', 'mm/mm', 'mm/s2', 'mm2', 'mm3', 'mm3/s', 'mm4', 'month', 'ms', 'mt',
+        'l', 'l/h', 'l/min', 'l/s', 'lb', 'lb-ft2', 'lb-in2', 'lbf', 'lbf-ft', 'lbf-fts2', 'lbf-in', 'lbf-ins2', 'lblpg', 'lbpcft', 'lbpcin', 'lbpcy', 'lbspg', 'ly', 'lx',
+        'm', 'm/h', 'm/m', 'm/s', 'm/s2', 'm2', 'm3', 'm3/h', 'm3/min', 'm3/s', 'm4', 'mA', 'mHz', 'mJ/kg/C', 'mJ/kg/K', 'mV', 'mVA', 'mVAR', 'mVARh', 'mW', 'mW/m/C', 'mWh', 'mbar', 'mg', 'mi', 'mi/s2', 'mi2', 'min', 'min/km', 'min/mi', 'ml', 'ml/s', 'mm', 'mm/mm', 'mm/s2', 'mm2', 'mm3', 'mm3/s', 'mm4', 'mmHg', 'month', 'ms', 'mt',
+        'MeV',
         'nMi', 'nm', 'ns',
         'oz', 'ozlpg', 'ozpcft', 'ozpcin', 'ozspg',
-        'pdl', 'pdl-ft', 'pdl-in', 'percent', 'pnt', 'pnt/h', 'pnt/min', 'pnt/s', 'ppb', 'ppm', 'ppq', 'ppt', 'psi', 'psi-sqrt(in)',
-        'qt', 'qt/s',
+        'pc', 'pdl', 'pdl-ft', 'pdl-in', 'percent', 'pk', 'pnt', 'pnt/h', 'pnt/min', 'pnt/s', 'pond', 'ppb', 'ppm', 'ppq', 'ppt', 'psi', 'psi-sqrt(in)',
+        'qt', 'qt/s', 'quad',
         'rad', 'rad/s', 'rpm',
-        's', 's/ft', 's/m', 'slpcft',
-        't', 'tfM', 'tfMm', 'tfl', 'tflm', 'tfs', 'tfsm', 'tlpcy', 'torr', 'tpcmm', 'tsp', 'tsp/s', 'tspcy',
+        's', 's/ft', 's/m', 'shake', 'slpcft', 'slug', 'stone', 'svedberg',
+        't', 'tfM', 'tfMm', 'tfl', 'tflm', 'tfs', 'tfsm', 'therm', 'tlpcy', 'toe', 'tonRef', 'torr', 'tpcmm', 'tsp', 'tsp/s', 'tspcy',
+        'u',
         'week',
-        'yd', 'yd/s2', 'yd/yd', 'yd2', 'yd3', 'yd3/h', 'yd3/min', 'yd3/s', 'year',
+        'yd', 'yd/s2', 'yd/yd', 'yd2', 'yd3', 'yd3/h', 'yd3/min', 'yd3/s', 'year', 'yr-julian',
         'zcm3', 'zft3', 'zin3', 'zm3', 'zmm3', 'μNm', 'μg', 'μm', 'μs',
         'Ah', 'mAh', 'c', 'mC', 'μC', 'nC', 'pC'
   ];

@@ -80,4 +80,44 @@ tests['mm to ft'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New units: Å, ly, AU, pc (metric); fathom, furlong, chain (imperial)
+tests['Å to m'] = function () {
+  assert.strictEqual( convert(1).from('Å').to('m') , 1e-10);
+};
+
+tests['m to Å'] = function () {
+  assert.strictEqual( convert(1).from('m').to('Å') , 1e10);
+};
+
+tests['ly to m'] = function () {
+  assert.strictEqual( convert(1).from('ly').to('m') , 9.4607e15);
+};
+
+tests['AU to m'] = function () {
+  assert.strictEqual( convert(1).from('AU').to('m') , 1.495978707e11);
+};
+
+tests['pc to ly'] = function () {
+  var expected = 3.26156
+    , actual = convert(1).from('pc').to('ly');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['fathom to ft'] = function () {
+  assert.strictEqual( convert(1).from('fathom').to('ft') , 6);
+};
+
+tests['furlong to ft'] = function () {
+  assert.strictEqual( convert(1).from('furlong').to('ft') , 660);
+};
+
+tests['chain to ft'] = function () {
+  assert.strictEqual( convert(1).from('chain').to('ft') , 66);
+};
+
+tests['furlong to chain'] = function () {
+  assert.strictEqual( convert(1).from('furlong').to('chain') , 10);
+};
+
 module.exports = tests;

@@ -65,4 +65,32 @@ tests['month to year'] = function () {
   assert.strictEqual( convert(12).from('month').to('year'), 1);
 };
 
+// New units: fortnight, shake, svedberg, yr-julian
+tests['fortnight to s'] = function () {
+  assert.strictEqual( convert(1).from('fortnight').to('s') , 1209600);
+};
+
+tests['s to fortnight'] = function () {
+  var expected = 1
+    , actual = convert(1209600).from('s').to('fortnight');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['shake to s'] = function () {
+  assert.strictEqual( convert(1).from('shake').to('s') , 1e-8);
+};
+
+tests['svedberg to s'] = function () {
+  assert.strictEqual( convert(1).from('svedberg').to('s') , 1e-13);
+};
+
+tests['yr-julian to s'] = function () {
+  assert.strictEqual( convert(1).from('yr-julian').to('s') , 31557600);
+};
+
+tests['fortnight to d'] = function () {
+  assert.strictEqual( convert(1).from('fortnight').to('d') , 14);
+};
+
 module.exports = tests;

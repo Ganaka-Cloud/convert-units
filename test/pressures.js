@@ -66,4 +66,49 @@ tests['psi to hPa'] = function () {
       , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New units: atm, mmHg, cmH2O, mbar (metric); inHg, inH2O (imperial)
+tests['atm to kPa'] = function () {
+  assert.strictEqual( convert(1).from('atm').to('kPa') , 101.325);
+};
+
+tests['kPa to atm'] = function () {
+  var expected = 1
+    , actual = convert(101.325).from('kPa').to('atm');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['mmHg to kPa'] = function () {
+  assert.strictEqual( convert(1).from('mmHg').to('kPa') , 0.133322);
+};
+
+tests['cmH2O to kPa'] = function () {
+  assert.strictEqual( convert(1).from('cmH2O').to('kPa') , 0.0980665);
+};
+
+tests['mbar to kPa'] = function () {
+  assert.strictEqual( convert(1).from('mbar').to('kPa') , 0.1);
+};
+
+tests['inHg to kPa'] = function () {
+  var expected = 3.38639
+    , actual = convert(1).from('inHg').to('kPa');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['inH2O to kPa'] = function () {
+  var expected = 0.249089
+    , actual = convert(1).from('inH2O').to('kPa');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['inHg to psi'] = function () {
+  var expected = 0.491154
+    , actual = convert(1).from('inHg').to('psi');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;
