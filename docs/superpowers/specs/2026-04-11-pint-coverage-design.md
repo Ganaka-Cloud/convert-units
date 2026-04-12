@@ -116,7 +116,7 @@ Note: bare "dB" is a relative/dimensionless ratio and cannot be converted to an 
 **Important engine constraint:** The conversion engine allows cross-system conversion within the same measure via `_anchors` ratio/transform — it does NOT block it. The "Cannot convert incompatible measures" error only fires when `origin.measure !== destination.measure` (different measures entirely). Therefore, putting absolute and relative dB units in different systems of the same measure would cause the engine to silently produce wrong results (it would attempt a ratio-based conversion between dBW and dB).
 
 **Solution:** Split into two separate measures:
-- **`Logarithmic-power`** (single system `metric`): dBW (anchor, `to_anchor: 1`), dBm (`anchor_shift: 30`, `to_anchor: 1`). Converting dBm ↔ dBW uses the existing `anchor_shift` mechanism.
+- **`Logarithmic-power`** (single system `metric`): dBW (anchor, `to_anchor: 1`, `anchor_shift: 0`), dBm (`to_anchor: 1`, `anchor_shift: 30`). The engine subtracts origin's `anchor_shift` and adds destination's — so dBm(20) → dBW: `20 - 30 = -10`. dBW(0) → dBm: `0 + 30 = 30`. This uses the existing `anchor_shift` mechanism identically to temperature (K has `anchor_shift: 273.15`).
 - **`Logarithmic-ratio`** (single system `metric`): dB (anchor, `to_anchor: 1`), Np (`to_anchor: 8.685889638`). Converting Np ↔ dB is a simple linear ratio.
 
 This way, attempting `convert(0).from('dBm').to('dB')` correctly throws "Cannot convert incompatible measures of Logarithmic-ratio and Logarithmic-power".
