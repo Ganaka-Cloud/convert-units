@@ -308,7 +308,8 @@ tests['all possibilities'] = function () {
         't', 'tfM', 'tfMm', 'tfl', 'tflm', 'tfs', 'tfsm', 'tlpcy', 'torr', 'tpcmm', 'tsp', 'tsp/s', 'tspcy',
         'week',
         'yd', 'yd/s2', 'yd/yd', 'yd2', 'yd3', 'yd3/h', 'yd3/min', 'yd3/s', 'year',
-        'zcm3', 'zft3', 'zin3', 'zm3', 'zmm3', 'μNm', 'μg', 'μm', 'μs'
+        'zcm3', 'zft3', 'zin3', 'zm3', 'zmm3', 'μNm', 'μg', 'μm', 'μs',
+        'Ah', 'mAh', 'c', 'mC', 'μC', 'nC', 'pC'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());
