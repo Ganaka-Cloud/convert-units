@@ -21,13 +21,13 @@ tests['l possibilities'] = function () {
 
 tests['kg possibilities'] = function () {
   var actual = convert().from('kg').possibilities()
-    , expected = [ 'pg', 'ng', 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'ct', 'oz', 'lb', 't', 'stone', 'grain', 'slug', 'ozt', 'lbt', 'cwt', 'dr', 'dwt', 'long-ton', 'short-ton' ];
+    , expected = [ 'pg', 'ng', 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'ct', 'm_e', 'm_p', 'm_n', 'mP', 'oz', 'lb', 't', 'stone', 'grain', 'slug', 'ozt', 'lbt', 'cwt', 'dr', 'dwt', 'long-ton', 'short-ton' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['m possibilities'] = function () {
   var actual = convert().from('m').possibilities()
-    , expected = [ 'pm', 'fm', 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Mm', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain', 'league', 'hand', 'rod' ];
+    , expected = [ 'pm', 'fm', 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Mm', 'Å', 'ly', 'AU', 'pc', 'a0', 'lP', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain', 'league', 'hand', 'rod' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -39,7 +39,7 @@ tests['each possibilities'] = function () {
 
 tests['mass possibilities'] = function () {
   var actual = convert().possibilities('Mass')
-    , expected = [ 'pg', 'ng', 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'ct', 'oz', 'lb', 't', 'stone', 'grain', 'slug', 'ozt', 'lbt', 'cwt', 'dr', 'dwt', 'long-ton', 'short-ton' ];
+    , expected = [ 'pg', 'ng', 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'ct', 'm_e', 'm_p', 'm_n', 'mP', 'oz', 'lb', 't', 'stone', 'grain', 'slug', 'ozt', 'lbt', 'cwt', 'dr', 'dwt', 'long-ton', 'short-ton' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -57,7 +57,7 @@ tests['volume flow rate possibilities'] = function () {
 
 tests['length possibilities'] = function () {
   var actual = convert().possibilities('Length')
-    , expected = [ 'pm', 'fm', 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Mm', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain', 'league', 'hand', 'rod' ];
+    , expected = [ 'pm', 'fm', 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Mm', 'Å', 'ly', 'AU', 'pc', 'a0', 'lP', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain', 'league', 'hand', 'rod' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -69,7 +69,7 @@ tests['temperature possibilities'] = function () {
 
 tests['time possibilities'] = function () {
   var actual = convert().possibilities('Time')
-    , expected = ['ps', 'ns', 'μs', 'ms', 's', 'min', 'h', 'd', 'week', 'month', 'year', 'fortnight', 'shake', 'svedberg', 'yr-julian', 'common-yr', 'leap-yr', 'sidereal-day', 'sidereal-yr', 'tropical-yr', 'century', 'millennium'];
+    , expected = ['ps', 'ns', 'μs', 'ms', 's', 'min', 'h', 'd', 'week', 'month', 'year', 'fortnight', 'shake', 'svedberg', 'yr-julian', 'common-yr', 'leap-yr', 'sidereal-day', 'sidereal-yr', 'tropical-yr', 'century', 'millennium', 'tP'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -99,7 +99,7 @@ tests['speed possibilities'] = function() {
 
 tests['current possibilities'] = function() {
   var actual = convert().possibilities('Current')
-    , expected = [ 'A', 'pA', 'nA', 'μA', 'mA', 'kA', 'MA', 'abA', 'Bi', 'statA'];
+    , expected = [ 'A', 'pA', 'nA', 'μA', 'mA', 'kA', 'MA', 'abA', 'Bi', 'statA', 'a_u_current'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -171,7 +171,7 @@ tests['area possibilities'] = function() {
 
 tests['force possibilities'] = function() {
   var actual = convert().possibilities('Force')
-    , expected = [ 'dyn', 'N', 'μN', 'mN', 'kN', 'MN', 'daN', 'kgf', 'tfM', 'pond', 'kp', 'lbf', 'kipf', 'pdl', 'tfs', 'tfl'];
+    , expected = [ 'dyn', 'N', 'μN', 'mN', 'kN', 'MN', 'daN', 'kgf', 'tfM', 'pond', 'kp', 'a_u_force', 'lbf', 'kipf', 'pdl', 'tfs', 'tfl'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -355,7 +355,19 @@ tests['all possibilities'] = function () {
         'abF',
         'abH', 'statH',
         'mho', 'abS',
-        'faraday', 'abC', 'statC', 'Fr', 'e'
+        'faraday', 'abC', 'statC', 'Fr', 'e',
+        // Physical constants added to existing measures
+        'a0', 'lP', 'm_e', 'm_p', 'm_n', 'mP', 'tP', 'a_u_force', 'a_u_current', 'a_u_E',
+        // New constant measures
+        'J*s', 'eV*s', 'erg*s',
+        'J/mol/K', 'cal/mol/K', 'L*atm/mol/K',
+        'A*m2', 'mu_B', 'mu_N', 'erg/G',
+        '1/m', '1/cm',
+        'F/m', 'pF/m', 'nF/m',
+        'H/m', 'μH/m', 'mH/m',
+        'N*m2/C2',
+        'W*m2', 'mW*m2',
+        'm*K', 'cm*K', 'mm*K'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

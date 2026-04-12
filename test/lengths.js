@@ -90,7 +90,10 @@ tests['m to Å'] = function () {
 };
 
 tests['ly to m'] = function () {
-  assert.strictEqual( convert(1).from('ly').to('m') , 9.4607e15);
+  var expected = 9.4607304725808e15,
+    actual = convert(1).from('ly').to('m');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['AU to m'] = function () {

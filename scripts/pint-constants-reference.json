@@ -1,0 +1,181 @@
+{
+  "Length": {
+    "a0": {
+      "pint_value": 5.2917721090397754e-11,
+      "target_unit": "meter",
+      "pint_name": "bohr_radius"
+    },
+    "lP": {
+      "pint_value": 1.616255024423705e-35,
+      "target_unit": "meter",
+      "pint_name": "planck_length"
+    }
+  },
+  "Mass": {
+    "m_e": {
+      "pint_value": 9.1093837015e-28,
+      "target_unit": "gram",
+      "pint_name": "electron_mass"
+    },
+    "m_p": {
+      "pint_value": 1.67262192369e-24,
+      "target_unit": "gram",
+      "pint_name": "proton_mass"
+    },
+    "m_n": {
+      "pint_value": 1.67492749804e-24,
+      "target_unit": "gram",
+      "pint_name": "neutron_mass"
+    },
+    "mP": {
+      "pint_value": 2.1764343427178985e-05,
+      "target_unit": "gram",
+      "pint_name": "planck_mass"
+    }
+  },
+  "Time": {
+    "tP": {
+      "pint_value": 5.391246448313604e-44,
+      "target_unit": "second",
+      "pint_name": "planck_time"
+    }
+  },
+  "Force": {
+    "a_u_force": {
+      "pint_value": 8.238723498238991e-08,
+      "target_unit": "newton",
+      "pint_name": "atomic_unit_of_force"
+    }
+  },
+  "Current": {
+    "a_u_current": {
+      "pint_value": 0.006623618237509995,
+      "target_unit": "ampere",
+      "pint_name": "atomic_unit_of_current"
+    }
+  },
+  "Planck-constant": {
+    "J*s": {
+      "pint_value": 6.626070150000001e-34,
+      "target_unit": "joule * second",
+      "pint_name": "planck_constant"
+    },
+    "eV*s": {
+      "pint_value": 4.135667696923859e-15,
+      "target_unit": "eV*s"
+    },
+    "hbar_J*s": {
+      "pint_value": 1.0545718176461565e-34,
+      "target_unit": "J*s"
+    },
+    "hbar_eV*s": {
+      "pint_value": 6.582119569509067e-16,
+      "target_unit": "eV*s"
+    }
+  },
+  "Gravitational-constant": {
+    "m3/kg/s2": {
+      "pint_value": 6.6743e-11,
+      "target_unit": "meter**3 / kilogram / second**2",
+      "pint_name": "gravitational_constant"
+    }
+  },
+  "Vacuum-permittivity": {
+    "F/m": {
+      "pint_value": 8.854187812764727e-12,
+      "target_unit": "farad / meter",
+      "pint_name": "vacuum_permittivity"
+    }
+  },
+  "Vacuum-permeability": {
+    "H/m": {
+      "pint_value": 1.2566370621250601e-06,
+      "target_unit": "henry / meter",
+      "pint_name": "vacuum_permeability"
+    }
+  },
+  "Gas-constant": {
+    "J/mol/K": {
+      "pint_value": 8.314462618153241,
+      "target_unit": "joule / mole / kelvin",
+      "pint_name": "molar_gas_constant"
+    }
+  },
+  "Coulomb-constant": {
+    "N*m2/C2": {
+      "pint_value": 8987551792.29697,
+      "target_unit": "newton * meter**2 / coulomb**2",
+      "pint_name": "coulomb_constant"
+    }
+  },
+  "Magnetic-flux-quantum": {
+    "Phi0": {
+      "pint_value": 2.0678338484619295e-15,
+      "target_unit": "weber",
+      "pint_name": "magnetic_flux_quantum"
+    }
+  },
+  "Von-Klitzing-constant": {
+    "R_K": {
+      "pint_value": 25812.807459304513,
+      "target_unit": "ohm",
+      "pint_name": "von_klitzing_constant"
+    }
+  },
+  "Conductance-quantum": {
+    "G_0": {
+      "pint_value": 7.74809172986365e-05,
+      "target_unit": "siemens",
+      "pint_name": "conductance_quantum"
+    }
+  },
+  "Josephson-constant": {
+    "K_J": {
+      "pint_value": 483597848416983.56,
+      "target_unit": "hertz / volt",
+      "pint_name": "josephson_constant"
+    }
+  },
+  "Bohr-magneton": {
+    "mu_B": {
+      "pint_value": 9.274010078362164e-24,
+      "target_unit": "ampere * meter**2",
+      "pint_name": "bohr_magneton"
+    }
+  },
+  "Nuclear-magneton": {
+    "mu_N": {
+      "pint_value": 5.050783746096374e-27,
+      "target_unit": "ampere * meter**2",
+      "pint_name": "nuclear_magneton"
+    }
+  },
+  "Rydberg-constant": {
+    "R_inf": {
+      "pint_value": 10973731.56816,
+      "target_unit": "1 / meter",
+      "pint_name": "rydberg_constant"
+    }
+  },
+  "First-radiation-constant": {
+    "c1": {
+      "pint_value": 3.7417718521927573e-16,
+      "target_unit": "watt * meter**2",
+      "pint_name": "first_radiation_constant"
+    }
+  },
+  "Second-radiation-constant": {
+    "c2": {
+      "pint_value": 0.014387768775039339,
+      "target_unit": "meter * kelvin",
+      "pint_name": "second_radiation_constant"
+    }
+  },
+  "Fine-structure-constant": {
+    "alpha": {
+      "pint_value": 1.0,
+      "target_unit": "dimensionless",
+      "pint_name": "fine_structure_constant"
+    }
+  }
+}
