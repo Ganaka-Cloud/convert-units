@@ -11,7 +11,8 @@ const path = require("path");
 const convert = require("../lib");
 
 const DIST_DIR = path.join(__dirname, "..", "dist");
-const VERSION = "2.5.1";
+const pkg = require("../package.json");
+const VERSION = pkg.version;
 
 // Ensure dist/ exists
 if (!fs.existsSync(DIST_DIR)) {
@@ -136,17 +137,27 @@ const latexUnitTypes = [
 ];
 
 allMeasures.forEach((measureName, idx) => {
-  const unitsForMeasure = allUnits.filter((u) => u.measure === measureName);
+  const fileName = measureToFile[measureName];
+  const rawDef = fileName ? definitionByFile[fileName] : null;
+  const anchors = rawDef ? rawDef._anchors || {} : {};
 
-  const metricUnits = unitsForMeasure.filter(
-    (u) => u.system === "metric" || u.system === "SI"
-  );
-  const imperialUnits = unitsForMeasure.filter(
-    (u) => u.system === "imperial" || u.system === "us" || u.system === "US"
-  );
+  // Find metric/SI anchor unit
+  let siunit = "--";
+  for (const sys of ["metric", "SI"]) {
+    if (anchors[sys] && anchors[sys].unit) {
+      siunit = anchors[sys].unit;
+      break;
+    }
+  }
 
-  const siunit = metricUnits.length > 0 ? metricUnits[0].abbr : "--";
-  const imperialunit = imperialUnits.length > 0 ? imperialUnits[0].abbr : "--";
+  // Find imperial/other-system anchor unit
+  let imperialunit = "--";
+  for (const sys of ["imperial", "us", "US", "legacy", "cgs", "CGS"]) {
+    if (anchors[sys] && anchors[sys].unit) {
+      imperialunit = anchors[sys].unit;
+      break;
+    }
+  }
 
   latexUnitTypes.push({
     id: idx + 2,
