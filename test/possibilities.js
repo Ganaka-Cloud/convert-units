@@ -328,7 +328,15 @@ tests['all possibilities'] = function () {
         'V/m', 'kV/m', 'MV/m', 'mV/m',
         'mol/s', 'mol/min', 'mmol/s', 'μmol/s',
         'dBW', 'dBm',
-        'dB', 'Np'
+        'dB', 'Np',
+        'Ω', 'mΩ', 'kΩ', 'MΩ', 'GΩ',
+        'S', 'mS', 'μS', 'nS',
+        'pF', 'nF', 'μF', 'mF',
+        'H', 'mH', 'μH',
+        'lm', 'mlm', 'klm',
+        'cd', 'mcd', 'kcd',
+        'mol', 'mmol', 'μmol', 'nmol', 'pmol',
+        'kat', 'mkat', 'μkat', 'nkat'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());
