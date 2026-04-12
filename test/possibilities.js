@@ -15,19 +15,19 @@ function getCurrencyCodes() {
 
 tests['l possibilities'] = function () {
   var actual = convert().from('l').possibilities()
-    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3', 'gill', 'bbl-oil', 'bbl-beer', 'bu', 'pk', 'fl-oz-UK' ];
+    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3', 'gill', 'bbl-oil', 'bbl-beer', 'bu', 'pk', 'fl-oz-UK', 'UK-gal', 'UK-pt', 'UK-gill', 'US-dry-gal', 'US-dry-qt', 'US-dry-pt', 'bdft', 'acre-ft', 'jigger', 'fl-dr' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['kg possibilities'] = function () {
   var actual = convert().from('kg').possibilities()
-    , expected = [ 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'oz', 'lb', 't', 'stone', 'grain', 'slug' ];
+    , expected = [ 'pg', 'ng', 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'ct', 'oz', 'lb', 't', 'stone', 'grain', 'slug', 'ozt', 'lbt', 'cwt', 'dr', 'dwt', 'long-ton', 'short-ton' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['m possibilities'] = function () {
   var actual = convert().from('m').possibilities()
-    , expected = [ 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain' ];
+    , expected = [ 'pm', 'fm', 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Mm', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain', 'league', 'hand', 'rod' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -39,13 +39,13 @@ tests['each possibilities'] = function () {
 
 tests['mass possibilities'] = function () {
   var actual = convert().possibilities('Mass')
-    , expected = [ 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'oz', 'lb', 't', 'stone', 'grain', 'slug' ];
+    , expected = [ 'pg', 'ng', 'μg', 'mg', 'g', 'kg', 'mt', 'u', 'Da', 'ct', 'oz', 'lb', 't', 'stone', 'grain', 'slug', 'ozt', 'lbt', 'cwt', 'dr', 'dwt', 'long-ton', 'short-ton' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['volume possibilities'] = function () {
   var actual = convert().possibilities('Volume')
-    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3', 'gill', 'bbl-oil', 'bbl-beer', 'bu', 'pk', 'fl-oz-UK' ];
+    , expected = [ 'mm3', 'cm3', 'ml', 'cl', 'dl', 'l', 'kl', 'm3', 'km3', 'tsp', 'Tbs', 'in3', 'fl-oz', 'cup', 'pnt', 'qt', 'gal', 'ft3', 'yd3', 'gill', 'bbl-oil', 'bbl-beer', 'bu', 'pk', 'fl-oz-UK', 'UK-gal', 'UK-pt', 'UK-gill', 'US-dry-gal', 'US-dry-qt', 'US-dry-pt', 'bdft', 'acre-ft', 'jigger', 'fl-dr' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -57,19 +57,19 @@ tests['volume flow rate possibilities'] = function () {
 
 tests['length possibilities'] = function () {
   var actual = convert().possibilities('Length')
-    , expected = [ 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain' ];
+    , expected = [ 'pm', 'fm', 'nm', 'μm', 'mm', 'cm', 'm', 'km', 'Mm', 'Å', 'ly', 'AU', 'pc', 'in', 'yd', 'ft-us', 'ft', 'mi', 'nMi', 'fathom', 'furlong', 'chain', 'league', 'hand', 'rod' ];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['temperature possibilities'] = function () {
   var actual = convert().possibilities('Temperature')
-    , expected = ['C', 'K', 'F', 'R'];
+    , expected = ['C', 'K', 'Re', 'F', 'R'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['time possibilities'] = function () {
   var actual = convert().possibilities('Time')
-    , expected = ['ns', 'μs', 'ms', 's', 'min', 'h', 'd', 'week', 'month', 'year', 'fortnight', 'shake', 'svedberg', 'yr-julian'];
+    , expected = ['ps', 'ns', 'μs', 'ms', 's', 'min', 'h', 'd', 'week', 'month', 'year', 'fortnight', 'shake', 'svedberg', 'yr-julian', 'common-yr', 'leap-yr', 'sidereal-day', 'sidereal-yr', 'tropical-yr', 'century', 'millennium'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -87,25 +87,25 @@ tests['partsPer possibilities'] = function() {
 
 tests['pressure possibilities'] = function() {
   var actual = convert().possibilities('Pressure')
-    , expected = [ 'Pa', 'μPa', 'mPa', 'hPa', 'kPa', 'MPa', 'GPa', 'bar', 'torr', 'atm', 'mmHg', 'cmH2O', 'mbar', 'psi', 'ksi', 'inHg', 'inH2O'];
+    , expected = [ 'Pa', 'μPa', 'mPa', 'hPa', 'kPa', 'MPa', 'GPa', 'bar', 'torr', 'atm', 'mmHg', 'cmH2O', 'mbar', 'cmHg', 'Ba', 'at', 'psi', 'ksi', 'inHg', 'inH2O'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['speed possibilities'] = function() {
   var actual = convert().possibilities('Speed')
-    , expected = [ 'm/s', 'km/h', 'm/h', 'knot', 'ft/s'];
+    , expected = [ 'm/s', 'km/h', 'mach', 'c_light', 'm/h', 'mph', 'knot', 'ft/s'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['current possibilities'] = function() {
   var actual = convert().possibilities('Current')
-    , expected = [ 'A', 'pA', 'nA', 'μA', 'mA', 'kA', 'MA'];
+    , expected = [ 'A', 'pA', 'nA', 'μA', 'mA', 'kA', 'MA', 'abA', 'Bi', 'statA'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['voltage possibilities'] = function() {
   var actual = convert().possibilities('Voltage')
-    , expected = [ 'V', 'nV', 'μV', 'mV', 'kV', 'MV'];
+    , expected = [ 'V', 'nV', 'μV', 'mV', 'kV', 'MV', 'abV', 'statV'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -129,7 +129,7 @@ tests['apparent power possibilities'] = function() {
 
 tests['energy possibilities'] = function() {
   var actual = convert().possibilities('Energy')
-    , expected = [ 'J', 'fJ', 'pJ', 'nJ', 'μJ', 'mJ', 'kJ', 'MJ', 'GJ', 'TJ', 'PJ', 'Wh', 'mWh', 'kWh', 'MWh', 'GWh', 'cal', 'kcal', 'erg', 'eV', 'keV', 'MeV', 'therm', 'quad', 'toe', 'Btu(IT)'];
+    , expected = [ 'J', 'fJ', 'pJ', 'nJ', 'μJ', 'mJ', 'kJ', 'MJ', 'GJ', 'TJ', 'PJ', 'Wh', 'mWh', 'kWh', 'MWh', 'GWh', 'cal', 'kcal', 'erg', 'eV', 'keV', 'MeV', 'therm', 'quad', 'toe', 'Eh', 'Ry', 'tTNT', 'ft-lb', 'Btu(IT)'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -165,7 +165,7 @@ tests['area-moment possibilities'] = function() {
 
 tests['area possibilities'] = function() {
   var actual = convert().possibilities('Area')
-    , expected = [ 'mm2', 'cm2', 'm2', 'ha', 'km2', 'in2', 'yd2', 'ft2', 'ac', 'mi2'];
+    , expected = [ 'mm2', 'cm2', 'm2', 'ha', 'km2', 'a', 'barn', 'in2', 'yd2', 'ft2', 'ac', 'mi2', 'circ-mil', 'darcy'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -267,7 +267,7 @@ tests['pace possibilities'] = function() {
 
 tests['angle possibilities'] = function() {
   var actual = convert().possibilities('Angle')
-    , expected = [ 'rad', 'deg', 'grad', 'arcmin', 'arcsec'];
+    , expected = [ 'rad', 'deg', 'grad', 'arcmin', 'arcsec', 'rev', 'mil'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -336,7 +336,26 @@ tests['all possibilities'] = function () {
         'lm', 'mlm', 'klm',
         'cd', 'mcd', 'kcd',
         'mol', 'mmol', 'μmol', 'nmol', 'pmol',
-        'kat', 'mkat', 'μkat', 'nkat'
+        'kat', 'mkat', 'μkat', 'nkat',
+        // New units added for Pint parity
+        'pm', 'fm', 'Mm', 'league', 'hand', 'rod',
+        'pg', 'ng', 'ct', 'ozt', 'lbt', 'cwt', 'dr', 'dwt', 'long-ton', 'short-ton',
+        'ps', 'common-yr', 'leap-yr', 'sidereal-day', 'sidereal-yr', 'tropical-yr', 'century', 'millennium',
+        'Re',
+        'rev', 'mil',
+        'mach', 'c_light', 'mph',
+        'a', 'barn', 'circ-mil', 'darcy',
+        'UK-gal', 'UK-pt', 'UK-gill', 'US-dry-gal', 'US-dry-qt', 'US-dry-pt', 'bdft', 'acre-ft', 'jigger', 'fl-dr',
+        'cmHg', 'Ba', 'at',
+        'Eh', 'Ry', 'tTNT', 'ft-lb',
+        'reyn',
+        'abA', 'Bi', 'statA',
+        'abV', 'statV',
+        'abΩ', 'statΩ',
+        'abF',
+        'abH', 'statH',
+        'mho', 'abS',
+        'faraday', 'abC', 'statC', 'Fr', 'e'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

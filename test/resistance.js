@@ -44,4 +44,22 @@ tests["MΩ to kΩ"] = function () {
   assert.strictEqual(convert(1).from("MΩ").to("kΩ"), 1000);
 };
 
+// New CGS resistance units: abΩ, statΩ
+var ACCURACY = 1/1000;
+var percentError = require("../lib/percentError");
+
+tests["abΩ to Ω"] = function () {
+  var expected = 1e-9
+    , actual = convert(1).from("abΩ").to("Ω");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
+tests["statΩ to Ω"] = function () {
+  var expected = 8.9876e11
+    , actual = convert(1).from("statΩ").to("Ω");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
 module.exports = tests;

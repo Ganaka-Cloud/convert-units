@@ -74,4 +74,27 @@ tests['grad to rad'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New units: rev (revolution), mil (NATO mil)
+tests['rev to deg'] = function () {
+  assert.strictEqual( convert(1).from('rev').to('deg') , 360);
+};
+
+tests['deg to rev'] = function () {
+  var expected = 1/360
+    , actual = convert(1).from('deg').to('rev');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['mil to deg'] = function () {
+  var expected = 360/6400
+    , actual = convert(1).from('mil').to('deg');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['rev to mil'] = function () {
+  assert.strictEqual( convert(1).from('rev').to('mil') , 6400);
+};
+
 module.exports = tests;

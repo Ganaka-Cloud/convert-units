@@ -45,4 +45,22 @@ tests["nS to μS"] = function () {
   assert.ok(Math.abs(result - 1) < 1e-9, "nS to μS should be ~1, got " + result);
 };
 
+// New conductance units: mho (alias for S), abS
+tests["mho to S"] = function () {
+  assert.strictEqual(convert(1).from("mho").to("S"), 1);
+};
+
+tests["S to mho"] = function () {
+  assert.strictEqual(convert(1).from("S").to("mho"), 1);
+};
+
+tests["abS to S"] = function () {
+  var ACCURACY = 1/1000;
+  var percentError = require("../lib/percentError");
+  var expected = 1e9
+    , actual = convert(1).from("abS").to("S");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
 module.exports = tests;

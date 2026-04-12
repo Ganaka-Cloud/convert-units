@@ -72,4 +72,17 @@ tests['mm2 to ft2'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New area units: a (are), barn (metric); circ-mil, darcy (imperial)
+tests['a to m2'] = function () {
+  assert.strictEqual( convert(1).from('a').to('m2') , 100);
+};
+
+tests['ha to a'] = function () {
+  assert.strictEqual( convert(1).from('ha').to('a') , 100);
+};
+
+tests['barn to m2'] = function () {
+  assert.strictEqual( convert(1).from('barn').to('m2') , 1e-28);
+};
+
 module.exports = tests;

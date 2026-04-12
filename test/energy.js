@@ -141,4 +141,40 @@ tests['toe to J'] = function () {
   assert.strictEqual( convert(1).from('toe').to('J') , 4.1868e10);
 };
 
+// New energy units: Eh (hartree), Ry (rydberg), tTNT, ft-lb
+tests['Eh to J'] = function () {
+  var expected = 4.3597447222071e-18
+    , actual = convert(1).from('Eh').to('J');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['Ry to J'] = function () {
+  var expected = 2.1798723611e-18
+    , actual = convert(1).from('Ry').to('J');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['Eh to Ry'] = function () {
+  var expected = 2
+    , actual = convert(1).from('Eh').to('Ry');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['tTNT to J'] = function () {
+  var expected = 4.184e9
+    , actual = convert(1).from('tTNT').to('J');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['ft-lb to J'] = function () {
+  var expected = 1.3558179483
+    , actual = convert(1).from('ft-lb').to('J');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

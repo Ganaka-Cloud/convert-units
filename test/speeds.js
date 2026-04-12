@@ -51,4 +51,30 @@ tests['m/h to km/h'] = function () {
       , 'Expected: ' + expected +', Actual: ' + actual);
 }
 
+// New units: mph (alias for m/h), mach, c_light
+tests['mph to m/h'] = function () {
+  assert.strictEqual( convert(1).from('mph').to('m/h') , 1);
+};
+
+tests['mach to km/h'] = function () {
+  var expected = 340.29 * 3.6
+    , actual = convert(1).from('mach').to('km/h');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['mach to m/s'] = function () {
+  var expected = 340.29
+    , actual = convert(1).from('mach').to('m/s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['c_light to m/s'] = function () {
+  var expected = 299792458
+    , actual = convert(1).from('c_light').to('m/s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

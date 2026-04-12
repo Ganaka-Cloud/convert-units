@@ -93,4 +93,49 @@ tests['fortnight to d'] = function () {
   assert.strictEqual( convert(1).from('fortnight').to('d') , 14);
 };
 
+// New units: ps, common-yr, leap-yr, sidereal-day, sidereal-yr, tropical-yr, century, millennium
+tests['ps to s'] = function () {
+  assert.strictEqual( convert(1).from('ps').to('s') , 1e-12);
+};
+
+tests['s to ps'] = function () {
+  assert.strictEqual( convert(1).from('s').to('ps') , 1e12);
+};
+
+tests['common-yr to s'] = function () {
+  assert.strictEqual( convert(1).from('common-yr').to('s') , 31536000);
+};
+
+tests['leap-yr to s'] = function () {
+  assert.strictEqual( convert(1).from('leap-yr').to('s') , 31622400);
+};
+
+tests['sidereal-day to s'] = function () {
+  var expected = 86164.0905
+    , actual = convert(1).from('sidereal-day').to('s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['century to s'] = function () {
+  var expected = 3.15576e9
+    , actual = convert(1).from('century').to('s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['millennium to s'] = function () {
+  var expected = 3.15576e10
+    , actual = convert(1).from('millennium').to('s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['century to millennium'] = function () {
+  var expected = 0.1
+    , actual = convert(1).from('century').to('millennium');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

@@ -120,4 +120,55 @@ tests['furlong to chain'] = function () {
   assert.strictEqual( convert(1).from('furlong').to('chain') , 10);
 };
 
+// New units: pm, fm, Mm (metric); league, hand, rod (imperial)
+tests['pm to m'] = function () {
+  assert.strictEqual( convert(1).from('pm').to('m') , 1e-12);
+};
+
+tests['m to pm'] = function () {
+  assert.strictEqual( convert(1).from('m').to('pm') , 1e12);
+};
+
+tests['fm to m'] = function () {
+  assert.strictEqual( convert(1).from('fm').to('m') , 1e-15);
+};
+
+tests['Mm to m'] = function () {
+  assert.strictEqual( convert(1).from('Mm').to('m') , 1e6);
+};
+
+tests['m to Mm'] = function () {
+  assert.strictEqual( convert(1).from('m').to('Mm') , 1e-6);
+};
+
+tests['league to ft'] = function () {
+  assert.strictEqual( convert(1).from('league').to('ft') , 15840);
+};
+
+tests['ft to league'] = function () {
+  assert.strictEqual( convert(15840).from('ft').to('league') , 1);
+};
+
+tests['hand to ft'] = function () {
+  var expected = 1/3
+    , actual = convert(1).from('hand').to('ft');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['ft to hand'] = function () {
+  assert.strictEqual( convert(1).from('ft').to('hand') , 3);
+};
+
+tests['rod to ft'] = function () {
+  assert.strictEqual( convert(1).from('rod').to('ft') , 16.5);
+};
+
+tests['ft to rod'] = function () {
+  var expected = 1/16.5
+    , actual = convert(1).from('ft').to('rod');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

@@ -41,4 +41,15 @@ tests["mF to μF"] = function () {
   assert.strictEqual(convert(0.001).from("mF").to("μF"), 1);
 };
 
+// New CGS capacitance unit: abF (1 abF = 1e9 F = 1e15 μF)
+var ACCURACY = 1/1000;
+var percentError = require("../lib/percentError");
+
+tests["abF to mF"] = function () {
+  var expected = 1e12  // 1 abF = 1e9 F = 1e12 mF
+    , actual = convert(1).from("abF").to("mF");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
 module.exports = tests;

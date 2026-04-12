@@ -38,4 +38,24 @@ tests['R to K'] = function () {
   assert.strictEqual( convert(459.67).from('R').to('K'), 255.3722222222222);
 };
 
+// New unit: Re (Réaumur) - 0°Ré = 0°C, 80°Ré = 100°C
+tests['Re to C - zero'] = function () {
+  assert.strictEqual( convert(0).from('Re').to('C') , 0);
+};
+
+tests['Re to C - boiling'] = function () {
+  assert.strictEqual( convert(80).from('Re').to('C') , 100);
+};
+
+tests['C to Re'] = function () {
+  assert.strictEqual( convert(100).from('C').to('Re') , 80);
+};
+
+tests['Re to F'] = function () {
+  var expected = 32
+    , actual = convert(0).from('Re').to('F');
+  assert.ok( actual === expected
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

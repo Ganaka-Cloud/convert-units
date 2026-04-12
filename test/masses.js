@@ -118,4 +118,54 @@ tests['stone to kg'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New units: pg, ng (metric); ct (metric); ozt, lbt, cwt, dr, dwt, long-ton, short-ton (imperial)
+tests['pg to g'] = function () {
+  assert.strictEqual( convert(1).from('pg').to('g') , 1e-12);
+};
+
+tests['ng to g'] = function () {
+  assert.strictEqual( convert(1).from('ng').to('g') , 1e-9);
+};
+
+tests['ct to g'] = function () {
+  assert.strictEqual( convert(1).from('ct').to('g') , 0.2);
+};
+
+tests['g to ct'] = function () {
+  assert.strictEqual( convert(0.2).from('g').to('ct') , 1);
+};
+
+tests['ozt to lb'] = function () {
+  var expected = 31.1035/453.592
+    , actual = convert(1).from('ozt').to('lb');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['cwt to lb'] = function () {
+  assert.strictEqual( convert(1).from('cwt').to('lb') , 100);
+};
+
+tests['long-ton to lb'] = function () {
+  assert.strictEqual( convert(1).from('long-ton').to('lb') , 2240);
+};
+
+tests['short-ton to lb'] = function () {
+  assert.strictEqual( convert(1).from('short-ton').to('lb') , 2000);
+};
+
+tests['dr to lb'] = function () {
+  var expected = 1/256
+    , actual = convert(1).from('dr').to('lb');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['lbt to ozt'] = function () {
+  var expected = 12
+    , actual = convert(1).from('lbt').to('ozt');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

@@ -40,4 +40,22 @@ tests["μH to mH"] = function () {
   assert.ok(Math.abs(result - 1) < 1e-9, "μH to mH should be ~1, got " + result);
 };
 
+// New CGS inductance units: abH, statH
+var ACCURACY = 1/1000;
+var percentError = require("../lib/percentError");
+
+tests["abH to H"] = function () {
+  var expected = 1e-9
+    , actual = convert(1).from("abH").to("H");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
+tests["statH to H"] = function () {
+  var expected = 8.9876e11
+    , actual = convert(1).from("statH").to("H");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
 module.exports = tests;

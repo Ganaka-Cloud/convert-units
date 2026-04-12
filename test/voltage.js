@@ -38,4 +38,21 @@ tests['kV to V'] = function () {
   assert.strictEqual( convert(1).from('kV').to('V'), 1000);
 }
 
+// New CGS voltage units: abV, statV
+tests['abV to V'] = function () {
+  var ACCURACY = 1/1000, percentError = require('../lib/percentError');
+  var expected = 1e-8
+    , actual = convert(1).from('abV').to('V');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected + ', Actual: ' + actual);
+};
+
+tests['statV to V'] = function () {
+  var ACCURACY = 1/1000, percentError = require('../lib/percentError');
+  var expected = 299.792458
+    , actual = convert(1).from('statV').to('V');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected + ', Actual: ' + actual);
+};
+
 module.exports = tests;

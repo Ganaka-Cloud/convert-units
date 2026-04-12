@@ -111,4 +111,33 @@ tests['inHg to psi'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New pressure units: cmHg, Ba (barye), at (technical atmosphere)
+tests['cmHg to kPa'] = function () {
+  var expected = 1.33322
+    , actual = convert(1).from('cmHg').to('kPa');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['mmHg to cmHg'] = function () {
+  var expected = 0.1
+    , actual = convert(1).from('mmHg').to('cmHg');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['Ba to Pa'] = function () {
+  var expected = 0.1
+    , actual = convert(1).from('Ba').to('Pa');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['at to kPa'] = function () {
+  var expected = 98.0665
+    , actual = convert(1).from('at').to('kPa');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

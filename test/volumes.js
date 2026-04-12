@@ -167,4 +167,41 @@ tests['fl-oz-UK to fl-oz'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New volume units
+tests['UK-gal to fl-oz'] = function () {
+  var expected = 160 * 0.96076
+    , actual = convert(1).from('UK-gal').to('fl-oz');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['UK-pt to fl-oz'] = function () {
+  var expected = 20 * 0.96076
+    , actual = convert(1).from('UK-pt').to('fl-oz');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['UK-gill to fl-oz'] = function () {
+  var expected = 5 * 0.96076
+    , actual = convert(1).from('UK-gill').to('fl-oz');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['jigger to fl-oz'] = function () {
+  assert.strictEqual( convert(1).from('jigger').to('fl-oz') , 1.5);
+};
+
+tests['fl-dr to fl-oz'] = function () {
+  assert.strictEqual( convert(1).from('fl-dr').to('fl-oz') , 1/8);
+};
+
+tests['bdft to in3'] = function () {
+  var expected = 144
+    , actual = convert(1).from('bdft').to('in3');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

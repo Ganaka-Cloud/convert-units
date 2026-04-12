@@ -69,4 +69,37 @@ tests["mAh to Ah"] = function () {
   assert.strictEqual(convert(1000).from("mAh").to("Ah"), 1);
 };
 
+// New charge units: faraday, abC, statC, Fr, e
+var ACCURACY = 1/1000;
+var percentError = require('../lib/percentError');
+
+tests["faraday to c"] = function () {
+  var expected = 96485.33212
+    , actual = convert(1).from("faraday").to("c");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
+tests["abC to c"] = function () {
+  assert.strictEqual(convert(1).from("abC").to("c"), 10);
+};
+
+tests["statC to c"] = function () {
+  var expected = 3.33564e-10
+    , actual = convert(1).from("statC").to("c");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
+tests["Fr to statC"] = function () {
+  assert.strictEqual(convert(1).from("Fr").to("statC"), 1);
+};
+
+tests["e to c"] = function () {
+  var expected = 1.602176634e-19
+    , actual = convert(1).from("e").to("c");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
 module.exports = tests;

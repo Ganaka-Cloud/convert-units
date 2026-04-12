@@ -38,4 +38,26 @@ tests['kA to A'] = function () {
   assert.strictEqual( convert(1).from('kA').to('A'), 1000);
 }
 
+// New CGS current units: abA, Bi, statA
+tests['abA to A'] = function () {
+  assert.strictEqual( convert(1).from('abA').to('A'), 10);
+};
+
+tests['Bi to A'] = function () {
+  assert.strictEqual( convert(1).from('Bi').to('A'), 10);
+};
+
+tests['abA to Bi'] = function () {
+  assert.strictEqual( convert(1).from('abA').to('Bi'), 1);
+};
+
+tests['statA to A'] = function () {
+  var expected = 3.33564e-10
+    , actual = convert(1).from('statA').to('A')
+    , ACCURACY = 1/1000
+    , percentError = require('../lib/percentError');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected + ', Actual: ' + actual);
+};
+
 module.exports = tests;

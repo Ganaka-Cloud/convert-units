@@ -39,4 +39,14 @@ tests["cP to P"] = function () {
   assert.strictEqual(convert(100).from("cP").to("P"), 1);
 };
 
+// New unit: reyn (1 reyn = 6894.757 Pa*s)
+tests["reyn to Pa*s"] = function () {
+  var expected = 6894.757
+    , actual = convert(1).from("reyn").to("Pa*s")
+    , ACCURACY = 1/1000
+    , percentError = require("../lib/percentError");
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , "Expected: " + expected + ", Actual: " + actual);
+};
+
 module.exports = tests;
