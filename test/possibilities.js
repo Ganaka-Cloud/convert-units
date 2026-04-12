@@ -87,7 +87,7 @@ tests['partsPer possibilities'] = function() {
 
 tests['pressure possibilities'] = function() {
   var actual = convert().possibilities('Pressure')
-    , expected = [ 'Pa', 'kPa', 'MPa', 'GPa', 'hPa', 'bar', 'torr', 'atm', 'mmHg', 'cmH2O', 'mbar', 'psi', 'ksi', 'inHg', 'inH2O'];
+    , expected = [ 'Pa', 'μPa', 'mPa', 'hPa', 'kPa', 'MPa', 'GPa', 'bar', 'torr', 'atm', 'mmHg', 'cmH2O', 'mbar', 'psi', 'ksi', 'inHg', 'inH2O'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -99,19 +99,19 @@ tests['speed possibilities'] = function() {
 
 tests['current possibilities'] = function() {
   var actual = convert().possibilities('Current')
-    , expected = [ 'A', 'mA', 'kA'];
+    , expected = [ 'A', 'pA', 'nA', 'μA', 'mA', 'kA', 'MA'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['voltage possibilities'] = function() {
   var actual = convert().possibilities('Voltage')
-    , expected = [ 'V', 'mV', 'kV'];
+    , expected = [ 'V', 'nV', 'μV', 'mV', 'kV', 'MV'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
 tests['power possibilities'] = function() {
   var actual = convert().possibilities('Power')
-    , expected = [ 'W', 'mW', 'kW', 'MW', 'GW', 'hp-mech', 'hp-met', 'hp-elec', 'hp-boiler', 'tonRef'];
+    , expected = [ 'W', 'pW', 'nW', 'μW', 'mW', 'kW', 'MW', 'GW', 'TW', 'hp-mech', 'hp-met', 'hp-elec', 'hp-boiler', 'tonRef'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -129,7 +129,7 @@ tests['apparent power possibilities'] = function() {
 
 tests['energy possibilities'] = function() {
   var actual = convert().possibilities('Energy')
-    , expected = [ 'Wh', 'mWh', 'kWh', 'MWh', 'GWh', 'J', 'kJ', 'cal', 'kcal', 'erg', 'eV', 'keV', 'MeV', 'therm', 'quad', 'toe', 'Btu(IT)'];
+    , expected = [ 'J', 'fJ', 'pJ', 'nJ', 'μJ', 'mJ', 'kJ', 'MJ', 'GJ', 'TJ', 'PJ', 'Wh', 'mWh', 'kWh', 'MWh', 'GWh', 'cal', 'kcal', 'erg', 'eV', 'keV', 'MeV', 'therm', 'quad', 'toe', 'Btu(IT)'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -141,7 +141,7 @@ tests['reactive energy possibilities'] = function() {
 
 tests['frequency possibilities'] = function() {
   var actual = convert().possibilities('Frequency')
-    , expected = [ 'Hz', 'mHz', 'kHz', 'MHz', 'GHz', 'THz', 'rpm', 'deg/s', 'rad/s'];
+    , expected = [ 'Hz', 'μHz', 'mHz', 'kHz', 'MHz', 'GHz', 'THz', 'rpm', 'deg/s', 'rad/s'];
   assert.deepEqual(actual.sort(), expected.sort())
 };
 
@@ -171,7 +171,7 @@ tests['area possibilities'] = function() {
 
 tests['force possibilities'] = function() {
   var actual = convert().possibilities('Force')
-    , expected = [ 'dyn', 'N', 'daN', 'kN', 'kgf', 'tfM', 'pond', 'kp', 'lbf', 'kipf', 'pdl', 'tfs', 'tfl'];
+    , expected = [ 'dyn', 'N', 'μN', 'mN', 'kN', 'MN', 'daN', 'kgf', 'tfM', 'pond', 'kp', 'lbf', 'kipf', 'pdl', 'tfs', 'tfl'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -277,11 +277,11 @@ tests['all possibilities'] = function () {
     , expected = [
         '/C', '/F', '/K', '/R',
         'A', 'B', 'Btu(IT)', 'Btu.in/hr/sq.ft/F', 'Btu.in/s/sq.ft/F', 'Btu/hr/ft/F', 'Btu/hr/sq.ft/R4', 'Btu/lbm/F',
-        'C', 'F', 'GB', 'GHz', 'GPa', 'GVA', 'GVAR', 'GVARh', 'GW', 'GWh', 'Gb',
+        'C', 'F', 'GB', 'GHz', 'GJ', 'GPa', 'GVA', 'GVAR', 'GVARh', 'GW', 'GWh', 'Gb',
         'Hz', 'J', 'J/K', 'J/g/C', 'J/kg/C', 'J/kg/K', 'J/sqm',
-        'K', 'KB', 'Kb', 'MB', 'MHz', 'MPa', 'MPa-sqrt(m)', 'MPam/h', 'MVA', 'MVAR', 'MVARh', 'MW', 'MWh', 'Mb',
+        'K', 'KB', 'Kb', 'MA', 'MB', 'MHz', 'MJ', 'MN', 'MPa', 'MPa-sqrt(m)', 'MPam/h', 'MV', 'MVA', 'MVAR', 'MVARh', 'MW', 'MWh', 'Mb',
         'N', 'Ncm', 'Nm', 'Nmm',
-        'Pa', 'Pa-sqrt(m)', 'R', 'TB', 'THz', 'Tb', 'Tbs', 'Tbs/s',
+        'Pa', 'Pa-sqrt(m)', 'PJ', 'R', 'TB', 'THz', 'TJ', 'TW', 'Tb', 'Tbs', 'Tbs/s',
         'V', 'VA', 'VAR', 'VARh',
         'W', 'W/cm/C', 'W/m/C', 'W/m/K', 'W/m2/K4', 'W/mm/C', 'Wh',
         'ac', 'arcmin', 'arcsec', 'atm',
@@ -300,11 +300,11 @@ tests['all possibilities'] = function () {
         'kg', 'kgcm2', 'kgf', 'kgf-m/kg/C', 'kgfm', 'kgfms2', 'kgm2', 'kgmm2', 'kgpcm', 'kgpl', 'kipf',
         'kl', 'kl/h', 'kl/min', 'kl/s', 'km', 'km/h', 'km/s2', 'km2', 'km3', 'km3/s', 'knot', 'ksi', 'ksi-sqr(in)',
         'l', 'l/h', 'l/min', 'l/s', 'lb', 'lb-ft2', 'lb-in2', 'lbf', 'lbf-ft', 'lbf-fts2', 'lbf-in', 'lbf-ins2', 'lblpg', 'lbpcft', 'lbpcin', 'lbpcy', 'lbspg', 'ly', 'lx',
-        'm', 'm/h', 'm/m', 'm/s', 'm/s2', 'm2', 'm3', 'm3/h', 'm3/min', 'm3/s', 'm4', 'mA', 'mHz', 'mJ/kg/C', 'mJ/kg/K', 'mV', 'mVA', 'mVAR', 'mVARh', 'mW', 'mW/m/C', 'mWh', 'mbar', 'mg', 'mi', 'mi/s2', 'mi2', 'min', 'min/km', 'min/mi', 'ml', 'ml/s', 'mm', 'mm/mm', 'mm/s2', 'mm2', 'mm3', 'mm3/s', 'mm4', 'mmHg', 'month', 'ms', 'mt',
+        'm', 'm/h', 'm/m', 'm/s', 'm/s2', 'm2', 'm3', 'm3/h', 'm3/min', 'm3/s', 'm4', 'mA', 'mHz', 'mJ', 'mJ/kg/C', 'mJ/kg/K', 'mN', 'mPa', 'mV', 'mVA', 'mVAR', 'mVARh', 'mW', 'mW/m/C', 'mWh', 'mbar', 'mg', 'mi', 'mi/s2', 'mi2', 'min', 'min/km', 'min/mi', 'ml', 'ml/s', 'mm', 'mm/mm', 'mm/s2', 'mm2', 'mm3', 'mm3/s', 'mm4', 'mmHg', 'month', 'ms', 'mt',
         'MeV',
-        'nMi', 'nm', 'ns',
+        'nA', 'nJ', 'nMi', 'nV', 'nW', 'nm', 'ns',
         'oz', 'ozlpg', 'ozpcft', 'ozpcin', 'ozspg',
-        'pc', 'pdl', 'pdl-ft', 'pdl-in', 'percent', 'pk', 'pnt', 'pnt/h', 'pnt/min', 'pnt/s', 'pond', 'ppb', 'ppm', 'ppq', 'ppt', 'psi', 'psi-sqrt(in)',
+        'pA', 'pJ', 'pW', 'pc', 'pdl', 'pdl-ft', 'pdl-in', 'percent', 'pk', 'pnt', 'pnt/h', 'pnt/min', 'pnt/s', 'pond', 'ppb', 'ppm', 'ppq', 'ppt', 'psi', 'psi-sqrt(in)',
         'qt', 'qt/s', 'quad',
         'rad', 'rad/s', 'rpm',
         's', 's/ft', 's/m', 'shake', 'slpcft', 'slug', 'stone', 'svedberg',
@@ -312,16 +312,16 @@ tests['all possibilities'] = function () {
         'u',
         'week',
         'yd', 'yd/s2', 'yd/yd', 'yd2', 'yd3', 'yd3/h', 'yd3/min', 'yd3/s', 'year', 'yr-julian',
-        'zcm3', 'zft3', 'zin3', 'zm3', 'zmm3', 'μNm', 'μg', 'μm', 'μs',
+        'fJ', 'zcm3', 'zft3', 'zin3', 'zm3', 'zmm3', 'μA', 'μHz', 'μJ', 'μN', 'μPa', 'μV', 'μW', 'μNm', 'μg', 'μm', 'μs',
         'Ah', 'mAh', 'c', 'mC', 'μC', 'nC', 'pC',
         'Pa*s', 'P', 'cP',
         'm2/s', 'St', 'cSt',
         'N*m', 'kN*m', 'MN*m', 'lbf*ft', 'ozf*in',
         'N/m', 'mN/m', 'dyn/cm',
         'Gy', 'Sv', 'mGy', 'mSv', 'μGy', 'μSv', 'RAD', 'rem',
-        'Bq', 'kBq', 'MBq', 'GBq', 'Ci', 'mCi', 'μCi', 'Rd',
-        'Wb', 'mWb', 'μWb', 'Mx',
-        'T', 'mT', 'μT', 'nT', 'G',
+        'Bq', 'μBq', 'kBq', 'MBq', 'GBq', 'TBq', 'Ci', 'mCi', 'μCi', 'Rd',
+        'Wb', 'nWb', 'mWb', 'μWb', 'kWb', 'Mx',
+        'T', 'pT', 'nT', 'μT', 'mT', 'G',
         'A/m', 'kA/m', 'Oe',
         'cd/m2', 'sb', 'La', 'fL',
         'sr', 'deg2',
