@@ -152,4 +152,41 @@ tests["deca prefix latex is $daN$"] = function () {
   assert.strictEqual(result["daN"]._latex, "$daN$");
 };
 
+// ─── Integration tests: prefixed units through the converter ─────────────────
+
+var convert = require("../lib");
+
+tests["convert 1 kBq to Bq"] = function () {
+  assert.strictEqual(convert(1).from("kBq").to("Bq"), 1000);
+};
+
+tests["convert 1000 Bq to kBq"] = function () {
+  assert.strictEqual(convert(1000).from("Bq").to("kBq"), 1);
+};
+
+tests["convert 1 MBq to kBq"] = function () {
+  assert.strictEqual(convert(1).from("MBq").to("kBq"), 1000);
+};
+
+tests["convert 1 mT to T"] = function () {
+  assert.strictEqual(convert(1).from("mT").to("T"), 0.001);
+};
+
+tests["convert 1 T to mT"] = function () {
+  assert.strictEqual(convert(1).from("T").to("mT"), 1000);
+};
+
+tests["convert 1 μWb to Wb"] = function () {
+  assert.strictEqual(convert(1).from("μWb").to("Wb"), 0.000001);
+};
+
+tests["convert 1 Wb to μWb"] = function () {
+  assert.strictEqual(convert(1).from("Wb").to("μWb"), 1000000);
+};
+
+tests["convert 1 mWb to μWb"] = function () {
+  var result = convert(1).from("mWb").to("μWb");
+  assert.ok(Math.abs(result - 1000) < 1e-6, "Expected ~1000, got " + result);
+};
+
 module.exports = tests;

@@ -21,7 +21,8 @@
     "format": "prettier --write lib test *.json",
     "format:check": "prettier --check lib test *.json",
     "ci:lint": "eslint lib --ext .js && prettier --check lib test *.json",
-    "check:collisions": "node scripts/check-collisions.js"
+    "check:collisions": "node scripts/check-collisions.js",
+    "build:registry": "node scripts/gen-registry.js"
   },
   "repository": {
     "type": "git",
