@@ -10,7 +10,10 @@ const fs = require("fs");
 const path = require("path");
 const convert = require("../lib");
 
-const DIST_DIR = path.join(__dirname, "..", "dist");
+// Output directory: pass as CLI argument or defaults to ../dist
+const DIST_DIR = process.argv[2]
+  ? path.resolve(process.argv[2])
+  : path.join(__dirname, "..", "dist");
 const pkg = require("../package.json");
 const VERSION = pkg.version;
 
