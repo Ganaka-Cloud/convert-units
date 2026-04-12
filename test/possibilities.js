@@ -313,7 +313,22 @@ tests['all possibilities'] = function () {
         'week',
         'yd', 'yd/s2', 'yd/yd', 'yd2', 'yd3', 'yd3/h', 'yd3/min', 'yd3/s', 'year', 'yr-julian',
         'zcm3', 'zft3', 'zin3', 'zm3', 'zmm3', 'μNm', 'μg', 'μm', 'μs',
-        'Ah', 'mAh', 'c', 'mC', 'μC', 'nC', 'pC'
+        'Ah', 'mAh', 'c', 'mC', 'μC', 'nC', 'pC',
+        'Pa*s', 'P', 'cP',
+        'm2/s', 'St', 'cSt',
+        'N*m', 'kN*m', 'MN*m', 'lbf*ft', 'ozf*in',
+        'N/m', 'mN/m', 'dyn/cm',
+        'Gy', 'Sv', 'mGy', 'mSv', 'μGy', 'μSv', 'RAD', 'rem',
+        'Bq', 'kBq', 'MBq', 'GBq', 'Ci', 'mCi', 'μCi', 'Rd',
+        'Wb', 'mWb', 'μWb', 'Mx',
+        'T', 'mT', 'μT', 'nT', 'G',
+        'A/m', 'kA/m', 'Oe',
+        'cd/m2', 'sb', 'La', 'fL',
+        'sr', 'deg2',
+        'V/m', 'kV/m', 'MV/m', 'mV/m',
+        'mol/s', 'mol/min', 'mmol/s', 'μmol/s',
+        'dBW', 'dBm',
+        'dB', 'Np'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());
