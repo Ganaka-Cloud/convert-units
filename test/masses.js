@@ -65,4 +65,57 @@ tests['g to lb'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New units: u/Da (metric, anchor=g); slug, stone, grain (imperial, anchor=lb)
+// u = 1.66053906660e-24 g (anchor is g)
+// stone = 14 lb, grain = 1/7000 lb, slug = 32.174 lb
+tests['u to g'] = function () {
+  var expected = 1.66053906660e-24
+    , actual = convert(1).from('u').to('g');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['Da to g'] = function () {
+  var expected = 1.66053906660e-24
+    , actual = convert(1).from('Da').to('g');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['u to Da'] = function () {
+  var expected = 1
+    , actual = convert(1).from('u').to('Da');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['stone to lb'] = function () {
+  assert.strictEqual( convert(1).from('stone').to('lb') , 14);
+};
+
+tests['lb to stone'] = function () {
+  assert.strictEqual( convert(14).from('lb').to('stone') , 1);
+};
+
+tests['grain to lb'] = function () {
+  var expected = 1/7000
+    , actual = convert(1).from('grain').to('lb');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['slug to lb'] = function () {
+  var expected = 32.174
+    , actual = convert(1).from('slug').to('lb');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['stone to kg'] = function () {
+  var expected = 6.35029
+    , actual = convert(1).from('stone').to('kg');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

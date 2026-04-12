@@ -1,6 +1,8 @@
 var convert = require('../lib')
   , assert = require('assert')
-  , tests = {};
+  , tests = {}
+  , ACCURACY = 1/1000
+  , percentError = require('../lib/percentError');
 
 tests['Wh to Wh'] = function () {
   assert.strictEqual( convert(1).from('Wh').to('Wh') , 1);
@@ -81,5 +83,62 @@ tests['kWh to Wh'] = function () {
 tests['kWh to kJ'] = function () {
   assert.strictEqual( convert(1).from('kWh').to('kJ'), 3600);
 }
+
+// New units: cal, kcal, erg, eV, keV, MeV, therm, quad, toe
+tests['cal to J'] = function () {
+  assert.strictEqual( convert(1).from('cal').to('J') , 4.184);
+};
+
+tests['J to cal'] = function () {
+  var expected = 1
+    , actual = convert(4.184).from('J').to('cal');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['kcal to J'] = function () {
+  assert.strictEqual( convert(1).from('kcal').to('J') , 4184);
+};
+
+tests['kcal to cal'] = function () {
+  assert.strictEqual( convert(1).from('kcal').to('cal') , 1000);
+};
+
+tests['erg to J'] = function () {
+  assert.strictEqual( convert(1).from('erg').to('J') , 1e-7);
+};
+
+tests['eV to J'] = function () {
+  assert.strictEqual( convert(1).from('eV').to('J') , 1.602176634e-19);
+};
+
+tests['keV to eV'] = function () {
+  var expected = 1000
+    , actual = convert(1).from('keV').to('eV');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['MeV to keV'] = function () {
+  var expected = 1000
+    , actual = convert(1).from('MeV').to('keV');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['therm to J'] = function () {
+  assert.strictEqual( convert(1).from('therm').to('J') , 1.05506e8);
+};
+
+tests['quad to therm'] = function () {
+  var expected = 1e10
+    , actual = convert(1).from('quad').to('therm');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['toe to J'] = function () {
+  assert.strictEqual( convert(1).from('toe').to('J') , 4.1868e10);
+};
 
 module.exports = tests;

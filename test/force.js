@@ -117,4 +117,34 @@ tests['lbf to N'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// New units: pond, kp (kilopond)
+tests['pond to N'] = function () {
+  assert.strictEqual( convert(1).from('pond').to('N') , 9.80665e-3);
+};
+
+tests['N to pond'] = function () {
+  var expected = 1/9.80665e-3
+    , actual = convert(1).from('N').to('pond');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['kp to N'] = function () {
+  assert.strictEqual( convert(1).from('kp').to('N') , 9.80665);
+};
+
+tests['kp to pond'] = function () {
+  var expected = 1000
+    , actual = convert(1).from('kp').to('pond');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['pond to kp'] = function () {
+  var expected = 1/1000
+    , actual = convert(1).from('pond').to('kp');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

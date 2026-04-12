@@ -1,6 +1,8 @@
 var convert = require('../lib')
   , assert = require('assert')
-  , tests = {};
+  , tests = {}
+  , ACCURACY = 1/1000
+  , percentError = require('../lib/percentError');
 
 tests['W to W'] = function () {
   assert.strictEqual( convert(1).from('W').to('W') , 1);
@@ -61,5 +63,40 @@ tests['mW to W'] = function () {
 tests['kW to W'] = function () {
   assert.strictEqual( convert(1).from('kW').to('W'), 1000);
 }
+
+// New units: hp-mech, hp-met, hp-elec, hp-boiler, tonRef
+tests['hp-mech to W'] = function () {
+  assert.strictEqual( convert(1).from('hp-mech').to('W') , 745.69987);
+};
+
+tests['W to hp-mech'] = function () {
+  var expected = 1
+    , actual = convert(745.69987).from('W').to('hp-mech');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['hp-met to W'] = function () {
+  assert.strictEqual( convert(1).from('hp-met').to('W') , 735.49875);
+};
+
+tests['hp-elec to W'] = function () {
+  assert.strictEqual( convert(1).from('hp-elec').to('W') , 746);
+};
+
+tests['hp-boiler to W'] = function () {
+  assert.strictEqual( convert(1).from('hp-boiler').to('W') , 9809.5);
+};
+
+tests['tonRef to W'] = function () {
+  assert.strictEqual( convert(1).from('tonRef').to('W') , 3516.8528);
+};
+
+tests['hp-mech to kW'] = function () {
+  var expected = 0.74569987
+    , actual = convert(1).from('hp-mech').to('kW');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
 
 module.exports = tests;
