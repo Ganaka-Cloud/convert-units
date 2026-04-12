@@ -16,9 +16,7 @@ for (const unit of allUnits) {
 }
 
 // Find collisions: abbreviations appearing in more than one measure
-const collisions = Object.entries(abbrToMeasures).filter(
-  ([, measures]) => measures.length > 1
-);
+const collisions = Object.entries(abbrToMeasures).filter(([, measures]) => measures.length > 1);
 
 if (collisions.length === 0) {
   console.log("No abbreviation collisions found.");
