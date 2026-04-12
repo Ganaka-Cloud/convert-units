@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"var c=require\\('./lib'\\); console.log\\('Measures:', c\\(\\).measures\\(\\).length, '| Units:', c\\(\\).possibilities\\(\\).length\\)\")"
+    ]
+  }
+}

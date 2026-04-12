@@ -49,13 +49,69 @@ while ((m = measureRegex.exec(indexSrc)) !== null) {
 }
 
 // Helper: generate LaTeX string for a unit abbreviation
+// Follows ganaka-ui conventions:
+//   - Trailing digits become superscripts: m2 -> m^{2}, m3 -> m^{3}
+//   - / becomes dot + negative exponent: l/h -> l.h^{-1}, m3/s -> m^{3}.s^{-1}
+//   - μ prefix: μm -> {\\mu}m
+//   - Section modulus z prefix: zm3 -> Z-m^{3}
+//   - Temperature degrees: /K -> /^{\\circ}K, /C -> /^{\\circ}C, /F -> /^{\\circ}F, /R -> /^{\\circ}R
 function latexFor(abbr) {
   if (abbr === "--") return "$--$";
-  if (abbr.startsWith("μ")) {
-    const rest = abbr.slice(1); // strip μ
-    return "${\\mu}" + rest + "$";
+
+  // Handle micro prefix first — strip μ, process the rest, then prepend
+  var hasMicro = false;
+  var work = abbr;
+  if (work.startsWith("μ")) {
+    hasMicro = true;
+    work = work.slice(1);
   }
-  return "$" + abbr + "$";
+
+  // Handle section modulus z-prefix: zm3 -> Z-m^{3}
+  if (/^z(m|cm|mm|in|ft)\d+$/.test(work)) {
+    work = "Z-" + work.slice(1);
+  }
+
+  // Split on / to handle rate units (numerator/denominator)
+  var parts = work.split("/");
+  var latexParts = [];
+
+  for (var i = 0; i < parts.length; i++) {
+    var part = parts[i];
+
+    // Add degree symbol before temperature letters in denominators
+    // e.g., K -> ^{\\circ}K, C -> ^{\\circ}C (only when it's a denominator, i.e., after /)
+    if (i > 0 && /^[KCFR]\d*$/.test(part)) {
+      part = "^{\\circ}" + part;
+    }
+
+    // Convert trailing digits to superscripts: m2 -> m^{2}, K4 -> K^{4}
+    part = part.replace(/(\D)(\d+)$/g, function (_, prefix, digits) {
+      return prefix + "^{" + digits + "}";
+    });
+
+    // For denominators (i > 0), use negative exponent notation
+    if (i > 0) {
+      // If the part has a numeric superscript, make it negative: ^{4} -> ^{-4}
+      if (/\^{\d+}/.test(part)) {
+        part = part.replace(/\^{(\d+)}/g, "^{-$1}");
+      } else {
+        // No numeric superscript — append ^{-1}
+        part = part + "^{-1}";
+      }
+    }
+
+    latexParts.push(part);
+  }
+
+  // Join with dot separator (ganaka-ui convention for compound units)
+  var result = latexParts.join(".");
+
+  // Prepend micro if needed
+  if (hasMicro) {
+    result = "{\\mu}" + result;
+  }
+
+  return "$" + result + "$";
 }
 
 // ─── Build units-registry.json ──────────────────────────────────────────────
