@@ -9,30 +9,33 @@ tests['m/s to m/s'] = function () {
 };
 
 tests['m/s to km/h'] = function () {
-  assert.strictEqual( convert(1).from('m/s').to('km/h') , 3.6);
-};
-
-tests['m/h to m/h'] = function () {
-  assert.strictEqual( convert(6).from('m/h').to('m/h') , 6);
-};
-
-tests['m/h to knot'] = function () {
-  var expected = 1.73795
-  var actual = convert(2).from('m/h').to('knot');
+  var expected = 3.6
+    , actual = convert(1).from('m/s').to('km/h');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
-tests['m/h to ft/s'] = function () {
+tests['mph to mph'] = function () {
+  assert.strictEqual( convert(6).from('mph').to('mph') , 6);
+};
+
+tests['mph to knot'] = function () {
+  var expected = 1.73795
+  var actual = convert(2).from('mph').to('knot');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['mph to ft/s'] = function () {
     var expected = 4.4
-    var actual = convert(3).from('m/h').to('ft/s')
+    var actual = convert(3).from('mph').to('ft/s')
     assert.ok( percentError(expected, actual) < ACCURACY
       , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
-tests['m/s to m/h'] = function () {
+tests['m/s to mph'] = function () {
     var expected = 22.3694
-    var actual = convert(10).from('m/s').to('m/h');
+    var actual = convert(10).from('m/s').to('mph');
     assert.ok( percentError(expected, actual) < ACCURACY
       , 'Expected: ' + expected +', Actual: ' + actual);
 }
@@ -44,17 +47,12 @@ tests['m/s to knot'] = function () {
       , 'Expected: ' + expected +', Actual: ' + actual);
 }
 
-tests['m/h to km/h'] = function () {
+tests['mph to km/h'] = function () {
     var expected = 19.3121
-    var actual = convert(12).from('m/h').to('km/h');
+    var actual = convert(12).from('mph').to('km/h');
     assert.ok( percentError(expected, actual) < ACCURACY
       , 'Expected: ' + expected +', Actual: ' + actual);
 }
-
-// New units: mph (alias for m/h), mach, c_light
-tests['mph to m/h'] = function () {
-  assert.strictEqual( convert(1).from('mph').to('m/h') , 1);
-};
 
 tests['mach to km/h'] = function () {
   var expected = 340.29 * 3.6

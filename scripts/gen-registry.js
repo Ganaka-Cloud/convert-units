@@ -227,15 +227,17 @@ const latexUnitTypes = [
 
 // Overrides for measures where the library's internal anchor differs from the
 // true SI base unit that ganaka-ui's backend expects for storage and calculation.
-// The library's anchor (e.g., kPa) is correct for conversion math; this map
-// provides the canonical SI base unit (Pa) for display/storage.
+// NOTE (v2.9.0): Mass, Volume, Speed, Pressure, VolumeFlowRate anchors have been
+// updated to their SI base units, so those overrides are now no-ops (kept as
+// safety net in case a future refactor regresses an anchor).
+// Temperature anchor is now K (SI base); Frequency anchor is now Hz (SI base).
 const SI_BASE_OVERRIDES = {
   Acceleration: { imperialunit: "ft/s2" }, // explicit override to ensure ft/s2 is used as imperial display unit
-  Mass: { siunit: "kg" }, // anchor is g; SI base is kg
-  Volume: { siunit: "m3" }, // anchor is l; SI base is m3
-  Speed: { siunit: "m/s", imperialunit: "ft/s" }, // anchor is km/h; SI base is m/s
-  Pressure: { siunit: "Pa" }, // anchor is kPa; SI base is Pa
-  VolumeFlowRate: { siunit: "m3/s" }, // anchor is l/s; SI base is m3/s
+  Mass: { siunit: "kg" }, // anchor is kg (SI base) — no-op override, safety net
+  Volume: { siunit: "m3" }, // anchor is m3 (SI base) — no-op override, safety net
+  Speed: { siunit: "m/s", imperialunit: "ft/s" }, // anchor is m/s (SI base) — siunit no-op; imperialunit overrides mph→ft/s
+  Pressure: { siunit: "Pa" }, // anchor is Pa (SI base) — no-op override, safety net
+  VolumeFlowRate: { siunit: "m3/s" }, // anchor is m3/s (SI base) — no-op override, safety net
 };
 
 allMeasures.forEach((measureName, idx) => {

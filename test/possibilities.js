@@ -93,7 +93,7 @@ tests['pressure possibilities'] = function() {
 
 tests['speed possibilities'] = function() {
   var actual = convert().possibilities('Speed')
-    , expected = [ 'm/s', 'km/h', 'mach', 'c_light', 'm/h', 'mph', 'knot', 'ft/s'];
+    , expected = [ 'm/s', 'km/h', 'mach', 'c_light', 'mph', 'knot', 'ft/s'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -300,7 +300,7 @@ tests['all possibilities'] = function () {
         'kg', 'kgcm2', 'kgf', 'kgf-m/kg/C', 'kgfm', 'kgfms2', 'kgm2', 'kgmm2', 'kgpcm', 'kgpl', 'kipf',
         'kl', 'kl/h', 'kl/min', 'kl/s', 'km', 'km/h', 'km/s2', 'km2', 'km3', 'km3/s', 'knot', 'ksi', 'ksi-sqr(in)',
         'l', 'l/h', 'l/min', 'l/s', 'lb', 'lb-ft2', 'lb-in2', 'lbf', 'lbf-ft', 'lbf-fts2', 'lbf-in', 'lbf-ins2', 'lblpg', 'lbpcft', 'lbpcin', 'lbpcy', 'lbspg', 'ly', 'lx',
-        'm', 'm/h', 'm/m', 'm/s', 'm/s2', 'm2', 'm3', 'm3/h', 'm3/min', 'm3/s', 'm4', 'mA', 'mHz', 'mJ', 'mJ/kg/C', 'mJ/kg/K', 'mN', 'mPa', 'mV', 'mVA', 'mVAR', 'mVARh', 'mW', 'mW/m/C', 'mWh', 'mbar', 'mg', 'mi', 'mi/s2', 'mi2', 'min', 'min/km', 'min/mi', 'ml', 'ml/s', 'mm', 'mm/mm', 'mm/s2', 'mm2', 'mm3', 'mm3/s', 'mm4', 'mmHg', 'month', 'ms', 'mt',
+        'm', 'm/m', 'm/s', 'm/s2', 'm2', 'm3', 'm3/h', 'm3/min', 'm3/s', 'm4', 'mA', 'mHz', 'mJ', 'mJ/kg/C', 'mJ/kg/K', 'mN', 'mPa', 'mV', 'mVA', 'mVAR', 'mVARh', 'mW', 'mW/m/C', 'mWh', 'mbar', 'mg', 'mi', 'mi/s2', 'mi2', 'min', 'min/km', 'min/mi', 'ml', 'ml/s', 'mm', 'mm/mm', 'mm/s2', 'mm2', 'mm3', 'mm3/s', 'mm4', 'mmHg', 'month', 'ms', 'mt',
         'MeV',
         'nA', 'nJ', 'nMi', 'nV', 'nW', 'nm', 'ns',
         'oz', 'ozlpg', 'ozpcft', 'ozpcin', 'ozspg',

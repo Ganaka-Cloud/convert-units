@@ -13,7 +13,10 @@ tests['mm3/s to l/s'] = function () {
 };
 
 tests['cm3/s to l/s'] = function () {
-  assert.strictEqual( convert(100).from('cm3/s').to('l/s') , 1/10);
+  var expected = 0.1
+    , actual = convert(100).from('cm3/s').to('l/s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['dl/s to l/s'] = function () {
@@ -25,7 +28,10 @@ tests['cl/s to l/s'] = function () {
 };
 
 tests['ml/s to l/s'] = function () {
-  assert.strictEqual( convert(100).from('ml/s').to('l/s') , 1/10);
+  var expected = 0.1
+    , actual = convert(100).from('ml/s').to('l/s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['m3/s to l/s'] = function () {
@@ -37,15 +43,24 @@ tests['km3/s to l/s'] = function () {
 };
 
 tests['l/s to ml/s'] = function () {
-  assert.strictEqual( convert(1).from('l/s').to('ml/s') , 1000);
+  var expected = 1000
+    , actual = convert(1).from('l/s').to('ml/s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['dl/s to ml/s'] = function () {
-  assert.strictEqual( convert(10).from('dl/s').to('ml/s') , 1000);
+  var expected = 1000
+    , actual = convert(10).from('dl/s').to('ml/s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['cl/s to ml/s'] = function () {
-  assert.strictEqual( convert(100).from('cl/s').to('ml/s') , 1000);
+  var expected = 1000
+    , actual = convert(100).from('cl/s').to('ml/s');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['ml/s to ml/s'] = function () {
@@ -73,7 +88,10 @@ tests['l/s to l/min'] = function () {
 };
 
 tests['l/s to l/h'] = function () {
-  assert.strictEqual( convert(1).from('l/s').to('l/h') , 3600);
+  var expected = 3600
+    , actual = convert(1).from('l/s').to('l/h');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['kl/s to kl/h'] = function () {

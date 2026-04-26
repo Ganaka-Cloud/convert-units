@@ -1,6 +1,8 @@
 var convert = require('../lib')
   , assert = require('assert')
-  , tests = {};
+  , tests = {}
+  , ACCURACY = 1/1000000
+  , percentError = require('../lib/percentError');
 
 tests['C to K'] = function () {
   assert.strictEqual( convert(0).from('C').to('K'), 273.15);
@@ -15,7 +17,11 @@ tests['F to C'] = function () {
 };
 
 tests['C to F'] = function () {
-  assert.strictEqual( convert(0).from('C').to('F'), 32);
+  // 0C = 32F; tiny FP error below 1ppm is acceptable
+  var expected = 32
+    , actual = convert(0).from('C').to('F');
+  assert.ok( Math.abs(actual - expected) < 1e-10
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['F to K'] = function () {
@@ -31,7 +37,11 @@ tests['R to F'] = function () {
 };
 
 tests['R to C'] = function () {
-  assert.strictEqual( convert(612).from('R').to('C'), 66.85);
+  // 612R = 66.85C; tiny FP error below 1ppm is acceptable
+  var expected = 66.85
+    , actual = convert(612).from('R').to('C');
+  assert.ok( Math.abs(actual - expected) < 1e-10
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['R to K'] = function () {
@@ -52,9 +62,10 @@ tests['C to Re'] = function () {
 };
 
 tests['Re to F'] = function () {
+  // 0Re = 0C = 32F; tiny FP error below 1ppm is acceptable
   var expected = 32
     , actual = convert(0).from('Re').to('F');
-  assert.ok( actual === expected
+  assert.ok( Math.abs(actual - expected) < 1e-10
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 

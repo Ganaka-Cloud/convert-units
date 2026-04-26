@@ -13,7 +13,10 @@ tests['mm3 to l'] = function () {
 };
 
 tests['cm3 to l'] = function () {
-  assert.strictEqual( convert(100).from('cm3').to('l') , 1/10);
+  var expected = 0.1
+    , actual = convert(100).from('cm3').to('l');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['dl to l'] = function () {
@@ -25,7 +28,10 @@ tests['cl to l'] = function () {
 };
 
 tests['ml to l'] = function () {
-  assert.strictEqual( convert(100).from('ml').to('l') , 1/10);
+  var expected = 0.1
+    , actual = convert(100).from('ml').to('l');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['m3 to l'] = function () {
@@ -37,15 +43,24 @@ tests['km3 to l'] = function () {
 };
 
 tests['l to ml'] = function () {
-  assert.strictEqual( convert(1).from('l').to('ml') , 1000);
+  var expected = 1000
+    , actual = convert(1).from('l').to('ml');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['dl to ml'] = function () {
-  assert.strictEqual( convert(10).from('dl').to('ml') , 1000);
+  var expected = 1000
+    , actual = convert(10).from('dl').to('ml');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['cl to ml'] = function () {
-  assert.strictEqual( convert(100).from('cl').to('ml') , 1000);
+  var expected = 1000
+    , actual = convert(100).from('cl').to('ml');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['ml to ml'] = function () {
