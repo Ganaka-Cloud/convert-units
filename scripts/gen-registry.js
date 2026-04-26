@@ -48,6 +48,29 @@ while ((m = measureRegex.exec(indexSrc)) !== null) {
   measureToFile[m[1]] = m[2];
 }
 
+// Density unit abbreviations are opaque (e.g. kgpcm, gpcc, tlpcy) and cannot
+// be decoded generically.  This lookup table maps them to proper LaTeX strings.
+const DENSITY_LATEX = {
+  "gpcc":   "$g.cm^{-3}$",
+  "gpcm":   "$g.m^{-3}$",
+  "kgpcm":  "$kg.m^{-3}$",
+  "tpcmm":  "$t.mm^{-3}$",
+  "kgpl":   "$kg.l^{-1}$",
+  "gpl":    "$g.l^{-1}$",
+  "ozpcin": "$oz.in^{-3}$",
+  "ozpcft": "$oz.ft^{-3}$",
+  "ozspg":  "$oz.gal_{US}^{-1}$",
+  "ozlpg":  "$oz.gal_{UK}^{-1}$",
+  "tspcy":  "$ton_{short}.yd^{-3}$",
+  "tlpcy":  "$ton_{long}.yd^{-3}$",
+  "lbpcin": "$lb.in^{-3}$",
+  "lbpcft": "$lb.ft^{-3}$",
+  "lbpcy":  "$lb.yd^{-3}$",
+  "lbspg":  "$lb.gal_{US}^{-1}$",
+  "lblpg":  "$lb.gal_{UK}^{-1}$",
+  "slpcft": "$slug.ft^{-3}$",
+};
+
 // Helper: generate LaTeX string for a unit abbreviation
 // Follows ganaka-ui conventions:
 //   - Trailing digits become superscripts: m2 -> m^{2}, m3 -> m^{3}
@@ -56,6 +79,10 @@ while ((m = measureRegex.exec(indexSrc)) !== null) {
 //   - Section modulus z prefix: zm3 -> Z-m^{3}
 //   - Temperature degrees: /K -> /^{\\circ}K, /C -> /^{\\circ}C, /F -> /^{\\circ}F, /R -> /^{\\circ}R
 function latexFor(abbr) {
+  // Check density lookup first (opaque abbreviations)
+  if (Object.prototype.hasOwnProperty.call(DENSITY_LATEX, abbr)) {
+    return DENSITY_LATEX[abbr];
+  }
   if (abbr === "--") return "$--$";
 
   // Handle micro prefix first — strip μ, process the rest, then prepend
@@ -203,7 +230,7 @@ const latexUnitTypes = [
 // The library's anchor (e.g., kPa) is correct for conversion math; this map
 // provides the canonical SI base unit (Pa) for display/storage.
 const SI_BASE_OVERRIDES = {
-  Acceleration: { imperialunit: "ft/s2" }, // anchor is m/h (legacy bug); true imperial base is ft/s2
+  Acceleration: { imperialunit: "ft/s2" }, // explicit override to ensure ft/s2 is used as imperial display unit
   Mass: { siunit: "kg" }, // anchor is g; SI base is kg
   Volume: { siunit: "m3" }, // anchor is l; SI base is m3
   Speed: { siunit: "m/s", imperialunit: "ft/s" }, // anchor is km/h; SI base is m/s

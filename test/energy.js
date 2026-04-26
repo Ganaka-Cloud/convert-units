@@ -177,4 +177,35 @@ tests['ft-lb to J'] = function () {
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
+// Cross-system: metric (J) <-> imperial (Btu(IT))
+// 1 Btu(IT) = 1055.056 J  (ISO 31-4 / NIST)
+tests['Btu(IT) to J'] = function () {
+  var expected = 1055.056
+    , actual = convert(1).from('Btu(IT)').to('J');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['J to Btu(IT)'] = function () {
+  var expected = 1 / 1055.056
+    , actual = convert(1).from('J').to('Btu(IT)');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['kJ to Btu(IT)'] = function () {
+  var expected = 1000 / 1055.056
+    , actual = convert(1).from('kJ').to('Btu(IT)');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
+tests['cal to Btu(IT)'] = function () {
+  // 1 cal = 4.184 J; 4.184/1055.056 Btu
+  var expected = 4.184 / 1055.056
+    , actual = convert(1).from('cal').to('Btu(IT)');
+  assert.ok( percentError(expected, actual) < ACCURACY
+    , 'Expected: ' + expected +', Actual: ' + actual);
+};
+
 module.exports = tests;

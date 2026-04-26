@@ -64,7 +64,7 @@ tests['J/kg/C to kgf-m/kg/C'] = function () {
 };
 
 tests['kgf-m/kg/C to J/kg/C'] = function () {
-  var expected = 0.10197162129779283
+  var expected = 1/9.80665
     , actual = convert(1).from('kgf-m/kg/C').to('J/kg/C');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
@@ -74,16 +74,16 @@ tests['Btu/lbm/F to Btu/lbm/F'] = function () {
   assert.strictEqual( convert(1).from('Btu/lbm/F').to('Btu/lbm/F') , 1);
 };
 
-// When converting between systems, expect < 0.1% error
+// Cross-system: 1 Btu/lbm/F = 4186.8 J/kg/C (by definition of the BTU)
 tests['J/kg/C to Btu/lbm/F'] = function () {
-  var expected = 4186.8
+  var expected = 1/4186.8
     , actual = convert(1).from('J/kg/C').to('Btu/lbm/F');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['Btu/lbm/F to J/kg/C'] = function () {
-  var expected = 1/4186.8
+  var expected = 4186.8
     , actual = convert(1).from('Btu/lbm/F').to('J/kg/C');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
