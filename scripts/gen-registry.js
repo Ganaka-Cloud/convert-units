@@ -84,8 +84,11 @@ function latexFor(abbr) {
       part = "^{\\circ}" + part;
     }
 
-    // Convert trailing digits to superscripts: m2 -> m^{2}, K4 -> K^{4}
-    part = part.replace(/(\D)(\d+)$/g, function (_, prefix, digits) {
+    // Convert trailing digits to superscripts ONLY for realistic exponents (2, 3, 4)
+    // This avoids treating constant subscripts as powers: a0 (Bohr radius) stays as a0,
+    // c0 (speed of light) stays as c0, etc. Single digits 2/3/4 are used for area,
+    // volume, and area-moment dimensions.
+    part = part.replace(/(\D)([234])$/g, function (_, prefix, digits) {
       return prefix + "^{" + digits + "}";
     });
 
@@ -169,7 +172,7 @@ fs.writeFileSync(
   JSON.stringify(registry, null, 2),
   "utf8"
 );
-console.log("Generated dist/units-registry.json");
+console.log("Generated " + path.join(DIST_DIR, "units-registry.json"));
 
 // ─── Build latexUnits.json ───────────────────────────────────────────────────
 
@@ -183,7 +186,7 @@ fs.writeFileSync(
   JSON.stringify({ latexUnits: latexUnitsMap }, null, 2),
   "utf8"
 );
-console.log("Generated dist/latexUnits.json");
+console.log("Generated " + path.join(DIST_DIR, "latexUnits.json"));
 
 // ─── Build latexUnitTypes.json ───────────────────────────────────────────────
 
@@ -194,6 +197,19 @@ const latexUnitTypes = [
   { id: 0, name: "-Select-", siunit: "--", imperialunit: "--" },
   { id: 1, name: "--", siunit: "--", imperialunit: "--" },
 ];
+
+// Overrides for measures where the library's internal anchor differs from the
+// true SI base unit that ganaka-ui's backend expects for storage and calculation.
+// The library's anchor (e.g., kPa) is correct for conversion math; this map
+// provides the canonical SI base unit (Pa) for display/storage.
+const SI_BASE_OVERRIDES = {
+  Acceleration: { imperialunit: "ft/s2" }, // anchor is m/h (legacy bug); true imperial base is ft/s2
+  Mass: { siunit: "kg" }, // anchor is g; SI base is kg
+  Volume: { siunit: "m3" }, // anchor is l; SI base is m3
+  Speed: { siunit: "m/s", imperialunit: "ft/s" }, // anchor is km/h; SI base is m/s
+  Pressure: { siunit: "Pa" }, // anchor is kPa; SI base is Pa
+  VolumeFlowRate: { siunit: "m3/s" }, // anchor is l/s; SI base is m3/s
+};
 
 allMeasures.forEach((measureName, idx) => {
   const fileName = measureToFile[measureName];
@@ -218,6 +234,13 @@ allMeasures.forEach((measureName, idx) => {
     }
   }
 
+  // Apply SI base unit overrides for ganaka-ui backend compatibility
+  const override = SI_BASE_OVERRIDES[measureName];
+  if (override) {
+    if (override.siunit) siunit = override.siunit;
+    if (override.imperialunit) imperialunit = override.imperialunit;
+  }
+
   latexUnitTypes.push({
     id: idx + 2,
     name: measureName,
@@ -231,7 +254,7 @@ fs.writeFileSync(
   JSON.stringify({ latexUnitTypes: latexUnitTypes }, null, 2),
   "utf8"
 );
-console.log("Generated dist/latexUnitTypes.json");
+console.log("Generated " + path.join(DIST_DIR, "latexUnitTypes.json"));
 
 // Summary
 console.log(
