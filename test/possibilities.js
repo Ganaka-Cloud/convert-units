@@ -367,7 +367,17 @@ tests['all possibilities'] = function () {
         'H/m', 'μH/m', 'mH/m',
         'N*m2/C2',
         'W*m2', 'mW*m2',
-        'm*K', 'cm*K', 'mm*K'
+        'm*K', 'cm*K', 'mm*K',
+        // New CAD pre/post-processor measures (LineLoad owns N/m, already listed above)
+        'N/mm', 'N/cm', 'kN/m', 'lbf/ft', 'lbf/in', 'kip/ft',
+        'N/m3', 'kN/m3', 'lbf/ft3', 'lbf/in3',
+        'W/m2', 'kW/m2', 'mW/m2', 'Btu/hr/ft2',
+        'W/m2/K', 'kW/m2/K', 'Btu/hr/ft2/F',
+        'W/m3', 'kW/m3', 'MW/m3', 'Btu/hr/ft3',
+        'kg/s', 'g/s', 'kg/min', 'kg/h', 't/h', 'lb/s', 'lb/min', 'lb/h',
+        'A/m2', 'kA/m2', 'A/cm2', 'A/mm2',
+        'C/m3', 'mC/m3', 'μC/m3', 'C/cm3',
+        'C/m2', 'mC/m2', 'μC/m2', 'C/cm2'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());
