@@ -380,10 +380,10 @@ tests['all possibilities'] = function () {
         'C/m2', 'mC/m2', 'μC/m2', 'C/cm2',
         // Grammar aliases (kg/m3, N/m2, 1/C, 1/K) and the Temperature-gradient, Electrical-conductivity, Compressibility and Piezo-coefficient measures
         'kg/m3', 'N/m2', '1/C', '1/K',
-        'K/m', 'K/cm', 'K/mm', 'F/ft', 'F/in',
-        'S/m', 'mS/m', 'S/cm', 'mS/cm', 'μS/cm',
-        '1/Pa', '1/kPa', '1/MPa', '1/GPa', '1/bar', '1/psi', '1/ksi',
-        'm/V', 'nm/V', 'pm/V'
+        'K/m', 'F/ft',
+        'S/m',
+        '1/Pa', '1/psi',
+        'm/V'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

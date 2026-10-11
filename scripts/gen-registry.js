@@ -71,18 +71,15 @@ const DENSITY_LATEX = {
   "slpcft": "$slug/ft^{3}$",
 };
 
-// Reciprocal units: the generic rule would render "1/K" as 1.^{\circ}K^{-1}, so the
-// grammar spellings of per-temperature and per-pressure units are listed here.
-const RECIPROCAL_LATEX = {
+// The generic rule would render "1/K" as 1.^{\circ}K^{-1} and "F/ft" with a farad F,
+// so the grammar spellings of per-temperature, per-pressure and temperature-gradient
+// units are listed here.
+const LATEX_OVERRIDES = {
   "1/C": "$^{\\circ}C^{-1}$",
   "1/K": "$^{\\circ}K^{-1}$",
   "1/Pa": "$Pa^{-1}$",
-  "1/kPa": "$kPa^{-1}$",
-  "1/MPa": "$MPa^{-1}$",
-  "1/GPa": "$GPa^{-1}$",
-  "1/bar": "$bar^{-1}$",
   "1/psi": "$psi^{-1}$",
-  "1/ksi": "$ksi^{-1}$",
+  "F/ft": "$^{\\circ}F.ft^{-1}$",
 };
 
 // Helper: generate LaTeX string for a unit abbreviation
@@ -97,8 +94,8 @@ function latexFor(abbr) {
   if (Object.prototype.hasOwnProperty.call(DENSITY_LATEX, abbr)) {
     return DENSITY_LATEX[abbr];
   }
-  if (Object.prototype.hasOwnProperty.call(RECIPROCAL_LATEX, abbr)) {
-    return RECIPROCAL_LATEX[abbr];
+  if (Object.prototype.hasOwnProperty.call(LATEX_OVERRIDES, abbr)) {
+    return LATEX_OVERRIDES[abbr];
   }
   if (abbr === "--") return "$--$";
 
