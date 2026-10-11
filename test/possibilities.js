@@ -87,7 +87,7 @@ tests['partsPer possibilities'] = function() {
 
 tests['pressure possibilities'] = function() {
   var actual = convert().possibilities('Pressure')
-    , expected = [ 'Pa', 'μPa', 'mPa', 'hPa', 'kPa', 'MPa', 'GPa', 'bar', 'torr', 'atm', 'mmHg', 'cmH2O', 'mbar', 'cmHg', 'Ba', 'at', 'psi', 'ksi', 'inHg', 'inH2O'];
+    , expected = [ 'Pa', 'μPa', 'mPa', 'hPa', 'kPa', 'MPa', 'GPa', 'bar', 'torr', 'atm', 'mmHg', 'cmH2O', 'mbar', 'cmHg', 'Ba', 'at', 'psi', 'ksi', 'inHg', 'inH2O', 'N/m2'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -243,7 +243,7 @@ tests['percent possibilities'] = function() {
 
 tests['density possibilities'] = function() {
   var actual = convert().possibilities('Density')
-    , expected = [ 'gpcc', 'gpcm', 'kgpcm', 'tpcmm', 'kgpl', 'gpl', 'ozpcin', 'ozpcft', 'ozspg', 'ozlpg', 'tspcy', 'tlpcy', 'lbpcin', 'lbpcft', 'lbpcy', 'lbspg', 'lblpg', 'slpcft'];
+    , expected = [ 'gpcc', 'gpcm', 'kgpcm', 'tpcmm', 'kgpl', 'gpl', 'ozpcin', 'ozpcft', 'ozspg', 'ozlpg', 'tspcy', 'tlpcy', 'lbpcin', 'lbpcft', 'lbpcy', 'lbspg', 'lblpg', 'slpcft', 'kg/m3'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -255,7 +255,7 @@ tests['boltzmann possibilities'] = function() {
 
 tests['linearcte possibilities'] = function() {
   var actual = convert().possibilities('LinearCTE')
-    , expected = [ '/C', '/F', '/K', '/R'];
+    , expected = [ '/C', '/F', '/K', '/R', '1/C', '1/K'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -377,7 +377,13 @@ tests['all possibilities'] = function () {
         'kg/s', 'g/s', 'kg/min', 'kg/h', 't/h', 'lb/s', 'lb/min', 'lb/h',
         'A/m2', 'kA/m2', 'A/cm2', 'A/mm2',
         'C/m3', 'mC/m3', 'μC/m3', 'C/cm3',
-        'C/m2', 'mC/m2', 'μC/m2', 'C/cm2'
+        'C/m2', 'mC/m2', 'μC/m2', 'C/cm2',
+        // Grammar aliases (kg/m3, N/m2, 1/C, 1/K) and the Temperature-gradient, Electrical-conductivity, Compressibility and Piezo-coefficient measures
+        'kg/m3', 'N/m2', '1/C', '1/K',
+        'K/m', 'F/ft',
+        'S/m',
+        '1/Pa', '1/psi',
+        'm/V'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

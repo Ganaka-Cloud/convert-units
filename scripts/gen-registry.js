@@ -71,6 +71,17 @@ const DENSITY_LATEX = {
   "slpcft": "$slug/ft^{3}$",
 };
 
+// The generic rule would render "1/K" as 1.^{\circ}K^{-1} and "F/ft" with a farad F,
+// so the grammar spellings of per-temperature, per-pressure and temperature-gradient
+// units are listed here.
+const LATEX_OVERRIDES = {
+  "1/C": "$^{\\circ}C^{-1}$",
+  "1/K": "$^{\\circ}K^{-1}$",
+  "1/Pa": "$Pa^{-1}$",
+  "1/psi": "$psi^{-1}$",
+  "F/ft": "$^{\\circ}F.ft^{-1}$",
+};
+
 // Helper: generate LaTeX string for a unit abbreviation
 // Follows ganaka-ui conventions:
 //   - Trailing digits become superscripts: m2 -> m^{2}, m3 -> m^{3}
@@ -82,6 +93,9 @@ function latexFor(abbr) {
   // Check density lookup first (opaque abbreviations)
   if (Object.prototype.hasOwnProperty.call(DENSITY_LATEX, abbr)) {
     return DENSITY_LATEX[abbr];
+  }
+  if (Object.prototype.hasOwnProperty.call(LATEX_OVERRIDES, abbr)) {
+    return LATEX_OVERRIDES[abbr];
   }
   if (abbr === "--") return "$--$";
 
