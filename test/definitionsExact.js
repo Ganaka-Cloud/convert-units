@@ -77,7 +77,7 @@ var TABLE = [
   ["ksi", "Pa", (1000 * lbf) / (inch * inch)],
   ["cal", "J", 4.184],
   ["toe", "J", 41.868e9],
-  ["therm", "J", 1e5 * btu],
+  ["therm", "J", 105506000],
   ["quad", "J", 1e15 * btu],
   ["ft-lb", "J", lbf * ft],
   ["hp-mech", "W", 550 * ft * lbf],
@@ -138,6 +138,7 @@ tests["NIST printed values"] = function () {
   near(3.386389e3, convert(1).from("inHg").to("Pa"), 2e-7);
   near(2.490889e2, convert(1).from("inH2O").to("Pa"), 2e-7);
   near(1.852e3, convert(1).from("nMi").to("m"), 1e-12);
+  near(1.05506e8, convert(1).from("therm").to("J"), 1e-12);
   near(1.382550e-1, convert(1).from("pdl").to("N"), 1e-6);
   near(4.214011e-2, convert(1).from("pdl-ft").to("Nm"), 1e-6);
 };

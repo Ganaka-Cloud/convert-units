@@ -33,19 +33,19 @@ tests['kW/m/K to W/m/C'] = function () {
 };
 
 tests['W/m/C to W/cm/C'] = function () {
-  assert.strictEqual( convert(1).from('W/m/C').to('W/cm/C') , 100);
+  assert.strictEqual( convert(1).from('W/m/C').to('W/cm/C') , 0.01);
 };
 
 tests['W/cm/C to W/m/C'] = function () {
-  assert.strictEqual( convert(1).from('W/cm/C').to('W/m/C') , 0.01);
+  assert.strictEqual( convert(1).from('W/cm/C').to('W/m/C') , 100);
 };
 
 tests['W/m/C to W/mm/C'] = function () {
-  assert.strictEqual( convert(1).from('W/m/C').to('W/mm/C') , 1000);
+  assert.strictEqual( convert(1).from('W/m/C').to('W/mm/C') , 0.001);
 };
 
 tests['W/mm/C to W/m/C'] = function () {
-  assert.strictEqual( convert(1).from('W/mm/C').to('W/m/C') , 0.001);
+  assert.strictEqual( convert(1).from('W/mm/C').to('W/m/C') , 1000);
 };
 
 tests['W/m/C to mW/m/C'] = function () {

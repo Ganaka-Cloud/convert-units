@@ -9,19 +9,19 @@ tests['zm3 to zm3'] = function () {
 };
 
 tests['zm3 to zcm3'] = function () {
-  assert.strictEqual( convert(1).from('zm3').to('zcm3') , 0.000001);
+  assert.strictEqual( convert(1).from('zm3').to('zcm3') , 1000000);
 };
 
 tests['zcm3 to zm3'] = function () {
-  assert.strictEqual( convert(1).from('zcm3').to('zm3') , 1000000);
+  assert.strictEqual( convert(1).from('zcm3').to('zm3') , 0.000001);
 };
 
 tests['zm3 to zmm3'] = function () {
-  assert.strictEqual( convert(1).from('zm3').to('zmm3') , 0.000000001);
+  assert.ok( Math.abs(convert(1).from('zm3').to('zmm3') / 1000000000 - 1) < 1e-12 );
 };
 
 tests['zmm3 to zm3'] = function () {
-  assert.strictEqual( convert(1).from('zmm3').to('zm3') , 1000000000);
+  assert.strictEqual( convert(1).from('zmm3').to('zm3') , 0.000000001);
 };
 
 tests['zft3 to zft3'] = function () {

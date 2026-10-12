@@ -127,7 +127,7 @@ tests['MeV to keV'] = function () {
 };
 
 tests['therm to J'] = function () {
-  assert.ok(Math.abs(convert(1).from('therm').to('J') / (1e5 * 1055.05585262) - 1) < 1e-12);
+  assert.ok(Math.abs(convert(1).from('therm').to('J') / 105506000 - 1) < 1e-12);
 };
 
 tests['quad to therm'] = function () {
