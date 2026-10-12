@@ -109,19 +109,19 @@ tests['pdl-in to lbf-ft'] = function () {
 };
 
 tests['lbf-ft to tfsm'] = function () {
-  assert.strictEqual( convert(1).from('lbf-ft').to('tfsm') , 0.00015240028595707946);
+  assert.ok(Math.abs(convert(1).from('lbf-ft').to('tfsm') / (1.3558179483314004 / 8896.44) - 1) < 1e-12);
 };
 
 tests['tfsm to lbf-ft'] = function () {
-  assert.strictEqual( convert(1).from('tfsm').to('lbf-ft') , 1/0.00015240028595707946);
+  assert.ok(Math.abs(convert(1).from('tfsm').to('lbf-ft') / (8896.44 / 1.3558179483314004) - 1) < 1e-12);
 };
 
 tests['lbf-ft to tflm'] = function () {
-  assert.strictEqual( convert(1).from('lbf-ft').to('tflm') , 0.00013607158556486236);
+  assert.ok(Math.abs(convert(1).from('lbf-ft').to('tflm') / (1.3558179483314004 / 9964.02) - 1) < 1e-12);
 };
 
 tests['tflm to lbf-ft'] = function () {
-  assert.strictEqual( convert(1).from('tflm').to('lbf-ft') , 7349.072885781298);
+  assert.ok(Math.abs(convert(1).from('tflm').to('lbf-ft') / (9964.02 / 1.3558179483314004) - 1) < 1e-12);
 };
 
 // When converting between systems, expect < 0.1% error

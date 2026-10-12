@@ -3,11 +3,11 @@ var convert = require('../lib')
   , tests = {};
 
 tests['ft-cd to lx'] = function () {
-  assert.strictEqual( convert(1).from('ft-cd').to('lx') , 10.76391);
+  assert.ok(Math.abs(convert(1).from('ft-cd').to('lx') / (1 / (0.3048 * 0.3048)) - 1) < 1e-12);
 };
 
 tests['lx to ft-cd'] = function () {
-  assert.strictEqual( convert(1).from('lx').to('ft-cd') , 0.09290304359661128);
+  assert.ok(Math.abs(convert(1).from('lx').to('ft-cd') / (0.3048 * 0.3048) - 1) < 1e-12);
 };
 
 module.exports = tests;

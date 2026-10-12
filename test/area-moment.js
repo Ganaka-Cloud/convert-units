@@ -29,23 +29,23 @@ tests['ft4 to ft4'] = function () {
 };
 
 tests['ft4 to in4'] = function () {
-  assert.strictEqual( convert(1).from('ft4').to('in4') , 0.000004822856481436825);
+  assert.strictEqual( convert(1).from('ft4').to('in4') , 20736);
 };
 
 tests['in4 to ft4'] = function () {
-  assert.strictEqual( convert(1).from('in4').to('ft4') , 207346);
+  assert.strictEqual( convert(1).from('in4').to('ft4') , 1/20736);
 };
 
 // When converting between systems, expect < 0.1% error
 tests['m4 to ft4'] = function () {
-  var expected = 497630400000.00006
+  var expected = 1/Math.pow(0.3048, 4)
     , actual = convert(1).from('m4').to('ft4');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['ft4 to m4'] = function () {
-  var expected = 1/497630400000.00006
+  var expected = Math.pow(0.3048, 4)
     , actual = convert(1).from('ft4').to('m4');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
