@@ -21,11 +21,11 @@ tests['min/mi to min/mi'] = function () {
 };
 
 tests['min/mi to s/ft'] = function () {
-  assert.strictEqual( convert(1).from('min/mi').to('s/ft') , 0.0113636);
+  assert.ok(Math.abs(convert(1).from('min/mi').to('s/ft') / (60 / 5280) - 1) < 1e-12);
 };
 
 tests['s/ft to min/mi'] = function () {
-  assert.strictEqual( convert(1).from('s/ft').to('min/mi') , 1/0.0113636);
+  assert.ok(Math.abs(convert(1).from('s/ft').to('min/mi') / (5280 / 60) - 1) < 1e-12);
 };
 
 // When converting between systems, expect < 0.1% error

@@ -57,14 +57,14 @@ tests['J/g/C to J/kg/C'] = function () {
 };
 
 tests['J/kg/C to kgf-m/kg/C'] = function () {
-  var expected = 9.80665
+  var expected = 1/9.80665
     , actual = convert(1).from('J/kg/C').to('kgf-m/kg/C');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['kgf-m/kg/C to J/kg/C'] = function () {
-  var expected = 1/9.80665
+  var expected = 9.80665
     , actual = convert(1).from('kgf-m/kg/C').to('J/kg/C');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);

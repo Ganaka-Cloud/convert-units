@@ -10,11 +10,11 @@ tests['ft to ft'] = function () {
 };
 
 tests['ft to ft-us'] = function () {
-  assert.strictEqual( convert(1).from('ft').to('ft-us') , 0.999998000004);
+  assert.ok(Math.abs(convert(1).from('ft').to('ft-us') / (0.3048 * 3937 / 1200) - 1) < 1e-12);
 };
 
 tests['ft-us to ft'] = function () {
-  assert.strictEqual( convert(1).from('ft-us').to('ft') , 1.000002);
+  assert.ok(Math.abs(convert(1).from('ft-us').to('ft') / (1200 / 3937 / 0.3048) - 1) < 1e-12);
 };
 
 tests['in to in'] = function () {

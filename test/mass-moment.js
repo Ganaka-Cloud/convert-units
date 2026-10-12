@@ -25,14 +25,14 @@ tests['kg*mm2 to kg*m2'] = function () {
 };
 
 tests['kg*m2 to kgfms2'] = function () {
-  var expected = 9.8066499998
+  var expected = 1/9.80665
     , actual = convert(1).from('kg*m2').to('kgfms2');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['kgfms2 to kg*m2'] = function () {
-  var expected = 1/9.8066499998
+  var expected = 9.80665
     , actual = convert(1).from('kgfms2').to('kg*m2');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);

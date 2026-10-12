@@ -81,47 +81,47 @@ tests['lbf-in to lbf-ft'] = function () {
 };
 
 tests['lbf-ft to pdl-ft'] = function () {
-  var expected = 0.031080895694038567
+  var expected = 9.80665 / 0.3048
     , actual = convert(1).from('lbf-ft').to('pdl-ft');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['pdl-ft to lbf-ft'] = function () {
-  var expected = 1/0.031080895694038567
+  var expected = 0.3048 / 9.80665
     , actual = convert(1).from('pdl-ft').to('lbf-ft');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['lbf-ft to pdl-in'] = function () {
-  var expected = 0.0025900746411698806
+  var expected = 12 * 9.80665 / 0.3048
     , actual = convert(1).from('lbf-ft').to('pdl-in');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['pdl-in to lbf-ft'] = function () {
-  var expected = 1/0.0025900746411698806
+  var expected = 0.3048 / 9.80665 / 12
     , actual = convert(1).from('pdl-in').to('lbf-ft');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['lbf-ft to tfsm'] = function () {
-  assert.ok(Math.abs(convert(1).from('lbf-ft').to('tfsm') / (1.3558179483314004 / 8896.44) - 1) < 1e-12);
+  assert.ok(Math.abs(convert(1).from('lbf-ft').to('tfsm') / (1.3558179483314004 / 8896.443230521) - 1) < 1e-12);
 };
 
 tests['tfsm to lbf-ft'] = function () {
-  assert.ok(Math.abs(convert(1).from('tfsm').to('lbf-ft') / (8896.44 / 1.3558179483314004) - 1) < 1e-12);
+  assert.ok(Math.abs(convert(1).from('tfsm').to('lbf-ft') / (8896.443230521 / 1.3558179483314004) - 1) < 1e-12);
 };
 
 tests['lbf-ft to tflm'] = function () {
-  assert.ok(Math.abs(convert(1).from('lbf-ft').to('tflm') / (1.3558179483314004 / 9964.02) - 1) < 1e-12);
+  assert.ok(Math.abs(convert(1).from('lbf-ft').to('tflm') / (1.3558179483314004 / 9964.016418183519) - 1) < 1e-12);
 };
 
 tests['tflm to lbf-ft'] = function () {
-  assert.ok(Math.abs(convert(1).from('tflm').to('lbf-ft') / (9964.02 / 1.3558179483314004) - 1) < 1e-12);
+  assert.ok(Math.abs(convert(1).from('tflm').to('lbf-ft') / (9964.016418183519 / 1.3558179483314004) - 1) < 1e-12);
 };
 
 // When converting between systems, expect < 0.1% error
