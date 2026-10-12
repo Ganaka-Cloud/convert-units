@@ -2,9 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.0.0] - 2026-10-12
+## [2.11.0] - 2026-10-12
 
-Breaking: unit keys are now the tag-grammar spelling only (SI symbols joined with `*` and `/`, bare integer exponents). Consumers must replace the removed keys; there are no aliases. Consumers install from git tags (ganaka-ui pins `#v2.10.0`) and run `scripts/gen-registry.js`, so re-run it after upgrading.
+Unit keys are now the tag-grammar spelling only (SI symbols joined with `*` and `/`, bare integer exponents). Consumers must replace the removed keys; there are no aliases. Consumers install from git tags (ganaka-ui pins `#v2.10.0`) and run `scripts/gen-registry.js`, so re-run it after upgrading.
 
 Removed keys and their replacements:
 
