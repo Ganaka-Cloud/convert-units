@@ -75,4 +75,39 @@ tests['/R to 1/K'] = function () {
   close(1.8, convert(1).from('/R').to('1/K'));
 };
 
+// A coefficient is per unit temperature interval, so it carries no scale offset:
+// NIST SP 811 App. B.8 gives 1 degF (interval) = 5.555 556 E-01 K, 1 degC (interval) = 1 K,
+// and 1 degR (interval) = 5.555 556 E-01 K. Hence x /degF = 1.8x /K.
+tests['/F to /K is exactly 9/5'] = function () {
+  assert.ok(Math.abs(convert(1).from('/F').to('/K') - 1.8) < 1e-12);
+  assert.ok(Math.abs(convert(1).from('/R').to('/C') - 1.8) < 1e-12);
+};
+
+// Published pairs (amesweb.info Linear-Thermal-Expansion-Coefficient-Metals, room
+// temperature table, columns 10^-6/degC and 10^-6/degF), rounded to 0.1 in the source.
+var PUBLISHED = [
+  ['Steel A36', 11.7, 6.5],
+  ['Steel 4140', 12.3, 6.8],
+  ['Stainless 304', 17.2, 9.6],
+  ['Aluminum 6061', 23.6, 13.1],
+  ['Copper C11000', 17.0, 9.4],
+  ['Brass C26000', 19.9, 11.1],
+];
+PUBLISHED.forEach(function (row) {
+  var perC = row[1] * 1e-6, perF = row[2] * 1e-6;
+  tests[row[0] + ' CTE per C to per F matches published'] = function () {
+    // 0.1 rounding of the published /F value allows up to ~0.8% error
+    assert.ok(Math.abs(convert(perC).from('/C').to('/F') - perF) / perF < 0.01);
+  };
+  tests[row[0] + ' CTE per F to per C matches published'] = function () {
+    assert.ok(Math.abs(convert(perF).from('/F').to('/C') - perC) / perC < 0.01);
+  };
+});
+
+// The coefficient is not an absolute-temperature reciprocal: no offset, so zero stays zero.
+tests['zero CTE stays zero across scales'] = function () {
+  assert.strictEqual(convert(0).from('/F').to('/K'), 0);
+  assert.strictEqual(convert(0).from('/K').to('/F'), 0);
+};
+
 module.exports = tests;
