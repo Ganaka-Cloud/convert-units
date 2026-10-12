@@ -71,12 +71,9 @@ const DENSITY_LATEX = {
   "slpcft": "$slug/ft^{3}$",
 };
 
-// The generic rule would render "1/K" as 1.^{\circ}K^{-1} and "F/ft" with a farad F,
-// so the grammar spellings of per-temperature, per-pressure and temperature-gradient
-// units are listed here.
+// The generic rule would render "F/ft" with a farad F, so these grammar spellings are
+// listed here.
 const LATEX_OVERRIDES = {
-  "1/C": "$^{\\circ}C^{-1}$",
-  "1/K": "$^{\\circ}K^{-1}$",
   "1/Pa": "$Pa^{-1}$",
   "1/psi": "$psi^{-1}$",
   "F/ft": "$^{\\circ}F.ft^{-1}$",
@@ -161,6 +158,19 @@ function latexFor(abbr) {
 // ─── Build units-registry.json ──────────────────────────────────────────────
 
 const allUnits = convert().list();
+const unitByAbbr = {};
+allUnits.forEach((u) => {
+  unitByAbbr[u.abbr] = u;
+});
+
+// Grammar aliases render exactly as the key they mirror, so the UI never shows two
+// notations for one unit.
+const ALIASES = require("./unit-aliases.json");
+function latexOfUnit(u) {
+  const src = Object.prototype.hasOwnProperty.call(ALIASES, u.abbr) ? unitByAbbr[ALIASES[u.abbr]] : u;
+  return src._latex || latexFor(src.abbr);
+}
+
 const allMeasures = convert().measures();
 
 const registry = {
@@ -187,7 +197,7 @@ allMeasures.forEach((measureName) => {
         to_anchor = rawDef[u.system][u.abbr].to_anchor;
       }
 
-      const latex = u._latex || latexFor(u.abbr);
+      const latex = latexOfUnit(u);
 
       unitsMap[u.abbr] = {
         system: u.system,
@@ -219,7 +229,7 @@ console.log("Generated " + path.join(DIST_DIR, "units-registry.json"));
 
 const latexUnitsMap = { "--": "$--$" };
 allUnits.forEach((u) => {
-  latexUnitsMap[u.abbr] = u._latex || latexFor(u.abbr);
+  latexUnitsMap[u.abbr] = latexOfUnit(u);
 });
 
 fs.writeFileSync(

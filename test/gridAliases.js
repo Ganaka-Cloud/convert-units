@@ -64,20 +64,7 @@ tests["1/C equals /C"] = function () {
 };
 
 // Every alias must convert exactly like the key it mirrors, to and from every other unit of its measure.
-var ALIASES = {
-  "kg/m3": "kgpcm",
-  "g/cm3": "gpcc",
-  "g/m3": "gpcm",
-  "t/mm3": "tpcmm",
-  "kg/l": "kgpl",
-  "g/l": "gpl",
-  "kg*m2": "kgm2",
-  "kg*cm2": "kgcm2",
-  "kg*mm2": "kgmm2",
-  "J/m2": "J/sqm",
-  "kJ/m2": "kJ/sqm",
-  "N/m2": "Pa",
-};
+var ALIASES = require("../scripts/unit-aliases.json");
 Object.keys(ALIASES).forEach(function (alias) {
   var key = ALIASES[alias];
   var measure = measureOf(key)[0];
@@ -89,5 +76,23 @@ Object.keys(ALIASES).forEach(function (alias) {
     });
   };
 });
+
+// The generated registry must render an alias exactly as its key.
+var fs = require("fs"), path = require("path");
+tests["aliases render like their keys in the registry"] = function () {
+  var dist = path.join(__dirname, "..", "dist");
+  var registry = JSON.parse(fs.readFileSync(path.join(dist, "units-registry.json"), "utf8"));
+  var latexUnits = JSON.parse(fs.readFileSync(path.join(dist, "latexUnits.json"), "utf8")).latexUnits;
+  var latexByAbbr = {};
+  Object.keys(registry.measures).forEach(function (m) {
+    Object.keys(registry.measures[m].units).forEach(function (u) {
+      latexByAbbr[u] = registry.measures[m].units[u].latex;
+    });
+  });
+  Object.keys(ALIASES).forEach(function (alias) {
+    assert.strictEqual(latexByAbbr[alias], latexByAbbr[ALIASES[alias]], alias);
+    assert.strictEqual(latexUnits[alias], latexUnits[ALIASES[alias]], alias);
+  });
+};
 
 module.exports = tests;
