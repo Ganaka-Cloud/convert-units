@@ -33,28 +33,28 @@ tests['kN to N'] = function () {
 };
 
 tests['N to kgf'] = function () {
-  var expected = 9.80665
+  var expected = 1/9.80665
     , actual = convert(1).from('N').to('kgf');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['kgf to N'] = function () {
-  var expected = 1/9.80665
+  var expected = 9.80665
     , actual = convert(1).from('kgf').to('N');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['N to tfM'] = function () {
-  var expected = 9806.65
+  var expected = 1/9806.65
     , actual = convert(1).from('N').to('tfM');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['tfM to N'] = function () {
-  var expected = 1/9806.65
+  var expected = 9806.65
     , actual = convert(1).from('tfM').to('N');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);

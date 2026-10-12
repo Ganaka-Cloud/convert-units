@@ -22,14 +22,14 @@ tests['ft-lbs/sqin to ft-lbs/sqin'] = function () {
 
 // When converting between systems, expect < 0.1% error
 tests['J/m2 to ft-lbs/sqin'] = function () {
-  var expected = 2103
+  var expected = 1 / (4.4482216152605 * 0.3048 / (0.0254 * 0.0254))
     , actual = convert(1).from('J/m2').to('ft-lbs/sqin');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['ft-lbs/sqin to J/m2'] = function () {
-  var expected = 1/2103
+  var expected = 4.4482216152605 * 0.3048 / (0.0254 * 0.0254)
     , actual = convert(1).from('ft-lbs/sqin').to('J/m2');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);

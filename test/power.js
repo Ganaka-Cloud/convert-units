@@ -66,7 +66,7 @@ tests['kW to W'] = function () {
 
 // New units: hp-mech, hp-met, hp-elec, hp-boiler, tonRef
 tests['hp-mech to W'] = function () {
-  assert.strictEqual( convert(1).from('hp-mech').to('W') , 745.69987);
+  assert.ok(Math.abs(convert(1).from('hp-mech').to('W') / (550 * 0.3048 * 0.45359237 * 9.80665) - 1) < 1e-12);
 };
 
 tests['W to hp-mech'] = function () {
@@ -89,7 +89,7 @@ tests['hp-boiler to W'] = function () {
 };
 
 tests['tonRef to W'] = function () {
-  assert.strictEqual( convert(1).from('tonRef').to('W') , 3516.8528);
+  assert.ok(Math.abs(convert(1).from('tonRef').to('W') / (12000 * 1055.05585262 / 3600) - 1) < 1e-12);
 };
 
 tests['hp-mech to kW'] = function () {
