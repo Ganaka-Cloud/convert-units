@@ -4,36 +4,36 @@ var convert = require('../lib')
   , ACCURACY = 1/1000
   , percentError = require('../lib/percentError');
 
-tests['kgm2 to kgm2'] = function () {
-  assert.strictEqual( convert(1).from('kgm2').to('kgm2') , 1);
+tests['kg*m2 to kg*m2'] = function () {
+  assert.strictEqual( convert(1).from('kg*m2').to('kg*m2') , 1);
 };
 
-tests['kgm2 to kgcm2'] = function () {
-  assert.strictEqual( convert(1).from('kgm2').to('kgcm2') , 10000);
+tests['kg*m2 to kg*cm2'] = function () {
+  assert.strictEqual( convert(1).from('kg*m2').to('kg*cm2') , 10000);
 };
 
-tests['kgcm2 to kgm2'] = function () {
-  assert.strictEqual( convert(1).from('kgcm2').to('kgm2') , 1/10000);
+tests['kg*cm2 to kg*m2'] = function () {
+  assert.strictEqual( convert(1).from('kg*cm2').to('kg*m2') , 1/10000);
 };
 
-tests['kgm2 to kgmm2'] = function () {
-  assert.strictEqual( convert(1).from('kgm2').to('kgmm2') , 1000000);
+tests['kg*m2 to kg*mm2'] = function () {
+  assert.strictEqual( convert(1).from('kg*m2').to('kg*mm2') , 1000000);
 };
 
-tests['kgmm2 to kgm2'] = function () {
-  assert.strictEqual( convert(1).from('kgmm2').to('kgm2') , 1/1000000);
+tests['kg*mm2 to kg*m2'] = function () {
+  assert.strictEqual( convert(1).from('kg*mm2').to('kg*m2') , 1/1000000);
 };
 
-tests['kgm2 to kgfms2'] = function () {
+tests['kg*m2 to kgfms2'] = function () {
   var expected = 9.8066499998
-    , actual = convert(1).from('kgm2').to('kgfms2');
+    , actual = convert(1).from('kg*m2').to('kgfms2');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
-tests['kgfms2 to kgm2'] = function () {
+tests['kgfms2 to kg*m2'] = function () {
   var expected = 1/9.8066499998
-    , actual = convert(1).from('kgfms2').to('kgm2');
+    , actual = convert(1).from('kgfms2').to('kg*m2');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
@@ -79,16 +79,16 @@ tests['lbf-ins2 to lb-ft2'] = function () {
 };
 
 // When converting between systems, expect < 0.1% error
-tests['kgm2 to lb-ft2'] = function () {
+tests['kg*m2 to lb-ft2'] = function () {
   var expected = 23.73036040423193
-    , actual = convert(1).from('kgm2').to('lb-ft2');
+    , actual = convert(1).from('kg*m2').to('lb-ft2');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
-tests['lb-ft2 to kgm2'] = function () {
+tests['lb-ft2 to kg*m2'] = function () {
   var expected = 1/23.73036040423193
-    , actual = convert(1).from('lb-ft2').to('kgm2');
+    , actual = convert(1).from('lb-ft2').to('kg*m2');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };

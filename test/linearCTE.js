@@ -9,16 +9,8 @@ function close(expected, actual) {
     , 'Expected: ' + expected +', Actual: ' + actual);
 }
 
-tests['/C to /C'] = function () {
-  assert.strictEqual( convert(1).from('/C').to('/C') , 1);
-};
-
-tests['/C to /K'] = function () {
-  assert.strictEqual( convert(1).from('/C').to('/K') , 1);
-};
-
-tests['/K to /C'] = function () {
-  assert.strictEqual( convert(1e-5).from('/K').to('/C') , 1e-5);
+tests['1/C to 1/C'] = function () {
+  assert.strictEqual( convert(1).from('1/C').to('1/C') , 1);
 };
 
 tests['1/C to 1/K'] = function () {
@@ -26,15 +18,11 @@ tests['1/C to 1/K'] = function () {
 };
 
 tests['1/K to 1/C'] = function () {
-  assert.strictEqual( convert(1).from('1/K').to('1/C') , 1);
+  assert.strictEqual( convert(1e-5).from('1/K').to('1/C') , 1e-5);
 };
 
-tests['1/K to /K'] = function () {
-  assert.strictEqual( convert(1).from('1/K').to('/K') , 1);
-};
-
-tests['1/C to /C'] = function () {
-  assert.strictEqual( convert(1).from('1/C').to('/C') , 1);
+tests['1/K to 1/K'] = function () {
+  assert.strictEqual( convert(1).from('1/K').to('1/K') , 1);
 };
 
 tests['/F to /F'] = function () {
@@ -49,26 +37,21 @@ tests['/R to /F'] = function () {
   assert.strictEqual( convert(1).from('/R').to('/F') , 1);
 };
 
-// 1 /K = 5/9 /F
-tests['/K to /F'] = function () {
-  close(5/9, convert(1).from('/K').to('/F'));
-};
-
-tests['/C to /F'] = function () {
-  close(5/9, convert(1).from('/C').to('/F'));
-};
-
+// 1 K^-1 = 5/9 degF^-1
 tests['1/K to /F'] = function () {
   close(5/9, convert(1).from('1/K').to('/F'));
 };
 
-// 1 /F = 1.8 /K
-tests['/F to /K'] = function () {
-  close(1.8, convert(1).from('/F').to('/K'));
+tests['1/C to /F'] = function () {
+  close(5/9, convert(1).from('1/C').to('/F'));
 };
 
-tests['/F to /C'] = function () {
-  close(1.8, convert(1).from('/F').to('/C'));
+tests['/F to 1/K'] = function () {
+  close(1.8, convert(1).from('/F').to('1/K'));
+};
+
+tests['/F to 1/C'] = function () {
+  close(1.8, convert(1).from('/F').to('1/C'));
 };
 
 tests['/R to 1/K'] = function () {
@@ -77,10 +60,10 @@ tests['/R to 1/K'] = function () {
 
 // A coefficient is per unit temperature interval, so it carries no scale offset:
 // NIST SP 811 App. B.8 gives 1 degF (interval) = 5.555 556 E-01 K, 1 degC (interval) = 1 K,
-// and 1 degR (interval) = 5.555 556 E-01 K. Hence x /degF = 1.8x /K.
-tests['/F to /K is exactly 9/5'] = function () {
-  assert.ok(Math.abs(convert(1).from('/F').to('/K') - 1.8) < 1e-12);
-  assert.ok(Math.abs(convert(1).from('/R').to('/C') - 1.8) < 1e-12);
+// and 1 degR (interval) = 5.555 556 E-01 K. Hence x /degF = 1.8x 1/K.
+tests['/F to 1/K is exactly 9/5'] = function () {
+  assert.ok(Math.abs(convert(1).from('/F').to('1/K') - 1.8) < 1e-12);
+  assert.ok(Math.abs(convert(1).from('/R').to('1/C') - 1.8) < 1e-12);
 };
 
 // Published pairs (amesweb.info Linear-Thermal-Expansion-Coefficient-Metals, room
@@ -97,17 +80,17 @@ PUBLISHED.forEach(function (row) {
   var perC = row[1] * 1e-6, perF = row[2] * 1e-6;
   tests[row[0] + ' CTE per C to per F matches published'] = function () {
     // 0.1 rounding of the published /F value allows up to ~0.8% error
-    assert.ok(Math.abs(convert(perC).from('/C').to('/F') - perF) / perF < 0.01);
+    assert.ok(Math.abs(convert(perC).from('1/C').to('/F') - perF) / perF < 0.01);
   };
   tests[row[0] + ' CTE per F to per C matches published'] = function () {
-    assert.ok(Math.abs(convert(perF).from('/F').to('/C') - perC) / perC < 0.01);
+    assert.ok(Math.abs(convert(perF).from('/F').to('1/C') - perC) / perC < 0.01);
   };
 });
 
 // The coefficient is not an absolute-temperature reciprocal: no offset, so zero stays zero.
 tests['zero CTE stays zero across scales'] = function () {
-  assert.strictEqual(convert(0).from('/F').to('/K'), 0);
-  assert.strictEqual(convert(0).from('/K').to('/F'), 0);
+  assert.strictEqual(convert(0).from('/F').to('1/K'), 0);
+  assert.strictEqual(convert(0).from('1/K').to('/F'), 0);
 };
 
 module.exports = tests;
