@@ -34,11 +34,11 @@ check("1 mm/s2 -> m/s2",    convert(1).from("mm/s2").to("m/s2"),    0.001);
 
 // ─── Density ───────────────────────────────────────────────────────────────────
 console.log("\n[Density]");
-check("1 g/cm3 -> kg/m3",   convert(1).from("gpcc").to("kgpcm"),    1000);
-check("1 kg/l -> kg/m3",    convert(1).from("kgpl").to("kgpcm"),    1000);
-check("1 g/m3 -> kg/m3",    convert(1).from("gpcm").to("kgpcm"),    0.001);
-check("1 lb/ft3 -> kg/m3",  convert(1).from("lbpcft").to("kgpcm"),  16.0185, 1e-3);
-check("1 kg/m3 -> lb/ft3",  convert(1).from("kgpcm").to("lbpcft"),  0.062428, 1e-3);
+check("1 g/cm3 -> kg/m3",   convert(1).from("g/cm3").to("kg/m3"),    1000);
+check("1 kg/l -> kg/m3",    convert(1).from("kg/l").to("kg/m3"),    1000);
+check("1 g/m3 -> kg/m3",    convert(1).from("g/m3").to("kg/m3"),    0.001);
+check("1 lb/ft3 -> kg/m3",  convert(1).from("lbpcft").to("kg/m3"),  16.0185, 1e-3);
+check("1 kg/m3 -> lb/ft3",  convert(1).from("kg/m3").to("lbpcft"),  0.062428, 1e-3);
 check("1 lb/ft3 -> lb/in3", convert(1).from("lbpcft").to("lbpcin"), 1/1728, 1e-3);
 
 // ─── Energy ────────────────────────────────────────────────────────────────────

@@ -4,56 +4,56 @@ var convert = require('../lib')
   , ACCURACY = 1/1000
   , percentError = require('../lib/percentError');
 
-tests['kgpcm to kgpcm'] = function () {
-  assert.strictEqual( convert(1).from('kgpcm').to('kgpcm') , 1);
+tests['kg/m3 to kg/m3'] = function () {
+  assert.strictEqual( convert(1).from('kg/m3').to('kg/m3') , 1);
 };
 
-// Metric intra-system (anchor = kgpcm = kg/m^3)
+// Metric intra-system (anchor = kg/m3 = kg/m^3)
 
-tests['gpcc to kgpcm'] = function () {
+tests['g/cm3 to kg/m3'] = function () {
   // 1 g/cm^3 = 1000 kg/m^3
-  assert.strictEqual( convert(1).from('gpcc').to('kgpcm') , 1000);
+  assert.strictEqual( convert(1).from('g/cm3').to('kg/m3') , 1000);
 };
 
-tests['kgpcm to gpcc'] = function () {
+tests['kg/m3 to g/cm3'] = function () {
   // 1 kg/m^3 = 0.001 g/cm^3
-  assert.strictEqual( convert(1).from('kgpcm').to('gpcc') , 0.001);
+  assert.strictEqual( convert(1).from('kg/m3').to('g/cm3') , 0.001);
 };
 
-tests['gpcm to kgpcm'] = function () {
+tests['g/m3 to kg/m3'] = function () {
   // 1 g/m^3 = 0.001 kg/m^3
-  assert.strictEqual( convert(1).from('gpcm').to('kgpcm') , 0.001);
+  assert.strictEqual( convert(1).from('g/m3').to('kg/m3') , 0.001);
 };
 
-tests['kgpcm to gpcm'] = function () {
+tests['kg/m3 to g/m3'] = function () {
   // 1 kg/m^3 = 1000 g/m^3
-  assert.strictEqual( convert(1).from('kgpcm').to('gpcm') , 1000);
+  assert.strictEqual( convert(1).from('kg/m3').to('g/m3') , 1000);
 };
 
-tests['kgpcm to tpcmm'] = function () {
-  assert.strictEqual( convert(1).from('kgpcm').to('tpcmm') , 1e-12);
+tests['kg/m3 to t/mm3'] = function () {
+  assert.strictEqual( convert(1).from('kg/m3').to('t/mm3') , 1e-12);
 };
 
-tests['tpcmm to kgpcm'] = function () {
-  assert.strictEqual( convert(1).from('tpcmm').to('kgpcm') , 1000000000000);
+tests['t/mm3 to kg/m3'] = function () {
+  assert.strictEqual( convert(1).from('t/mm3').to('kg/m3') , 1000000000000);
 };
 
-tests['kgpl to kgpcm'] = function () {
+tests['kg/l to kg/m3'] = function () {
   // 1 kg/l = 1000 kg/m^3
-  assert.strictEqual( convert(1).from('kgpl').to('kgpcm') , 1000);
+  assert.strictEqual( convert(1).from('kg/l').to('kg/m3') , 1000);
 };
 
-tests['kgpcm to kgpl'] = function () {
+tests['kg/m3 to kg/l'] = function () {
   // 1 kg/m^3 = 0.001 kg/l
-  assert.strictEqual( convert(1).from('kgpcm').to('kgpl') , 0.001);
+  assert.strictEqual( convert(1).from('kg/m3').to('kg/l') , 0.001);
 };
 
-tests['kgpcm to gpl'] = function () {
-  assert.strictEqual( convert(1).from('kgpcm').to('gpl') , 1);
+tests['kg/m3 to g/l'] = function () {
+  assert.strictEqual( convert(1).from('kg/m3').to('g/l') , 1);
 };
 
-tests['gpl to kgpcm'] = function () {
-  assert.strictEqual( convert(1).from('gpl').to('kgpcm') , 1);
+tests['g/l to kg/m3'] = function () {
+  assert.strictEqual( convert(1).from('g/l').to('kg/m3') , 1);
 };
 
 // Imperial intra-system (anchor = tlpcy)
@@ -244,26 +244,26 @@ tests['tlpcy to lbpcft'] = function () {
 
 // Cross-system
 
-tests['kgpcm to lbpcft'] = function () {
+tests['kg/m3 to lbpcft'] = function () {
   // 1 kg/m^3 = 0.062428 lb/ft^3 (Pint reference)
   var expected = 0.0624279606
-    , actual = convert(1).from('kgpcm').to('lbpcft');
+    , actual = convert(1).from('kg/m3').to('lbpcft');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
-tests['lbpcft to kgpcm'] = function () {
+tests['lbpcft to kg/m3'] = function () {
   // 1 lb/ft^3 = 16.0185 kg/m^3 (Pint reference)
   var expected = 16.01846337374285
-    , actual = convert(1).from('lbpcft').to('kgpcm');
+    , actual = convert(1).from('lbpcft').to('kg/m3');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
-tests['gpcc to lbpcft'] = function () {
+tests['g/cm3 to lbpcft'] = function () {
   // 1 g/cm^3 = 1000 kg/m^3 = 62.428 lb/ft^3
   var expected = 62.4279606
-    , actual = convert(1).from('gpcc').to('lbpcft');
+    , actual = convert(1).from('g/cm3').to('lbpcft');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };

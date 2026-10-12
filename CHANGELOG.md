@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2026-10-12
+
+Breaking: unit keys are now the tag-grammar spelling only (SI symbols joined with `*` and `/`, bare integer exponents). Consumers must replace the removed keys; there are no aliases. Consumers install from git tags (ganaka-ui pins `#v2.10.0`) and run `scripts/gen-registry.js`, so re-run it after upgrading.
+
+Removed keys and their replacements:
+
+| Measure | Removed | Use |
+|---|---|---|
+| Density | `kgpcm` | `kg/m3` |
+| Density | `gpcc` | `g/cm3` |
+| Density | `gpcm` | `g/m3` |
+| Density | `tpcmm` | `t/mm3` |
+| Density | `kgpl` | `kg/l` |
+| Density | `gpl` | `g/l` |
+| Mass-moment | `kgm2` | `kg*m2` |
+| Mass-moment | `kgcm2` | `kg*cm2` |
+| Mass-moment | `kgmm2` | `kg*mm2` |
+| J-integral | `J/sqm` | `J/m2` |
+| J-integral | `kJ/sqm` | `kJ/m2` |
+| LinearCTE | `/C` | `1/C` |
+| LinearCTE | `/K` | `1/K` |
+
+Also in this release:
+
+- LinearCTE no longer applies absolute-temperature offsets: a coefficient is per temperature interval, so 1 /K = 5/9 /F (NIST SP 811 App. B.8). The measure's metric anchor is now `1/K`.
+- New measures: Temperature-gradient (`K/m`, `F/ft`), Electrical-conductivity (`S/m`), Compressibility (`1/Pa`, `1/psi`), Piezo-coefficient (`m/V`).
+- Density `tpcmm` (now `t/mm3`) is named a metric tonne per cubic millimetre, matching its factor.
+- Registry LaTeX: `kg/m^{3}`, `kg\cdot m^{2}`, `J/m^{2}`, `^{\circ}C^{-1}`, `K^{-1}` for the new keys.
+- Anchors changed in the generated registry: Density `kg/m3`, Mass-moment `kg*m2`, J-integral `J/m2`, LinearCTE `1/K`.
+
 ## [2.5.1] - 2025-08-09
 
 - Cleanup: Removed server-side `lib/utils/currencyUpdater.js` as browser/Vue apps use in-memory updates.
