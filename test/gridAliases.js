@@ -24,6 +24,16 @@ var GRAMMAR = {
   "S/m": "Electrical-conductivity",
   "1/Pa": "Compressibility",
   "m/V": "Piezo-coefficient",
+  "g/cm3": "Density",
+  "g/m3": "Density",
+  "t/mm3": "Density",
+  "kg/l": "Density",
+  "g/l": "Density",
+  "kg*m2": "Mass-moment",
+  "kg*cm2": "Mass-moment",
+  "kg*mm2": "Mass-moment",
+  "J/m2": "J-integral",
+  "kJ/m2": "J-integral",
 };
 Object.keys(GRAMMAR).forEach(function (abbr) {
   tests[abbr + " resolves to " + GRAMMAR[abbr]] = function () {
@@ -52,5 +62,32 @@ tests["1/C equals /C"] = function () {
   assert.strictEqual(convert(1).from("1/C").to("1/K"), convert(1).from("/C").to("/K"));
   assert.strictEqual(convert(1).from("1/C").to("/F"), convert(1).from("/C").to("/F"));
 };
+
+// Every alias must convert exactly like the key it mirrors, to and from every other unit of its measure.
+var ALIASES = {
+  "kg/m3": "kgpcm",
+  "g/cm3": "gpcc",
+  "g/m3": "gpcm",
+  "t/mm3": "tpcmm",
+  "kg/l": "kgpl",
+  "g/l": "gpl",
+  "kg*m2": "kgm2",
+  "kg*cm2": "kgcm2",
+  "kg*mm2": "kgmm2",
+  "J/m2": "J/sqm",
+  "kJ/m2": "kJ/sqm",
+  "N/m2": "Pa",
+};
+Object.keys(ALIASES).forEach(function (alias) {
+  var key = ALIASES[alias];
+  var measure = measureOf(key)[0];
+  var others = convert().possibilities(measure);
+  tests[alias + " converts like " + key] = function () {
+    others.forEach(function (other) {
+      assert.strictEqual(convert(7.5).from(alias).to(other), convert(7.5).from(key).to(other));
+      assert.strictEqual(convert(7.5).from(other).to(alias), convert(7.5).from(other).to(key));
+    });
+  };
+});
 
 module.exports = tests;
