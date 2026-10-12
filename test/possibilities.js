@@ -183,7 +183,7 @@ tests['moment possibilities'] = function() {
 
 tests['mass-moment possibilities'] = function() {
   var actual = convert().possibilities('Mass-moment')
-    , expected = [ 'kgm2', 'kgcm2', 'kgmm2', 'kgfms2', 'lb-in2', 'lb-ft2', 'lbf-ins2', 'lbf-fts2'];
+    , expected = [ 'kgm2', 'kgcm2', 'kgmm2', 'kgfms2', 'lb-in2', 'lb-ft2', 'lbf-ins2', 'lbf-fts2', 'kg*m2', 'kg*cm2', 'kg*mm2'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -225,7 +225,7 @@ tests['stress-intensity-factor possibilities'] = function() {
 
 tests['j-integral possibilities'] = function() {
   var actual = convert().possibilities('J-integral')
-    , expected = [ 'J/sqm', 'kJ/sqm', 'ft-lbs/sqin'];
+    , expected = [ 'J/sqm', 'kJ/sqm', 'ft-lbs/sqin', 'J/m2', 'kJ/m2'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -243,7 +243,7 @@ tests['percent possibilities'] = function() {
 
 tests['density possibilities'] = function() {
   var actual = convert().possibilities('Density')
-    , expected = [ 'gpcc', 'gpcm', 'kgpcm', 'tpcmm', 'kgpl', 'gpl', 'ozpcin', 'ozpcft', 'ozspg', 'ozlpg', 'tspcy', 'tlpcy', 'lbpcin', 'lbpcft', 'lbpcy', 'lbspg', 'lblpg', 'slpcft', 'kg/m3'];
+    , expected = [ 'gpcc', 'gpcm', 'kgpcm', 'tpcmm', 'kgpl', 'gpl', 'ozpcin', 'ozpcft', 'ozspg', 'ozlpg', 'tspcy', 'tlpcy', 'lbpcin', 'lbpcft', 'lbpcy', 'lbspg', 'lblpg', 'slpcft', 'kg/m3', 'g/cm3', 'g/m3', 't/mm3', 'kg/l', 'g/l'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -380,6 +380,7 @@ tests['all possibilities'] = function () {
         'C/m2', 'mC/m2', 'μC/m2', 'C/cm2',
         // Grammar aliases (kg/m3, N/m2, 1/C, 1/K) and the Temperature-gradient, Electrical-conductivity, Compressibility and Piezo-coefficient measures
         'kg/m3', 'N/m2', '1/C', '1/K',
+        'g/cm3', 'g/m3', 't/mm3', 'kg/l', 'g/l', 'kg*m2', 'kg*cm2', 'kg*mm2', 'J/m2', 'kJ/m2',
         'K/m', 'F/ft',
         'S/m',
         '1/Pa', '1/psi',

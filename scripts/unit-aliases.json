@@ -1,0 +1,16 @@
+{
+  "kg/m3": "kgpcm",
+  "g/cm3": "gpcc",
+  "g/m3": "gpcm",
+  "t/mm3": "tpcmm",
+  "kg/l": "kgpl",
+  "g/l": "gpl",
+  "kg*m2": "kgm2",
+  "kg*cm2": "kgcm2",
+  "kg*mm2": "kgmm2",
+  "J/m2": "J/sqm",
+  "kJ/m2": "kJ/sqm",
+  "N/m2": "Pa",
+  "1/C": "/C",
+  "1/K": "/K"
+}
