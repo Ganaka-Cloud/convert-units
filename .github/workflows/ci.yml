@@ -1,13 +1,21 @@
 name: CI
 
+# Runs on pull requests only. The org "main: CI gate" ruleset requires the `ci`
+# job below and an up-to-date branch, so the merged tree is the tree tested here
+# and nothing reruns on develop. No paths filter: a workflow that never runs
+# leaves the required check pending forever.
 on:
-  push:
-    branches: [ develop, main, master ]
   pull_request:
-    branches: [ develop, main, master ]
+    branches: [develop]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   lint-and-test:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,6 +41,7 @@ jobs:
   # test/pint.js checks convert-units against pint-check/reference.json. This job proves the
   # committed reference is what pint actually says for the committed unit map.
   pint-reference:
+    if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,3 +60,18 @@ jobs:
 
       - name: Reference is up to date
         run: git diff --exit-code pint-check/reference.json
+
+  # The one check the org ruleset requires. A skipped required check counts as
+  # passed, so the verdict reads every result rather than trusting needs: alone.
+  ci:
+    if: ${{ always() && !github.event.pull_request.draft }}
+    needs: [lint-and-test, pint-reference]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verdict
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          for r in $RESULTS; do
+            [ "$r" = success ] || { echo "::error::a required job ended $r"; exit 1; }
+          done
