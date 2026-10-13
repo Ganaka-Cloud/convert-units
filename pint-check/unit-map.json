@@ -1,0 +1,803 @@
+{
+  "excludeMeasures": {
+    "Currency": "Exchange rates, not physical units."
+  },
+  "measures": {
+    "Length": {
+      "pm": "picometer",
+      "fm": "femtometer",
+      "nm": "nanometer",
+      "μm": "micrometer",
+      "mm": "millimeter",
+      "cm": "centimeter",
+      "m": "meter",
+      "km": "kilometer",
+      "Å": "angstrom",
+      "ly": "light_year",
+      "AU": "astronomical_unit",
+      "pc": { "pint": "648000 / pi * astronomical_unit", "why": "IAU 2015 B2 defines the parsec as (648000/pi) au; pint derives it through tan(1 arcsec)." },
+      "Mm": "megameter",
+      "a0": "bohr_radius",
+      "lP": "planck_length",
+      "in": "inch",
+      "yd": "yard",
+      "ft-us": { "pint": "1200 / 3937 * meter", "why": "US survey foot, defined as 1200/3937 m." },
+      "ft": "foot",
+      "mi": "mile",
+      "nMi": "nautical_mile",
+      "fathom": { "pint": "6 * foot", "why": "International foot; pint's fathom is survey-based, retired by NIST in 2022." },
+      "furlong": { "pint": "660 * foot", "why": "International foot; pint's furlong is survey-based." },
+      "chain": { "pint": "66 * foot", "why": "International foot; pint's chain is survey-based." },
+      "league": { "pint": "3 * mile", "why": "International mile; pint's league is survey-based." },
+      "hand": "hand",
+      "rod": { "pint": "16.5 * foot", "why": "International foot; pint's rod is survey-based." }
+    },
+    "Acceleration": {
+      "km/s2": "kilometer / second ** 2",
+      "m/s2": "meter / second ** 2",
+      "dm/s2": "decimeter / second ** 2",
+      "cm/s2": "centimeter / second ** 2",
+      "mm/s2": "millimeter / second ** 2",
+      "g-force": "standard_gravity",
+      "in/s2": "inch / second ** 2",
+      "ft/s2": "foot / second ** 2",
+      "yd/s2": "yard / second ** 2",
+      "mi/s2": "mile / second ** 2",
+      "g-force:US": "standard_gravity"
+    },
+    "Area-moment": {
+      "m4": "meter ** 4",
+      "cm4": "centimeter ** 4",
+      "mm4": "millimeter ** 4",
+      "in4": "inch ** 4",
+      "ft4": "foot ** 4"
+    },
+    "Area": {
+      "mm2": "millimeter ** 2",
+      "cm2": "centimeter ** 2",
+      "m2": "meter ** 2",
+      "ha": "hectare",
+      "km2": "kilometer ** 2",
+      "a": "are",
+      "barn": "barn",
+      "in2": "inch ** 2",
+      "yd2": "yard ** 2",
+      "ft2": "foot ** 2",
+      "ac": { "pint": "43560 * foot ** 2", "why": "International foot; pint's acre is survey-based." },
+      "mi2": "mile ** 2",
+      "circ-mil": "circular_mil",
+      "darcy": "darcy"
+    },
+    "Force": {
+      "dyn": "dyne",
+      "N": "newton",
+      "μN": "micronewton",
+      "mN": "millinewton",
+      "kN": "kilonewton",
+      "MN": "meganewton",
+      "daN": "decanewton",
+      "kgf": "kilogram_force",
+      "tfM": "force_metric_ton",
+      "pond": "gram_force",
+      "kp": "kilogram_force",
+      "a_u_force": "atomic_unit_of_force",
+      "lbf": "force_pound",
+      "kipf": "kip",
+      "pdl": "poundal",
+      "tfs": "force_short_ton",
+      "tfl": "force_long_ton"
+    },
+    "Mass": {
+      "pg": "picogram",
+      "ng": "nanogram",
+      "μg": "microgram",
+      "mg": "milligram",
+      "g": "gram",
+      "kg": "kilogram",
+      "mt": "metric_ton",
+      "u": "unified_atomic_mass_unit",
+      "Da": "dalton",
+      "ct": "carat",
+      "m_e": "electron_mass",
+      "m_p": "proton_mass",
+      "m_n": "neutron_mass",
+      "mP": "planck_mass",
+      "oz": "ounce",
+      "lb": "pound",
+      "t": "short_ton",
+      "stone": "stone",
+      "grain": "grain",
+      "slug": "slug",
+      "ozt": "troy_ounce",
+      "lbt": "troy_pound",
+      "cwt": "short_hundredweight",
+      "dr": "dram",
+      "dwt": "pennyweight",
+      "long-ton": "long_ton",
+      "short-ton": "short_ton"
+    },
+    "Moment": {
+      "μNm": "micronewton * meter",
+      "Nmm": "newton * millimeter",
+      "Ncm": "newton * centimeter",
+      "Nm": "newton * meter",
+      "kNm": "kilonewton * meter",
+      "kgfm": "kilogram_force * meter",
+      "tfMm": "force_metric_ton * meter",
+      "tfsm": "force_short_ton * meter",
+      "tflm": "force_long_ton * meter",
+      "lbf-in": "force_pound * inch",
+      "lbf-ft": "force_pound * foot",
+      "pdl-ft": "poundal * foot",
+      "pdl-in": "poundal * inch"
+    },
+    "Mass-moment": {
+      "kg*m2": "kilogram * meter ** 2",
+      "kg*cm2": "kilogram * centimeter ** 2",
+      "kg*mm2": "kilogram * millimeter ** 2",
+      "kgfms2": "kilogram_force * meter * second ** 2",
+      "lb-in2": "pound * inch ** 2",
+      "lb-ft2": "pound * foot ** 2",
+      "lbf-ins2": "force_pound * inch * second ** 2",
+      "lbf-fts2": "force_pound * foot * second ** 2"
+    },
+    "Section-modulus": {
+      "zm3": "meter ** 3",
+      "zcm3": "centimeter ** 3",
+      "zmm3": "millimeter ** 3",
+      "zin3": "inch ** 3",
+      "zft3": "foot ** 3"
+    },
+    "Thermal-expansion": {
+      "mm/mm": "millimeter / millimeter",
+      "cm/cm": "centimeter / centimeter",
+      "m/m": "meter / meter",
+      "in/in": "inch / inch",
+      "yd/yd": "yard / yard",
+      "ft-us/ft-us": "meter / meter",
+      "ft/ft": "foot / foot"
+    },
+    "Thermal-conductivity": {
+      "W/mm/C": "watt / millimeter / delta_degC",
+      "W/cm/C": "watt / centimeter / delta_degC",
+      "mW/m/C": "milliwatt / meter / delta_degC",
+      "cW/m/C": "centiwatt / meter / delta_degC",
+      "W/m/C": "watt / meter / delta_degC",
+      "kW/m/C": "kilowatt / meter / delta_degC",
+      "W/m/K": "watt / meter / kelvin",
+      "kW/m/K": "kilowatt / meter / kelvin",
+      "Btu.in/hr/sq.ft/F": "Btu_it * inch / hour / foot ** 2 / delta_degF",
+      "Btu.in/s/sq.ft/F": "Btu_it * inch / second / foot ** 2 / delta_degF",
+      "Btu/hr/ft/F": "Btu_it / hour / foot / delta_degF"
+    },
+    "Specific-heat-capacity": {
+      "J/g/C": "joule / gram / delta_degC",
+      "J/kg/C": "joule / kilogram / delta_degC",
+      "mJ/kg/C": "millijoule / kilogram / delta_degC",
+      "kJ/kg/C": "kilojoule / kilogram / delta_degC",
+      "mJ/kg/K": "millijoule / kilogram / kelvin",
+      "J/kg/K": "joule / kilogram / kelvin",
+      "kJ/kg/K": "kilojoule / kilogram / kelvin",
+      "kgf-m/kg/C": "kilogram_force * meter / kilogram / delta_degC",
+      "Btu/lbm/F": "Btu_it / pound / delta_degF"
+    },
+    "Stefan-Boltzmann": {
+      "W/m2/K4": "watt / meter ** 2 / kelvin ** 4",
+      "Btu/hr/sq.ft/R4": "Btu_it / hour / foot ** 2 / degR ** 4"
+    },
+    "Stress-Intensity-Factor": {
+      "Pa-sqrt(m)": "pascal * meter ** 0.5",
+      "kPa-sqrt(m)": "kilopascal * meter ** 0.5",
+      "hPa-sqrt(m)": "hectopascal * meter ** 0.5",
+      "MPa-sqrt(m)": "megapascal * meter ** 0.5",
+      "psi-sqrt(in)": "psi * inch ** 0.5",
+      "ksi-sqr(in)": "ksi * inch ** 0.5"
+    },
+    "J-integral": {
+      "J/m2": "joule / meter ** 2",
+      "kJ/m2": "kilojoule / meter ** 2",
+      "ft-lbs/sqin": "foot_pound / inch ** 2"
+    },
+    "Crack-growth-rate-CorrParam": {
+      "MPam/h": "megapascal * meter / hour"
+    },
+    "Percent": {
+      "percent": "percent"
+    },
+    "Density": {
+      "g/cm3": "gram / centimeter ** 3",
+      "g/m3": "gram / meter ** 3",
+      "kg/m3": "kilogram / meter ** 3",
+      "t/mm3": "metric_ton / millimeter ** 3",
+      "kg/l": "kilogram / liter",
+      "g/l": "gram / liter",
+      "ozpcin": "ounce / inch ** 3",
+      "ozpcft": "ounce / foot ** 3",
+      "ozspg": "ounce / gallon",
+      "ozlpg": "ounce / imperial_gallon",
+      "tspcy": "short_ton / yard ** 3",
+      "tlpcy": "long_ton / yard ** 3",
+      "lbpcin": "pound / inch ** 3",
+      "lbpcft": "pound / foot ** 3",
+      "lbpcy": "pound / yard ** 3",
+      "lbspg": "pound / gallon",
+      "lblpg": "pound / imperial_gallon",
+      "slpcft": "slug / foot ** 3"
+    },
+    "Boltzmann": {
+      "J/K": "joule / kelvin",
+      "ev/K": "electron_volt / kelvin",
+      "ft-lb/R": "foot_pound / degR"
+    },
+    "Volume": {
+      "mm3": "millimeter ** 3",
+      "cm3": "centimeter ** 3",
+      "ml": "milliliter",
+      "cl": "centiliter",
+      "dl": "deciliter",
+      "l": "liter",
+      "kl": "kiloliter",
+      "m3": "meter ** 3",
+      "km3": "kilometer ** 3",
+      "tsp": "teaspoon",
+      "Tbs": "tablespoon",
+      "in3": "inch ** 3",
+      "fl-oz": "fluid_ounce",
+      "cup": "cup",
+      "pnt": "pint",
+      "qt": "quart",
+      "gal": "gallon",
+      "ft3": "foot ** 3",
+      "yd3": "yard ** 3",
+      "gill": "gill",
+      "bbl-oil": "oil_barrel",
+      "bbl-beer": "beer_barrel",
+      "bu": "bushel",
+      "pk": "peck",
+      "fl-oz-UK": "imperial_fluid_ounce",
+      "UK-gal": "imperial_gallon",
+      "UK-pt": "imperial_pint",
+      "UK-gill": "imperial_gill",
+      "US-dry-gal": "dry_gallon",
+      "US-dry-qt": "dry_quart",
+      "US-dry-pt": "dry_pint",
+      "bdft": "board_foot",
+      "acre-ft": { "pint": "43560 * foot ** 3", "why": "International foot; pint's acre_foot is survey-based." },
+      "jigger": { "pint": "1.5 * fluid_ounce", "why": "Pint has no jigger; US jigger is 1.5 US fl oz." },
+      "fl-dr": "fluid_dram"
+    },
+    "Each": {
+      "ea": "1",
+      "dz": { "pint": "12", "why": "Pint has no dozen." }
+    },
+    "Temperature": {
+      "C": "degC",
+      "K": "kelvin",
+      "Re": "degRe",
+      "F": "degF",
+      "R": "degR"
+    },
+    "LinearCTE": {
+      "1/C": "1 / delta_degC",
+      "1/K": "1 / kelvin",
+      "/F": "1 / delta_degF",
+      "/R": "1 / degR"
+    },
+    "Time": {
+      "ps": "picosecond",
+      "ns": "nanosecond",
+      "μs": "microsecond",
+      "ms": "millisecond",
+      "s": "second",
+      "min": "minute",
+      "h": "hour",
+      "d": "day",
+      "week": "week",
+      "month": "month",
+      "year": "julian_year",
+      "fortnight": "fortnight",
+      "shake": "shake",
+      "svedberg": "svedberg",
+      "yr-julian": "julian_year",
+      "common-yr": "common_year",
+      "leap-yr": "leap_year",
+      "sidereal-day": "sidereal_day",
+      "sidereal-yr": "sidereal_year",
+      "tropical-yr": "tropical_year",
+      "century": { "pint": "100 * julian_year", "why": "Julian century, as in astronomy." },
+      "millennium": { "pint": "1000 * julian_year", "why": "Julian millennium." },
+      "tP": "planck_time"
+    },
+    "Digital": {
+      "b": "bit",
+      "Kb": { "pint": "kibibit", "why": "convert-units uses binary multiples: 1 Kb = 1024 b." },
+      "Mb": { "pint": "mebibit", "why": "Binary multiple." },
+      "Gb": { "pint": "gibibit", "why": "Binary multiple." },
+      "Tb": { "pint": "tebibit", "why": "Binary multiple." },
+      "B": "byte",
+      "KB": { "pint": "kibibyte", "why": "Binary multiple." },
+      "MB": { "pint": "mebibyte", "why": "Binary multiple." },
+      "GB": { "pint": "gibibyte", "why": "Binary multiple." },
+      "TB": { "pint": "tebibyte", "why": "Binary multiple." }
+    },
+    "PartsPer": {
+      "ppm": "ppm",
+      "ppb": "1e-9",
+      "ppt": "1e-12",
+      "ppq": "1e-15"
+    },
+    "Speed": {
+      "m/s": "meter / second",
+      "km/h": "kilometer / hour",
+      "mach": { "exclude": "Depends on the medium; convert-units fixes 340.29 m/s (sea-level ISA), which pint has no unit for." },
+      "c_light": "speed_of_light",
+      "mph": "mile / hour",
+      "knot": "knot",
+      "ft/s": "foot / second"
+    },
+    "Pace": {
+      "min/km": "minute / kilometer",
+      "s/m": "second / meter",
+      "min/mi": "minute / mile",
+      "s/ft": "second / foot"
+    },
+    "Pressure": {
+      "Pa": "pascal",
+      "μPa": "micropascal",
+      "mPa": "millipascal",
+      "hPa": "hectopascal",
+      "kPa": "kilopascal",
+      "MPa": "megapascal",
+      "GPa": "gigapascal",
+      "bar": "bar",
+      "torr": "torr",
+      "atm": "atmosphere",
+      "mmHg": "millimeter_Hg",
+      "cmH2O": "centimeter_H2O",
+      "mbar": "millibar",
+      "cmHg": "centimeter_Hg",
+      "Ba": "barye",
+      "at": "technical_atmosphere",
+      "psi": "psi",
+      "ksi": "ksi",
+      "inHg": "inch_Hg",
+      "inH2O": "inch_H2O"
+    },
+    "Current": {
+      "A": "ampere",
+      "pA": "picoampere",
+      "nA": "nanoampere",
+      "μA": "microampere",
+      "mA": "milliampere",
+      "kA": "kiloampere",
+      "MA": "megaampere",
+      "abA": "abampere",
+      "Bi": "biot",
+      "statA": { "pint": "10 * ampere * centimeter / second / speed_of_light", "why": "Pint's statampere is Gaussian (kg^0.5 dimensions); 1 statA = 10/c[cm/s] A." },
+      "a_u_current": "atomic_unit_of_current"
+    },
+    "Voltage": {
+      "V": "volt",
+      "nV": "nanovolt",
+      "μV": "microvolt",
+      "mV": "millivolt",
+      "kV": "kilovolt",
+      "MV": "megavolt",
+      "abV": "abvolt",
+      "statV": { "pint": "1e-6 * speed_of_light * second / meter * volt", "why": "Pint's statvolt is Gaussian; 1 statV = c[m/s]/1e6 V." }
+    },
+    "Power": {
+      "W": "watt",
+      "pW": "picowatt",
+      "nW": "nanowatt",
+      "μW": "microwatt",
+      "mW": "milliwatt",
+      "kW": "kilowatt",
+      "MW": "megawatt",
+      "GW": "gigawatt",
+      "TW": "terawatt",
+      "hp-mech": "horsepower",
+      "hp-met": "metric_horsepower",
+      "hp-elec": "electrical_horsepower",
+      "hp-boiler": { "pint": "9809.50 * watt", "why": "NIST SP 811 App. B.8 value; the 33475 Btu/h derivation depends on which Btu and steam table." },
+      "tonRef": { "pint": "12000 * Btu_it / hour", "why": "Ton of refrigeration on Btu_IT; pint's uses the ISO Btu." }
+    },
+    "ReactivePower": {
+      "VAR": "volt * ampere",
+      "mVAR": "millivolt * ampere",
+      "kVAR": "kilovolt * ampere",
+      "MVAR": "megavolt * ampere",
+      "GVAR": "gigavolt * ampere"
+    },
+    "ApparentPower": {
+      "VA": "volt * ampere",
+      "mVA": "millivolt * ampere",
+      "kVA": "kilovolt * ampere",
+      "MVA": "megavolt * ampere",
+      "GVA": "gigavolt * ampere"
+    },
+    "Energy": {
+      "J": "joule",
+      "fJ": "femtojoule",
+      "pJ": "picojoule",
+      "nJ": "nanojoule",
+      "μJ": "microjoule",
+      "mJ": "millijoule",
+      "kJ": "kilojoule",
+      "MJ": "megajoule",
+      "GJ": "gigajoule",
+      "TJ": "terajoule",
+      "PJ": "petajoule",
+      "Wh": "watt_hour",
+      "mWh": "milliwatt_hour",
+      "kWh": "kilowatt_hour",
+      "MWh": "megawatt_hour",
+      "GWh": "gigawatt_hour",
+      "cal": "calorie",
+      "kcal": "kilocalorie",
+      "erg": "erg",
+      "eV": "electron_volt",
+      "keV": "kiloelectron_volt",
+      "MeV": "megaelectron_volt",
+      "therm": { "pint": "105.506 * megajoule", "why": "EC therm as fixed by Directive 80/181/EEC; pint uses 1e5 Btu_ISO (105.5056 MJ)." },
+      "quad": { "pint": "1e15 * Btu_it", "why": "Quad on Btu_IT; pint's quad uses the ISO Btu." },
+      "toe": "tonne_of_oil_equivalent",
+      "Eh": "hartree",
+      "Ry": "rydberg",
+      "tTNT": "ton_TNT",
+      "ft-lb": "foot_pound",
+      "Btu(IT)": "Btu_it"
+    },
+    "ReactiveEnergy": {
+      "VARh": "volt * ampere * hour",
+      "mVARh": "millivolt * ampere * hour",
+      "kVARh": "kilovolt * ampere * hour",
+      "MVARh": "megavolt * ampere * hour",
+      "GVARh": "gigavolt * ampere * hour"
+    },
+    "VolumeFlowRate": {
+      "mm3/s": "millimeter ** 3 / second",
+      "cm3/s": "centimeter ** 3 / second",
+      "ml/s": "milliliter / second",
+      "cl/s": "centiliter / second",
+      "dl/s": "deciliter / second",
+      "l/s": "liter / second",
+      "l/min": "liter / minute",
+      "l/h": "liter / hour",
+      "kl/s": "kiloliter / second",
+      "kl/min": "kiloliter / minute",
+      "kl/h": "kiloliter / hour",
+      "m3/s": "meter ** 3 / second",
+      "m3/min": "meter ** 3 / minute",
+      "m3/h": "meter ** 3 / hour",
+      "km3/s": "kilometer ** 3 / second",
+      "tsp/s": "teaspoon / second",
+      "Tbs/s": "tablespoon / second",
+      "in3/s": "inch ** 3 / second",
+      "in3/min": "inch ** 3 / minute",
+      "in3/h": "inch ** 3 / hour",
+      "fl-oz/s": "fluid_ounce / second",
+      "fl-oz/min": "fluid_ounce / minute",
+      "fl-oz/h": "fluid_ounce / hour",
+      "cup/s": "cup / second",
+      "pnt/s": "pint / second",
+      "pnt/min": "pint / minute",
+      "pnt/h": "pint / hour",
+      "qt/s": "quart / second",
+      "gal/s": "gallon / second",
+      "gal/min": "gallon / minute",
+      "gal/h": "gallon / hour",
+      "ft3/s": "foot ** 3 / second",
+      "ft3/min": "foot ** 3 / minute",
+      "ft3/h": "foot ** 3 / hour",
+      "yd3/s": "yard ** 3 / second",
+      "yd3/min": "yard ** 3 / minute",
+      "yd3/h": "yard ** 3 / hour"
+    },
+    "Illuminance": {
+      "lx": "lux",
+      "ft-cd": { "pint": "lumen / foot ** 2", "why": "Pint has no foot-candle." }
+    },
+    "Frequency": {
+      "Hz": "hertz",
+      "μHz": "microhertz",
+      "mHz": "millihertz",
+      "kHz": "kilohertz",
+      "MHz": "megahertz",
+      "GHz": "gigahertz",
+      "THz": "terahertz",
+      "rpm": { "pint": "1 / minute", "why": "convert-units counts a revolution as one cycle; pint treats revolution as 2*pi (dimensionless radians)." },
+      "deg/s": { "pint": "1 / 360 / second", "why": "Cycle convention: 360 deg per cycle." },
+      "rad/s": { "pint": "1 / (2 * pi) / second", "why": "Cycle convention: 2*pi rad per cycle." }
+    },
+    "Angle": {
+      "rad": "radian",
+      "deg": "degree",
+      "grad": "gradian",
+      "arcmin": "arcminute",
+      "arcsec": "arcsecond",
+      "rev": "revolution",
+      "mil": { "pint": "revolution / 6400", "why": "NATO mil (6400 per turn); pint's mil is pi/32000 rad." }
+    },
+    "Charge": {
+      "c": "coulomb",
+      "mC": "millicoulomb",
+      "μC": "microcoulomb",
+      "nC": "nanocoulomb",
+      "pC": "picocoulomb",
+      "Ah": "ampere_hour",
+      "mAh": "milliampere_hour",
+      "faraday": "faraday",
+      "abC": "abcoulomb",
+      "statC": { "pint": "10 * coulomb * centimeter / second / speed_of_light", "why": "Pint's statcoulomb is Gaussian; 1 statC = 10/c[cm/s] C." },
+      "Fr": { "pint": "10 * coulomb * centimeter / second / speed_of_light", "why": "Franklin = statcoulomb." },
+      "e": "elementary_charge"
+    },
+    "Viscosity": {
+      "Pa*s": "pascal * second",
+      "P": "poise",
+      "cP": "centipoise",
+      "reyn": "reyn"
+    },
+    "Kinematic-viscosity": {
+      "m2/s": "meter ** 2 / second",
+      "St": "stokes",
+      "cSt": "centistokes"
+    },
+    "Torque": {
+      "N*m": "newton * meter",
+      "kN*m": "kilonewton * meter",
+      "MN*m": "meganewton * meter",
+      "lbf*ft": "force_pound * foot",
+      "ozf*in": "force_ounce * inch"
+    },
+    "Surface-tension": {
+      "mN/m": "millinewton / meter",
+      "dyn/cm": "dyne / centimeter"
+    },
+    "Radiation-dose": {
+      "Gy": "gray",
+      "Sv": "sievert",
+      "mGy": "milligray",
+      "mSv": "millisievert",
+      "μGy": "microgray",
+      "μSv": "microsievert",
+      "RAD": "rads",
+      "rem": "rem"
+    },
+    "Radiation-activity": {
+      "Bq": "becquerel",
+      "μBq": "microbecquerel",
+      "kBq": "kilobecquerel",
+      "MBq": "megabecquerel",
+      "GBq": "gigabecquerel",
+      "TBq": "terabecquerel",
+      "Ci": "curie",
+      "mCi": "millicurie",
+      "μCi": "microcurie",
+      "Rd": "rutherford"
+    },
+    "Magnetic-flux": {
+      "Wb": "weber",
+      "nWb": "nanoweber",
+      "μWb": "microweber",
+      "mWb": "milliweber",
+      "kWb": "kiloweber",
+      "Mx": { "pint": "1e-8 * weber", "why": "Pint's maxwell is Gaussian; 1 Mx = 1e-8 Wb." }
+    },
+    "Magnetic-flux-density": {
+      "T": "tesla",
+      "pT": "picotesla",
+      "nT": "nanotesla",
+      "μT": "microtesla",
+      "mT": "millitesla",
+      "G": { "pint": "1e-4 * tesla", "why": "Pint's gauss is Gaussian; 1 G = 1e-4 T." }
+    },
+    "Magnetic-field-strength": {
+      "A/m": "ampere / meter",
+      "kA/m": "kiloampere / meter",
+      "Oe": { "pint": "1000 / (4 * pi) * ampere / meter", "why": "Pint's oersted is Gaussian; 1 Oe = 1000/(4*pi) A/m." }
+    },
+    "Luminance": {
+      "cd/m2": "candela / meter ** 2",
+      "sb": "stilb",
+      "La": "lambert",
+      "fL": { "pint": "candela / foot ** 2 / pi", "why": "Pint has no foot-lambert." }
+    },
+    "Solid-angle": {
+      "sr": "steradian",
+      "deg2": "square_degree"
+    },
+    "Electric-field": {
+      "V/m": "volt / meter",
+      "kV/m": "kilovolt / meter",
+      "MV/m": "megavolt / meter",
+      "mV/m": "millivolt / meter",
+      "a_u_E": "atomic_unit_of_electric_field"
+    },
+    "Substance-flow": {
+      "mol/s": "mole / second",
+      "mol/min": "mole / minute",
+      "mmol/s": "millimole / second",
+      "μmol/s": "micromole / second"
+    },
+    "Logarithmic-power": {
+      "dBW": "decibelwatt",
+      "dBm": "decibelmilliwatt"
+    },
+    "Logarithmic-ratio": {
+      "dB": "decibel",
+      "Np": "neper"
+    },
+    "Resistance": {
+      "Ω": "ohm",
+      "mΩ": "milliohm",
+      "kΩ": "kiloohm",
+      "MΩ": "megaohm",
+      "GΩ": "gigaohm",
+      "abΩ": "abohm",
+      "statΩ": { "pint": "1e-5 * (speed_of_light * second / meter) ** 2 * ohm", "why": "Pint's statohm is Gaussian; 1 statΩ = c[m/s]^2 * 1e-5 Ω." }
+    },
+    "Conductance": {
+      "S": "siemens",
+      "mS": "millisiemens",
+      "μS": "microsiemens",
+      "nS": "nanosiemens",
+      "mho": "mho",
+      "abS": "absiemens"
+    },
+    "Capacitance": {
+      "pF": "picofarad",
+      "nF": "nanofarad",
+      "μF": "microfarad",
+      "mF": "millifarad",
+      "abF": "abfarad"
+    },
+    "Inductance": {
+      "H": "henry",
+      "μH": "microhenry",
+      "mH": "millihenry",
+      "abH": "abhenry",
+      "statH": { "pint": "1e-5 * (speed_of_light * second / meter) ** 2 * henry", "why": "Pint's stathenry is Gaussian; 1 statH = c[m/s]^2 * 1e-5 H." }
+    },
+    "Luminous-flux": {
+      "lm": "lumen",
+      "mlm": "millilumen",
+      "klm": "kilolumen"
+    },
+    "Luminous-intensity": {
+      "cd": "candela",
+      "mcd": "millicandela",
+      "kcd": "kilocandela"
+    },
+    "Amount-of-substance": {
+      "mol": "mole",
+      "mmol": "millimole",
+      "μmol": "micromole",
+      "nmol": "nanomole",
+      "pmol": "picomole"
+    },
+    "Catalytic-activity": {
+      "kat": "katal",
+      "mkat": "millikatal",
+      "μkat": "microkatal",
+      "nkat": "nanokatal"
+    },
+    "Action": {
+      "J*s": "joule * second",
+      "eV*s": "electron_volt * second",
+      "erg*s": "erg * second"
+    },
+    "Molar-heat": {
+      "J/mol/K": "joule / mole / kelvin",
+      "cal/mol/K": "calorie / mole / kelvin",
+      "L*atm/mol/K": "liter * atmosphere / mole / kelvin"
+    },
+    "Magnetic-moment": {
+      "A*m2": "ampere * meter ** 2",
+      "mu_B": "bohr_magneton",
+      "mu_N": "nuclear_magneton",
+      "erg/G": { "pint": "erg / (1e-4 * tesla)", "why": "Pint's gauss is Gaussian; 1 G = 1e-4 T." }
+    },
+    "Wavenumber": {
+      "1/m": "1 / meter",
+      "1/cm": "1 / centimeter"
+    },
+    "Permittivity": {
+      "F/m": "farad / meter",
+      "pF/m": "picofarad / meter",
+      "nF/m": "nanofarad / meter"
+    },
+    "Permeability": {
+      "H/m": "henry / meter",
+      "mH/m": "millihenry / meter",
+      "μH/m": "microhenry / meter"
+    },
+    "Force-per-charge2": {
+      "N*m2/C2": "newton * meter ** 2 / coulomb ** 2"
+    },
+    "Spectral-power": {
+      "W*m2": "watt * meter ** 2",
+      "mW*m2": "milliwatt * meter ** 2"
+    },
+    "Temperature-length": {
+      "m*K": "meter * kelvin",
+      "cm*K": "centimeter * kelvin",
+      "mm*K": "millimeter * kelvin"
+    },
+    "LineLoad": {
+      "N/m": "newton / meter",
+      "N/mm": "newton / millimeter",
+      "N/cm": "newton / centimeter",
+      "kN/m": "kilonewton / meter",
+      "lbf/ft": "force_pound / foot",
+      "lbf/in": "force_pound / inch",
+      "kip/ft": "kip / foot"
+    },
+    "BodyForce": {
+      "N/m3": "newton / meter ** 3",
+      "kN/m3": "kilonewton / meter ** 3",
+      "lbf/ft3": "force_pound / foot ** 3",
+      "lbf/in3": "force_pound / inch ** 3"
+    },
+    "HeatFlux": {
+      "W/m2": "watt / meter ** 2",
+      "kW/m2": "kilowatt / meter ** 2",
+      "mW/m2": "milliwatt / meter ** 2",
+      "Btu/hr/ft2": "Btu_it / hour / foot ** 2"
+    },
+    "FilmCoeff": {
+      "W/m2/K": "watt / meter ** 2 / kelvin",
+      "kW/m2/K": "kilowatt / meter ** 2 / kelvin",
+      "Btu/hr/ft2/F": "Btu_it / hour / foot ** 2 / delta_degF"
+    },
+    "HeatGen": {
+      "W/m3": "watt / meter ** 3",
+      "kW/m3": "kilowatt / meter ** 3",
+      "MW/m3": "megawatt / meter ** 3",
+      "Btu/hr/ft3": "Btu_it / hour / foot ** 3"
+    },
+    "MassFlow": {
+      "kg/s": "kilogram / second",
+      "g/s": "gram / second",
+      "kg/min": "kilogram / minute",
+      "kg/h": "kilogram / hour",
+      "t/h": "metric_ton / hour",
+      "lb/s": "pound / second",
+      "lb/min": "pound / minute",
+      "lb/h": "pound / hour"
+    },
+    "CurrentDensity": {
+      "A/m2": "ampere / meter ** 2",
+      "kA/m2": "kiloampere / meter ** 2",
+      "A/cm2": "ampere / centimeter ** 2",
+      "A/mm2": "ampere / millimeter ** 2"
+    },
+    "ChargeDensity": {
+      "C/m3": "coulomb / meter ** 3",
+      "mC/m3": "millicoulomb / meter ** 3",
+      "μC/m3": "microcoulomb / meter ** 3",
+      "C/cm3": "coulomb / centimeter ** 3"
+    },
+    "SurfCharge": {
+      "C/m2": "coulomb / meter ** 2",
+      "mC/m2": "millicoulomb / meter ** 2",
+      "μC/m2": "microcoulomb / meter ** 2",
+      "C/cm2": "coulomb / centimeter ** 2"
+    },
+    "Temperature-gradient": {
+      "K/m": "kelvin / meter",
+      "F/ft": "delta_degF / foot"
+    },
+    "Electrical-conductivity": {
+      "S/m": "siemens / meter"
+    },
+    "Compressibility": {
+      "1/Pa": "1 / pascal",
+      "1/psi": "1 / psi"
+    },
+    "Piezo-coefficient": {
+      "m/V": "meter / volt"
+    }
+  }
+}

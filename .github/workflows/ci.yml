@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ develop, main, master ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ develop, main, master ]
 
 jobs:
   lint-and-test:
@@ -24,7 +24,30 @@ jobs:
       - name: Lint
         run: npm run ci:lint
 
+      - name: Generate registry
+        run: node scripts/gen-registry.js
+
       - name: Test
         run: npm test
 
+  # test/pint.js checks convert-units against pint-check/reference.json. This job proves the
+  # committed reference is what pint actually says for the committed unit map.
+  pint-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pint
+        run: pip install -r pint-check/requirements.txt
+
+      - name: Regenerate reference
+        run: python -I pint-check/gen_reference.py
+
+      - name: Reference is up to date
+        run: git diff --exit-code pint-check/reference.json

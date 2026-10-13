@@ -59,6 +59,14 @@ Conversion factors corrected. Metric/imperial anchor ratios and many inner facto
 
 Truncated decimals replaced by exact or derived values (relative error of the old value): Volume and VolumeFlowRate fl oz, in3, ft3 (4.6e-6); Density long ton and imperial densities (2.9e-6); Area ft2 (9.7e-7); Section-modulus in3 (2.6e-7); Length and Acceleration ft (3.2e-8); Stefan-Boltzmann and thermal-conductivity Btu factors (1.9e-7); Energy Btu_IT (1.4e-7), `quad` (4e-6) and `ft-lb`; Torque and Moment lbf ft (6.7e-8); HeatGen (1.3e-7); Illuminance footcandle (3.9e-8); Mass `slug`, `ozt`, `lbt`, `dwt` (1.5e-6); Length `pc` (7e-6); Pressure `mmHg`, `cmHg` (3e-6), `inHg` and `inH2O`; Moment `tfsm`, `tflm` (4e-7); Power `hp-mech` (2e-9) and `tonRef` (1e-8); Speed `knot` and `ft/s` (4e-7, 2.7e-7); Pace `min/mi` (3.2e-6); Viscosity `reyn` (4e-8); Luminance `fL`; Charge `statC`, `Fr` and Current `statA` (2.9e-7); Resistance `statΩ` and Inductance `statH` (6e-6); Force `a_u_force` (1.6e-8); Length `nMi` is exactly 1852 m and `ft-us` exactly 1200/3937 m. `therm` stays 105,506,000 J (NIST, EC therm).
 
+Every physical unit is now checked against pint 0.26.1 to 1e-12, for every pair of units in its measure (`test/pint.js`, `pint-check/`). Only Currency and Speed `mach` are excluded. The check found these, now fixed (relative error of the old value):
+
+- Physical constants move from CODATA 2018 to CODATA 2022. Atomic and Planck units are now derived from the constants in `lib/constants.js` instead of rounded published values: Mass `m_e` (1.4e-9), `m_p` (1.4e-9), `m_n` (1.5e-9), `u` and `Da` (1.4e-9), `mP` (1.3e-9); Length `a0` (6.8e-10), `lP` (1.5e-8); Time `tP` (8.3e-8); Force `a_u_force` (6.7e-10); Electric-field `a_u_E` (6.8e-10); Magnetic-moment `mu_B`, `mu_N` (1.4e-9); Energy `Ry` (1.4e-12), `Eh` (2.5e-13).
+- Charge `faraday` is exactly e N_A (3.4e-11).
+- Logarithmic-ratio `Np` is exactly 20/ln 10 dB (7.5e-12).
+- Area `darcy` is exactly 1 cP cm2/(s atm) (3.4e-8).
+- Time `sidereal-day`, `sidereal-yr` and `tropical-yr` use the full J2000 values (3.6e-10, 7.5e-9, 7.9e-9).
+
 Other fixes:
 
 - The Moment and Mass-moment imperial anchor units are now `lbf-ft` and `lb-ft2`, and Stress-Intensity-Factor's is `ksi-sqr(in)`; they named non-existent keys in the generated `latexUnitTypes`.
