@@ -150,7 +150,7 @@ tests['Eh to J'] = function () {
 };
 
 tests['Ry to J'] = function () {
-  var expected = 2.1798723611e-18
+  var expected = 2.179872361103e-18
     , actual = convert(1).from('Ry').to('J');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
