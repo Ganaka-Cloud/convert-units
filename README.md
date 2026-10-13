@@ -338,6 +338,19 @@ Supported Units
 
 Adding new measurement sets is easy. Take a look at [`lib/definitions`](https://github.com/ben-ng/convert-units/tree/master/lib/definitions) to see how it's done.
 
+### Checked against pint
+
+Every physical unit is checked against [pint](https://github.com/hgrecco/pint) to a relative error of 1e-12, for every pair of units in its measure. `pint-check/unit-map.json` gives each unit's pint spelling, or a reason it is excluded. `test/pint.js` fails for any unit that has neither, so a new unit has to be added there too.
+
+After changing the map, regenerate the reference with pint (version pinned in `pint-check/requirements.txt`) and commit it:
+
+```
+pip install -r pint-check/requirements.txt
+npm run pint:gen
+```
+
+CI regenerates it and fails if the committed `pint-check/reference.json` differs.
+
 License
 -------
 Copyright (c) 2013-2017 Ben Ng and Contributors, http://benng.me

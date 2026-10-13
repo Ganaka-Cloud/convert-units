@@ -183,7 +183,7 @@ tests['moment possibilities'] = function() {
 
 tests['mass-moment possibilities'] = function() {
   var actual = convert().possibilities('Mass-moment')
-    , expected = [ 'kgm2', 'kgcm2', 'kgmm2', 'kgfms2', 'lb-in2', 'lb-ft2', 'lbf-ins2', 'lbf-fts2'];
+    , expected = [ 'kg*m2', 'kg*cm2', 'kg*mm2', 'kgfms2', 'lb-in2', 'lb-ft2', 'lbf-ins2', 'lbf-fts2'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -225,7 +225,7 @@ tests['stress-intensity-factor possibilities'] = function() {
 
 tests['j-integral possibilities'] = function() {
   var actual = convert().possibilities('J-integral')
-    , expected = [ 'J/sqm', 'kJ/sqm', 'ft-lbs/sqin'];
+    , expected = [ 'J/m2', 'kJ/m2', 'ft-lbs/sqin'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -243,7 +243,7 @@ tests['percent possibilities'] = function() {
 
 tests['density possibilities'] = function() {
   var actual = convert().possibilities('Density')
-    , expected = [ 'gpcc', 'gpcm', 'kgpcm', 'tpcmm', 'kgpl', 'gpl', 'ozpcin', 'ozpcft', 'ozspg', 'ozlpg', 'tspcy', 'tlpcy', 'lbpcin', 'lbpcft', 'lbpcy', 'lbspg', 'lblpg', 'slpcft'];
+    , expected = [ 'g/cm3', 'g/m3', 'kg/m3', 't/mm3', 'kg/l', 'g/l', 'ozpcin', 'ozpcft', 'ozspg', 'ozlpg', 'tspcy', 'tlpcy', 'lbpcin', 'lbpcft', 'lbpcy', 'lbspg', 'lblpg', 'slpcft'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -255,7 +255,7 @@ tests['boltzmann possibilities'] = function() {
 
 tests['linearcte possibilities'] = function() {
   var actual = convert().possibilities('LinearCTE')
-    , expected = [ '/C', '/F', '/K', '/R'];
+    , expected = [ '1/C', '/F', '1/K', '/R'];
   assert.deepEqual(actual.sort(), expected.sort());
 };
 
@@ -275,10 +275,10 @@ tests['all possibilities'] = function () {
   var actual = convert().possibilities()
     // Please keep these sorted for maintainability
     , expected = [
-        '/C', '/F', '/K', '/R',
+        '1/C', '/F', '1/K', '/R',
         'A', 'B', 'Btu(IT)', 'Btu.in/hr/sq.ft/F', 'Btu.in/s/sq.ft/F', 'Btu/hr/ft/F', 'Btu/hr/sq.ft/R4', 'Btu/lbm/F',
         'C', 'F', 'GB', 'GHz', 'GJ', 'GPa', 'GVA', 'GVAR', 'GVARh', 'GW', 'GWh', 'Gb',
-        'Hz', 'J', 'J/K', 'J/g/C', 'J/kg/C', 'J/kg/K', 'J/sqm',
+        'Hz', 'J', 'J/K', 'J/g/C', 'J/kg/C', 'J/kg/K', 'J/m2',
         'K', 'KB', 'Kb', 'MA', 'MB', 'MHz', 'MJ', 'MN', 'MPa', 'MPa-sqrt(m)', 'MPam/h', 'MV', 'MVA', 'MVAR', 'MVARh', 'MW', 'MWh', 'Mb',
         'N', 'Ncm', 'Nm', 'Nmm',
         'Pa', 'Pa-sqrt(m)', 'PJ', 'R', 'TB', 'THz', 'TJ', 'TW', 'Tb', 'Tbs', 'Tbs/s',
@@ -293,11 +293,11 @@ tests['all possibilities'] = function () {
         'Da', 'd', 'daN', 'deg', 'deg/s', 'dl', 'dl/s', 'dm/s2', 'dyn', 'dz',
         'ea', 'eV', 'erg', 'ev/K',
         'fl-oz', 'fl-oz-UK', 'fl-oz/h', 'fl-oz/min', 'fl-oz/s', 'fortnight', 'ft', 'ft-cd', 'ft-lb/R', 'ft-lbs/sqin', 'ft-us', 'ft-us/ft-us', 'ft/ft', 'ft/s', 'ft/s2', 'ft2', 'ft3', 'ft3/h', 'ft3/min', 'ft3/s', 'ft4', 'fathom', 'furlong',
-        'g', 'g-force', 'g-force:US', 'gal', 'gal/h', 'gal/min', 'gal/s', 'gill', 'gpcc', 'gpcm', 'gpl', 'grad', 'grain',
+        'g', 'g-force', 'g-force:US', 'gal', 'gal/h', 'gal/min', 'gal/s', 'gill', 'g/cm3', 'g/m3', 'g/l', 'grad', 'grain',
         'h', 'hPa', 'hPa-sqrt(m)', 'ha', 'hp-boiler', 'hp-elec', 'hp-mech', 'hp-met',
         'in', 'in/in', 'inH2O', 'inHg', 'in/s2', 'in2', 'in3', 'in3/h', 'in3/min', 'in3/s', 'in4',
-        'kA', 'kHz', 'kJ', 'kJ/kg/C', 'kJ/kg/K', 'kJ/sqm', 'kN', 'kNm', 'kPa', 'kPa-sqrt(m)', 'kV', 'kVA', 'kVAR', 'kVARh', 'kW', 'kW/m/C', 'kW/m/K', 'kWh', 'kp', 'kcal', 'keV',
-        'kg', 'kgcm2', 'kgf', 'kgf-m/kg/C', 'kgfm', 'kgfms2', 'kgm2', 'kgmm2', 'kgpcm', 'kgpl', 'kipf',
+        'kA', 'kHz', 'kJ', 'kJ/kg/C', 'kJ/kg/K', 'kJ/m2', 'kN', 'kNm', 'kPa', 'kPa-sqrt(m)', 'kV', 'kVA', 'kVAR', 'kVARh', 'kW', 'kW/m/C', 'kW/m/K', 'kWh', 'kp', 'kcal', 'keV',
+        'kg', 'kg*cm2', 'kgf', 'kgf-m/kg/C', 'kgfm', 'kgfms2', 'kg*m2', 'kg*mm2', 'kg/m3', 'kg/l', 'kipf',
         'kl', 'kl/h', 'kl/min', 'kl/s', 'km', 'km/h', 'km/s2', 'km2', 'km3', 'km3/s', 'knot', 'ksi', 'ksi-sqr(in)',
         'l', 'l/h', 'l/min', 'l/s', 'lb', 'lb-ft2', 'lb-in2', 'lbf', 'lbf-ft', 'lbf-fts2', 'lbf-in', 'lbf-ins2', 'lblpg', 'lbpcft', 'lbpcin', 'lbpcy', 'lbspg', 'ly', 'lx',
         'm', 'm/m', 'm/s', 'm/s2', 'm2', 'm3', 'm3/h', 'm3/min', 'm3/s', 'm4', 'mA', 'mHz', 'mJ', 'mJ/kg/C', 'mJ/kg/K', 'mN', 'mPa', 'mV', 'mVA', 'mVAR', 'mVARh', 'mW', 'mW/m/C', 'mWh', 'mbar', 'mg', 'mi', 'mi/s2', 'mi2', 'min', 'min/km', 'min/mi', 'ml', 'ml/s', 'mm', 'mm/mm', 'mm/s2', 'mm2', 'mm3', 'mm3/s', 'mm4', 'mmHg', 'month', 'ms', 'mt',
@@ -308,7 +308,7 @@ tests['all possibilities'] = function () {
         'qt', 'qt/s', 'quad',
         'rad', 'rad/s', 'rpm',
         's', 's/ft', 's/m', 'shake', 'slpcft', 'slug', 'stone', 'svedberg',
-        't', 'tfM', 'tfMm', 'tfl', 'tflm', 'tfs', 'tfsm', 'therm', 'tlpcy', 'toe', 'tonRef', 'torr', 'tpcmm', 'tsp', 'tsp/s', 'tspcy',
+        't', 'tfM', 'tfMm', 'tfl', 'tflm', 'tfs', 'tfsm', 'therm', 'tlpcy', 'toe', 'tonRef', 'torr', 't/mm3', 'tsp', 'tsp/s', 'tspcy',
         'u',
         'week',
         'yd', 'yd/s2', 'yd/yd', 'yd2', 'yd3', 'yd3/h', 'yd3/min', 'yd3/s', 'year', 'yr-julian',
@@ -377,7 +377,12 @@ tests['all possibilities'] = function () {
         'kg/s', 'g/s', 'kg/min', 'kg/h', 't/h', 'lb/s', 'lb/min', 'lb/h',
         'A/m2', 'kA/m2', 'A/cm2', 'A/mm2',
         'C/m3', 'mC/m3', 'μC/m3', 'C/cm3',
-        'C/m2', 'mC/m2', 'μC/m2', 'C/cm2'
+        'C/m2', 'mC/m2', 'μC/m2', 'C/cm2',
+        // Temperature-gradient, Electrical-conductivity, Compressibility and Piezo-coefficient measures
+        'K/m', 'F/ft',
+        'S/m',
+        '1/Pa', '1/psi',
+        'm/V'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

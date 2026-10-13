@@ -66,17 +66,17 @@ tests['g to lb'] = function () {
 };
 
 // New units: u/Da (metric, anchor=g); slug, stone, grain (imperial, anchor=lb)
-// u = 1.66053906660e-24 g (anchor is g)
+// u = 1.66053906892e-24 g (CODATA 2022)
 // stone = 14 lb, grain = 1/7000 lb, slug = 32.174 lb
 tests['u to g'] = function () {
-  var expected = 1.66053906660e-24
+  var expected = 1.66053906892e-24
     , actual = convert(1).from('u').to('g');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['Da to g'] = function () {
-  var expected = 1.66053906660e-24
+  var expected = 1.66053906892e-24
     , actual = convert(1).from('Da').to('g');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);

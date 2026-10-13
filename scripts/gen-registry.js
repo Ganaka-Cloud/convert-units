@@ -48,15 +48,15 @@ while ((m = measureRegex.exec(indexSrc)) !== null) {
   measureToFile[m[1]] = m[2];
 }
 
-// Density unit abbreviations are opaque (e.g. kgpcm, gpcc, tlpcy) and cannot
-// be decoded generically.  This lookup table maps them to proper LaTeX strings.
+// Imperial density abbreviations are opaque (e.g. tlpcy, lbpcin) and the generic rule
+// would render metric densities as kg.m^{-3}; this table gives their LaTeX directly.
 const DENSITY_LATEX = {
-  "gpcc":   "$g/cm^{3}$",
-  "gpcm":   "$g/m^{3}$",
-  "kgpcm":  "$kg/m^{3}$",
-  "tpcmm":  "$t/mm^{3}$",
-  "kgpl":   "$kg/l$",
-  "gpl":    "$g/l$",
+  "g/cm3": "$g/cm^{3}$",
+  "g/m3": "$g/m^{3}$",
+  "kg/m3": "$kg/m^{3}$",
+  "t/mm3": "$t/mm^{3}$",
+  "kg/l": "$kg/l$",
+  "g/l": "$g/l$",
   "ozpcin": "$oz/in^{3}$",
   "ozpcft": "$oz/ft^{3}$",
   "ozspg":  "$oz/gal_{US}$",
@@ -71,6 +71,23 @@ const DENSITY_LATEX = {
   "slpcft": "$slug/ft^{3}$",
 };
 
+// Units whose generic rendering is wrong or ugly: "F/ft" would read as a farad, "*" is a
+// product, and per-temperature units would get a leading dot.
+const LATEX_OVERRIDES = {
+  "1/C": "$^{\\circ}C^{-1}$",
+  "1/K": "$K^{-1}$",
+  "/F": "$^{\\circ}F^{-1}$",
+  "/R": "$^{\\circ}R^{-1}$",
+  "kg*m2": "$kg\\cdot m^{2}$",
+  "kg*cm2": "$kg\\cdot cm^{2}$",
+  "kg*mm2": "$kg\\cdot mm^{2}$",
+  "J/m2": "$J/m^{2}$",
+  "kJ/m2": "$kJ/m^{2}$",
+  "1/Pa": "$Pa^{-1}$",
+  "1/psi": "$psi^{-1}$",
+  "F/ft": "$^{\\circ}F.ft^{-1}$",
+};
+
 // Helper: generate LaTeX string for a unit abbreviation
 // Follows ganaka-ui conventions:
 //   - Trailing digits become superscripts: m2 -> m^{2}, m3 -> m^{3}
@@ -82,6 +99,9 @@ function latexFor(abbr) {
   // Check density lookup first (opaque abbreviations)
   if (Object.prototype.hasOwnProperty.call(DENSITY_LATEX, abbr)) {
     return DENSITY_LATEX[abbr];
+  }
+  if (Object.prototype.hasOwnProperty.call(LATEX_OVERRIDES, abbr)) {
+    return LATEX_OVERRIDES[abbr];
   }
   if (abbr === "--") return "$--$";
 

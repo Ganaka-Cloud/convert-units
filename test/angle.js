@@ -94,7 +94,37 @@ tests['mil to deg'] = function () {
 };
 
 tests['rev to mil'] = function () {
-  assert.strictEqual( convert(1).from('rev').to('mil') , 6400);
+  assert.ok( Math.abs(convert(1).from('rev').to('mil') - 6400) < 1e-9 );
+};
+
+// The radian is the base unit (SI), so these convert directly through it.
+tests['180 deg is exactly pi rad'] = function () {
+  assert.strictEqual( convert(180).from('deg').to('rad') , Math.PI);
+};
+
+tests['1 rev is exactly 2 pi rad'] = function () {
+  assert.strictEqual( convert(1).from('rev').to('rad') , 2 * Math.PI);
+};
+
+tests['rad to rad'] = function () {
+  assert.strictEqual( convert(1.5).from('rad').to('rad') , 1.5);
+};
+
+tests['exact fractions of pi in rad'] = function () {
+  var close = function (e, a) { assert.ok( Math.abs(a - e) / e < 1e-15, e + ' vs ' + a ); };
+  close(Math.PI / 200, convert(1).from('grad').to('rad'));
+  close(Math.PI / 10800, convert(1).from('arcmin').to('rad'));
+  close(Math.PI / 648000, convert(1).from('arcsec').to('rad'));
+  close(2 * Math.PI / 6400, convert(1).from('mil').to('rad'));
+};
+
+tests['round trips through rad'] = function () {
+  ['deg', 'grad', 'arcmin', 'arcsec', 'rev', 'mil'].forEach(function (u) {
+    [1, 7.3, 90, 180, 1234.5].forEach(function (v) {
+      var back = convert(convert(v).from(u).to('rad')).from('rad').to(u);
+      assert.ok( Math.abs(back - v) / v < 1e-14, u + ' ' + v + ' -> ' + back );
+    });
+  });
 };
 
 module.exports = tests;

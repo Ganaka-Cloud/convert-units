@@ -74,7 +74,7 @@ var ACCURACY = 1/1000;
 var percentError = require('../lib/percentError');
 
 tests["faraday to c"] = function () {
-  var expected = 96485.33212
+  var expected = 96485.33212331
     , actual = convert(1).from("faraday").to("c");
   assert.ok( percentError(expected, actual) < ACCURACY
     , "Expected: " + expected + ", Actual: " + actual);

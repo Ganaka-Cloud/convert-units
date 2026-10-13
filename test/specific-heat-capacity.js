@@ -33,38 +33,38 @@ tests['kJ/kg/K to J/kg/C'] = function () {
 };
 
 tests['J/kg/C to mJ/kg/C'] = function () {
-  assert.strictEqual( convert(1).from('J/kg/C').to('mJ/kg/C') , 0.001);
+  assert.strictEqual( convert(1).from('J/kg/C').to('mJ/kg/C') , 1000);
 };
 
 tests['mJ/kg/C to J/kg/C'] = function () {
-  assert.strictEqual( convert(1).from('mJ/kg/C').to('J/kg/C') , 1000);
+  assert.strictEqual( convert(1).from('mJ/kg/C').to('J/kg/C') , 0.001);
 };
 
 tests['J/kg/C to mJ/kg/K'] = function () {
-  assert.strictEqual( convert(1).from('J/kg/C').to('mJ/kg/K') , 0.001);
+  assert.strictEqual( convert(1).from('J/kg/C').to('mJ/kg/K') , 1000);
 };
 
 tests['mJ/kg/K to J/kg/C'] = function () {
-  assert.strictEqual( convert(1).from('mJ/kg/K').to('J/kg/C') , 1000);
+  assert.strictEqual( convert(1).from('mJ/kg/K').to('J/kg/C') , 0.001);
 };
 
 tests['J/kg/C to J/g/C'] = function () {
-  assert.strictEqual( convert(1).from('J/kg/C').to('J/g/C') , 1000);
+  assert.strictEqual( convert(1).from('J/kg/C').to('J/g/C') , 0.001);
 };
 
 tests['J/g/C to J/kg/C'] = function () {
-  assert.strictEqual( convert(1).from('J/g/C').to('J/kg/C') , 0.001);
+  assert.strictEqual( convert(1).from('J/g/C').to('J/kg/C') , 1000);
 };
 
 tests['J/kg/C to kgf-m/kg/C'] = function () {
-  var expected = 9.80665
+  var expected = 1/9.80665
     , actual = convert(1).from('J/kg/C').to('kgf-m/kg/C');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
 };
 
 tests['kgf-m/kg/C to J/kg/C'] = function () {
-  var expected = 1/9.80665
+  var expected = 9.80665
     , actual = convert(1).from('kgf-m/kg/C').to('J/kg/C');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);

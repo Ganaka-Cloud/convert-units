@@ -79,7 +79,7 @@ tests['kPa to atm'] = function () {
 };
 
 tests['mmHg to kPa'] = function () {
-  assert.strictEqual( convert(1).from('mmHg').to('kPa') , 0.133322);
+  assert.ok(Math.abs(convert(1).from('mmHg').to('kPa') / 0.133322387415 - 1) < 1e-12);
 };
 
 tests['cmH2O to kPa'] = function () {

@@ -127,7 +127,7 @@ tests['MeV to keV'] = function () {
 };
 
 tests['therm to J'] = function () {
-  assert.strictEqual( convert(1).from('therm').to('J') , 1.05506e8);
+  assert.ok(Math.abs(convert(1).from('therm').to('J') / 105506000 - 1) < 1e-12);
 };
 
 tests['quad to therm'] = function () {
@@ -150,7 +150,7 @@ tests['Eh to J'] = function () {
 };
 
 tests['Ry to J'] = function () {
-  var expected = 2.1798723611e-18
+  var expected = 2.179872361103e-18
     , actual = convert(1).from('Ry').to('J');
   assert.ok( percentError(expected, actual) < ACCURACY
     , 'Expected: ' + expected +', Actual: ' + actual);
