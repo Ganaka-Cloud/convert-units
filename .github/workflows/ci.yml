@@ -16,10 +16,10 @@ concurrency:
 jobs:
   lint-and-test:
     if: ${{ !github.event.pull_request.draft }}
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: useblacksmith/checkout@v1
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -42,10 +42,10 @@ jobs:
   # committed reference is what pint actually says for the committed unit map.
   pint-reference:
     if: ${{ !github.event.pull_request.draft }}
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: useblacksmith/checkout@v1
 
       - name: Use Python
         uses: actions/setup-python@v5
@@ -66,7 +66,7 @@ jobs:
   ci:
     if: ${{ always() && !github.event.pull_request.draft }}
     needs: [lint-and-test, pint-reference]
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
       - name: Verdict
         env:
