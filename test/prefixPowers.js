@@ -21,9 +21,11 @@ var CASES = [
   ["A/cm2", "A/m2", 1e4], ["A/mm2", "A/m2", 1e6], ["C/cm3", "C/m3", 1e6], ["C/cm2", "C/m2", 1e4],
   ["g/cm3", "kg/m3", 1e3], ["g/m3", "kg/m3", 1e-3], ["t/mm3", "kg/m3", 1e12], ["kg/l", "kg/m3", 1e3], ["g/l", "kg/m3", 1],
 ];
+// These cases predate Stiffness sharing the force-per-length abbreviations; they are the LineLoad ones.
+var SHARED = require("../scripts/sharedAbbreviations");
 CASES.forEach(function (c) {
   tests[c[0] + " is " + c[2] + " " + c[1]] = function () {
-    assert.ok(Math.abs(convert(1).from(c[0]).to(c[1]) / c[2] - 1) < 1e-12, c[0] + " to " + c[1]);
+    assert.ok(Math.abs(convert(1).from(c[0], SHARED[c[0]] ? "LineLoad" : undefined).to(c[1]) / c[2] - 1) < 1e-12, c[0] + " to " + c[1]);
   };
 });
 
@@ -41,7 +43,7 @@ tests["plain SI prefixes match their power"] = function () {
     if (!PREFIX.hasOwnProperty(p) || !byMeasure[u.measure][base]) return;
     // area, volume and moment families scale by the prefix to the power in the base's exponent
     if (/\d/.test(base)) return;
-    var v = convert(1).from(u.abbr).to(base);
+    var v = convert(1).from(u.abbr, u.measure).to(base, u.measure);
     assert.ok(Math.abs(v / PREFIX[p] - 1) < 1e-9, u.abbr + " to " + base + " = " + v);
   });
 };

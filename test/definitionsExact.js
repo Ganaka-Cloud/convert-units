@@ -122,9 +122,11 @@ var TABLE = [
   ["statH", "H", 1e-5 * 299792458 * 299792458],
 ];
 
+// These rows predate Stiffness sharing the force-per-length abbreviations; they are the LineLoad ones.
+var SHARED = require("../scripts/sharedAbbreviations");
 TABLE.forEach(function (row) {
   tests["1 " + row[0].replace(":", "-") + " is exactly " + row[2] + " " + row[1]] = function () {
-    var actual = convert(1).from(row[0]).to(row[1]);
+    var actual = convert(1).from(row[0], SHARED[row[0]] ? "LineLoad" : undefined).to(row[1]);
     assert.ok(Math.abs(actual - row[2]) / Math.abs(row[2]) < 1e-12, row[0] + " gave " + actual);
   };
 });

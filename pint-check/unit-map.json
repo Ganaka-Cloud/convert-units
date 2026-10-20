@@ -798,6 +798,25 @@
     },
     "Piezo-coefficient": {
       "m/V": "meter / volt"
+    },
+    "Stiffness": {
+      "N/m": "newton / meter",
+      "kN/m": "kilonewton / meter",
+      "MN/m": "meganewton / meter",
+      "N/mm": "newton / millimeter",
+      "kN/mm": "kilonewton / millimeter",
+      "lbf/in": "force_pound / inch",
+      "lbf/ft": "force_pound / foot",
+      "kip/in": "kip / inch"
+    },
+    "Rotational-stiffness": {
+      "N*m/rad": "newton * meter / radian",
+      "kN*m/rad": "kilonewton * meter / radian",
+      "MN*m/rad": "meganewton * meter / radian",
+      "lbf*in/rad": "force_pound * inch / radian",
+      "lbf*ft/rad": "force_pound * foot / radian",
+      "kip*in/rad": "kip * inch / radian",
+      "kip*ft/rad": "kip * foot / radian"
     }
   }
 }

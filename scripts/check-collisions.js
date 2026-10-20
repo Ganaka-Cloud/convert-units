@@ -1,30 +1,46 @@
 "use strict";
 
 const convert = require("../lib");
+const shared = require("./sharedAbbreviations");
 
 const allUnits = convert().list();
 
-// Build map: abbreviation -> array of measure names
+// measure -> abbr -> count (a duplicate inside one measure, across its systems, is a bug)
+const perMeasure = {};
+// abbr -> measures that define it
 const abbrToMeasures = {};
 for (const unit of allUnits) {
-  if (!abbrToMeasures[unit.abbr]) {
-    abbrToMeasures[unit.abbr] = [];
+  const m = (perMeasure[unit.measure] = perMeasure[unit.measure] || {});
+  m[unit.abbr] = (m[unit.abbr] || 0) + 1;
+  const list = (abbrToMeasures[unit.abbr] = abbrToMeasures[unit.abbr] || []);
+  if (!list.includes(unit.measure)) list.push(unit.measure);
+}
+
+const problems = [];
+for (const [measure, abbrs] of Object.entries(perMeasure)) {
+  for (const [abbr, n] of Object.entries(abbrs)) {
+    if (n > 1) problems.push(`"${abbr}" is defined ${n} times in ${measure}`);
   }
-  if (!abbrToMeasures[unit.abbr].includes(unit.measure)) {
-    abbrToMeasures[unit.abbr].push(unit.measure);
+}
+for (const [abbr, measures] of Object.entries(abbrToMeasures)) {
+  if (measures.length < 2) continue;
+  const expected = shared[abbr];
+  if (!expected || expected.slice().sort().join() !== measures.slice().sort().join()) {
+    problems.push(
+      `"${abbr}" is shared by ${measures.join(", ")} but is not listed in scripts/sharedAbbreviations.js`
+    );
+  }
+}
+for (const [abbr, measures] of Object.entries(shared)) {
+  if ((abbrToMeasures[abbr] || []).length < 2) {
+    problems.push(`"${abbr}" is listed as shared (${measures.join(", ")}) but no longer is`);
   }
 }
 
-// Find collisions: abbreviations appearing in more than one measure
-const collisions = Object.entries(abbrToMeasures).filter(([, measures]) => measures.length > 1);
-
-if (collisions.length === 0) {
+if (problems.length === 0) {
   console.log("No abbreviation collisions found.");
   process.exit(0);
-} else {
-  console.error("Abbreviation collisions detected:");
-  for (const [abbr, measures] of collisions) {
-    console.error(`  "${abbr}" appears in: ${measures.join(", ")}`);
-  }
-  process.exit(1);
 }
+console.error("Abbreviation problems detected:");
+for (const p of problems) console.error("  " + p);
+process.exit(1);

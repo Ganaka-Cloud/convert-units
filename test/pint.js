@@ -67,7 +67,7 @@ Object.keys(reference.measures).forEach(function (measure) {
       abbrs.forEach(function (a) {
         abbrs.forEach(function (b) {
           var expected = ref.factors[a] / ref.factors[b],
-            actual = convert(1).from(a).to(b),
+            actual = convert(1).from(a, measure).to(b, measure),
             e = err(actual, expected, 0);
           if (!(e <= tolerance(measure, a, b))) {
             failures.push("1 " + a + " -> " + b + ": " + actual + ", pint " + expected + " (rel " + e.toExponential(2) + ")");
@@ -76,7 +76,7 @@ Object.keys(reference.measures).forEach(function (measure) {
       });
     } else {
       ref.cases.forEach(function (c) {
-        var actual = convert(c[2]).from(c[0]).to(c[1]),
+        var actual = convert(c[2]).from(c[0], measure).to(c[1], measure),
           e = err(actual, c[3], 1);
         if (!(e <= tolerance(measure, c[0], c[1]))) {
           failures.push(c[2] + " " + c[0] + " -> " + c[1] + ": " + actual + ", pint " + c[3] + " (rel " + e.toExponential(2) + ")");
