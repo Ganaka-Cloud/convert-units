@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.12.0] - 2026-10-20
+
+New measures, and units are now identified by (measure, abbreviation).
+
+- New measure **Stiffness** (translational spring stiffness, SI base `N/m`): `N/m`, `kN/m`, `MN/m`, `N/mm`, `kN/mm`, `lbf/in`, `lbf/ft`, `kip/in`. Imperial anchor `lbf/in` (1 lbf/in = 175.126835 N/m, from 1 lbf = 4.4482216152605 N and 1 in = 0.0254 m).
+- New measure **Rotational-stiffness** (SI base `N*m/rad`): `N*m/rad`, `kN*m/rad`, `MN*m/rad`, `lbf*in/rad`, `lbf*ft/rad`, `kip*in/rad`, `kip*ft/rad`. Imperial anchor `lbf*in/rad`. No collision with Torque or Moment.
+- `from`, `to`, `describe` and `getUnit` accept the measure as an optional second argument: `convert(1).from('lbf/in', 'Stiffness').to('N/m', 'Stiffness')`. `.to` with no measure resolves inside the measure of `from`.
+- Five abbreviations are now shared by LineLoad and Stiffness: `N/m`, `N/mm`, `kN/m`, `lbf/in`, `lbf/ft` (list in `scripts/sharedAbbreviations.js`). `scripts/check-collisions.js` now fails on a duplicate abbreviation inside one measure, and on any cross-measure share that is not listed.
+- Behaviour change (the only one): calling a shared abbreviation with no measure, e.g. `convert(1).from('N/m')`, throws `Ambiguous unit N/m: it belongs to the measures LineLoad, Stiffness...` instead of resolving to LineLoad. Consumers that convert LineLoad values by abbreviation alone must pass `'LineLoad'`. Every other abbreviation behaves exactly as before.
+- Registry: `scripts/gen-registry.js` emits both measures with LaTeX (`$N.m^{-1}$`, `$kip.in^{-1}$`, `$N\cdot m.rad^{-1}$`) and siunit/imperialunit `N/m` / `lbf/in` and `N*m/rad` / `lbf*in/rad`. `latexUnits.json` is keyed by abbreviation, and a shared abbreviation has the same LaTeX in both measures.
+- Run `scripts/gen-registry.js` again after upgrading.
+
 ## [2.11.0] - 2026-10-12
 
 Unit keys are now the tag-grammar spelling only (SI symbols joined with `*` and `/`, bare integer exponents). Consumers must replace the removed keys; there are no aliases. Consumers install from git tags (ganaka-ui pins `#v2.10.0`) and run `scripts/gen-registry.js`, so re-run it after upgrading.

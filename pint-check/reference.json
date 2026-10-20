@@ -2031,6 +2031,31 @@
    "factors": {
     "m/V": 1.0
    }
+  },
+  "Stiffness": {
+   "base": "kilogram / second ** 2",
+   "factors": {
+    "N/m": 1.0,
+    "kN/m": 1000.0,
+    "MN/m": 1000000.0,
+    "N/mm": 1000.0,
+    "kN/mm": 1000000.0,
+    "lbf/in": 175.12683524647645,
+    "lbf/ft": 14.59390293720637,
+    "kip/in": 175126.83524647643
+   }
+  },
+  "Rotational-stiffness": {
+   "base": "kilogram * meter ** 2 / radian / second ** 2",
+   "factors": {
+    "N*m/rad": 1.0,
+    "kN*m/rad": 1000.0,
+    "MN*m/rad": 1000000.0,
+    "lbf*in/rad": 0.11298482902761671,
+    "lbf*ft/rad": 1.3558179483314006,
+    "kip*in/rad": 112.98482902761671,
+    "kip*ft/rad": 1355.8179483314004
+   }
   }
  }
 }

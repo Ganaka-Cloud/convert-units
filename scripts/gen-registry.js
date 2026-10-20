@@ -86,6 +86,13 @@ const LATEX_OVERRIDES = {
   "1/Pa": "$Pa^{-1}$",
   "1/psi": "$psi^{-1}$",
   "F/ft": "$^{\\circ}F.ft^{-1}$",
+  "N*m/rad": "$N\\cdot m.rad^{-1}$",
+  "kN*m/rad": "$kN\\cdot m.rad^{-1}$",
+  "MN*m/rad": "$MN\\cdot m.rad^{-1}$",
+  "lbf*in/rad": "$lbf\\cdot in.rad^{-1}$",
+  "lbf*ft/rad": "$lbf\\cdot ft.rad^{-1}$",
+  "kip*in/rad": "$kip\\cdot in.rad^{-1}$",
+  "kip*ft/rad": "$kip\\cdot ft.rad^{-1}$",
 };
 
 // Helper: generate LaTeX string for a unit abbreviation

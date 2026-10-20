@@ -334,6 +334,24 @@ Supported Units
 * MVARh
 * GVARh
 
+### Shared abbreviations
+
+A unit is identified by its measure and its abbreviation. A few abbreviations belong to more than
+one measure because the quantities have the same dimension: `N/m`, `N/mm`, `kN/m`, `lbf/in` and
+`lbf/ft` are in both `LineLoad` and `Stiffness` (see `scripts/sharedAbbreviations.js`). Pass the
+measure as the second argument of `from` and `to`:
+
+```js
+convert(1).from('lbf/in', 'Stiffness').to('N/m', 'Stiffness') // 175.126835...
+convert(1).from('kip/ft', 'LineLoad').to('lbf/ft', 'LineLoad') // 1000
+convert().describe('N/m', 'Stiffness') // { abbr: 'N/m', measure: 'Stiffness', ... }
+```
+
+If `to` has no measure it is looked up in the measure of `from`, so `convert(1).from('lbf/in',
+'Stiffness').to('N/m')` converts stiffness. Calling a shared abbreviation with no measure and no
+`from` to resolve it throws `Ambiguous unit N/m: it belongs to the measures LineLoad, Stiffness...`;
+it never picks one. Every other abbreviation works with or without the measure, as before.
+
 ### Want More?
 
 Adding new measurement sets is easy. Take a look at [`lib/definitions`](https://github.com/ben-ng/convert-units/tree/master/lib/definitions) to see how it's done.

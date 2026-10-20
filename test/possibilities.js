@@ -382,7 +382,10 @@ tests['all possibilities'] = function () {
         'K/m', 'F/ft',
         'S/m',
         '1/Pa', '1/psi',
-        'm/V'
+        'm/V',
+        // Stiffness shares N/m, kN/m, N/mm, lbf/ft and lbf/in with LineLoad, so they are listed twice
+        'N/m', 'kN/m', 'MN/m', 'N/mm', 'kN/mm', 'lbf/in', 'lbf/ft', 'kip/in',
+        'N*m/rad', 'kN*m/rad', 'MN*m/rad', 'lbf*in/rad', 'lbf*ft/rad', 'kip*in/rad', 'kip*ft/rad'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

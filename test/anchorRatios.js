@@ -61,10 +61,10 @@ function rel(expected, actual) {
 
 TABLE.forEach(function (row) {
   tests[row[0] + " 1 " + row[1] + " is exactly " + row[2]] = function () {
-    assert.ok(rel(row[3], convert(1).from(row[1]).to(row[2])) < 1e-12, row[1] + " to " + row[2]);
+    assert.ok(rel(row[3], convert(1).from(row[1], row[0]).to(row[2], row[0])) < 1e-12, row[1] + " to " + row[2]);
   };
   tests[row[0] + " 1 " + row[2] + " is exactly 1/" + row[1]] = function () {
-    assert.ok(rel(1 / row[3], convert(1).from(row[2]).to(row[1])) < 1e-12, row[2] + " to " + row[1]);
+    assert.ok(rel(1 / row[3], convert(1).from(row[2], row[0]).to(row[1], row[0])) < 1e-12, row[2] + " to " + row[1]);
   };
 });
 
