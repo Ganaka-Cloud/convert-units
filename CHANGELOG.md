@@ -10,7 +10,12 @@ New measures, and units are now identified by (measure, abbreviation).
 - New measure **Rotational-stiffness** (SI base `N*m/rad`): `N*m/rad`, `kN*m/rad`, `MN*m/rad`, `lbf*in/rad`, `lbf*ft/rad`, `kip*in/rad`, `kip*ft/rad`. Imperial anchor `lbf*in/rad`. No collision with Torque or Moment.
 - `from`, `to`, `describe` and `getUnit` accept the measure as an optional second argument: `convert(1).from('lbf/in', 'Stiffness').to('N/m', 'Stiffness')`. `.to` with no measure resolves inside the measure of `from`.
 - Five abbreviations are now shared by LineLoad and Stiffness: `N/m`, `N/mm`, `kN/m`, `lbf/in`, `lbf/ft` (list in `scripts/sharedAbbreviations.js`). `scripts/check-collisions.js` now fails on a duplicate abbreviation inside one measure, and on any cross-measure share that is not listed.
-- Behaviour change (the only one): calling a shared abbreviation with no measure, e.g. `convert(1).from('N/m')`, throws `Ambiguous unit N/m: it belongs to the measures LineLoad, Stiffness...` instead of resolving to LineLoad. Consumers that convert LineLoad values by abbreviation alone must pass `'LineLoad'`. Every other abbreviation behaves exactly as before.
+- Behaviour changes (all follow from shared abbreviations; every other abbreviation behaves exactly as before):
+  - `from(sharedAbbr)` and `describe(sharedAbbr)` with no measure throw `Ambiguous unit N/m: it belongs to the measures LineLoad, Stiffness...` instead of resolving to LineLoad. Consumers that convert LineLoad values by abbreviation alone must pass `'LineLoad'`.
+  - `convert().possibilities()` with no origin and no measure lists each shared abbreviation once per measure that has it.
+  - `to(sharedAbbr)` with no measure resolves inside the measure of `from`. If `from` is in an unrelated measure the error is now `Ambiguous unit` rather than `Cannot convert incompatible measures`.
+  - The same abbreviation in two different measures is no longer treated as the same unit: `from('N/m', 'LineLoad').to('N/m', 'Stiffness')` throws `Cannot convert incompatible measures`.
+  - Naming a measure that lacks the unit throws `Unsupported unit X in <measure>, use one of:` with that measure's units only.
 - Registry: `scripts/gen-registry.js` emits both measures with LaTeX (`$N.m^{-1}$`, `$kip.in^{-1}$`, `$N\cdot m.rad^{-1}$`) and siunit/imperialunit `N/m` / `lbf/in` and `N*m/rad` / `lbf*in/rad`. `latexUnits.json` is keyed by abbreviation, and a shared abbreviation has the same LaTeX in both measures.
 - Run `scripts/gen-registry.js` again after upgrading.
 

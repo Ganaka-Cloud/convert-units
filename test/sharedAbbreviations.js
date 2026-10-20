@@ -98,6 +98,30 @@ tests["a unit that is not in the named measure is unsupported"] = function () {
   }, /Unsupported unit kip\/in/);
 };
 
+tests["same abbreviation in two measures is not the same unit"] = function () {
+  assert.throws(function () {
+    convert(5).from("N/m", "LineLoad").to("N/m", "Stiffness");
+  }, /Cannot convert incompatible measures/);
+  assert.strictEqual(convert(5).from("N/m", "Stiffness").to("N/m", "Stiffness"), 5);
+};
+
+tests["to(sharedAbbr) from an unrelated measure is ambiguous"] = function () {
+  assert.throws(function () {
+    convert(1).from("kg").to("N/m");
+  }, /Ambiguous unit N\/m/);
+};
+
+tests["unsupported unit in a named measure lists only that measure"] = function () {
+  assert.throws(
+    function () {
+      convert(1).from("kip/ft", "Stiffness");
+    },
+    function (e) {
+      return /in Stiffness, use one of/.test(e.message) && e.message.indexOf("kip/in") >= 0 && e.message.indexOf("kg") < 0;
+    }
+  );
+};
+
 tests["an unknown measure throws"] = function () {
   assert.throws(function () {
     convert(1).from("N/m", "Nope");
