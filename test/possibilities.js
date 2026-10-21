@@ -385,7 +385,9 @@ tests['all possibilities'] = function () {
         'm/V',
         // Stiffness shares N/m, kN/m, N/mm, lbf/ft and lbf/in with LineLoad, so they are listed twice
         'N/m', 'kN/m', 'MN/m', 'N/mm', 'kN/mm', 'lbf/in', 'lbf/ft', 'kip/in',
-        'N*m/rad', 'kN*m/rad', 'MN*m/rad', 'lbf*in/rad', 'lbf*ft/rad', 'kip*in/rad', 'kip*ft/rad'
+        'N*m/rad', 'kN*m/rad', 'MN*m/rad', 'lbf*in/rad', 'lbf*ft/rad', 'kip*in/rad', 'kip*ft/rad',
+        // Temperature-difference shares K, C, F and R with Temperature, so they are listed twice
+        'K', 'C', 'F', 'R'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

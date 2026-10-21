@@ -43,14 +43,37 @@ tests["no abbreviation is defined twice inside one measure"] = function () {
 };
 
 tests["the five force-per-length abbreviations are shared by LineLoad and Stiffness"] = function () {
-  assert.deepStrictEqual(Object.keys(shared).sort(), ["N/m", "N/mm", "kN/m", "lbf/ft", "lbf/in"]);
-  Object.keys(shared).forEach(function (a) {
+  ["N/m", "N/mm", "kN/m", "lbf/ft", "lbf/in"].forEach(function (a) {
     assert.deepStrictEqual(shared[a], ["LineLoad", "Stiffness"]);
   });
 };
 
+tests["K, C, F and R are shared by Temperature and Temperature-difference"] = function () {
+  ["K", "C", "F", "R"].forEach(function (a) {
+    assert.deepStrictEqual(shared[a], ["Temperature", "Temperature-difference"]);
+  });
+  assert.deepStrictEqual(Object.keys(shared).sort(), ["C", "F", "K", "N/m", "N/mm", "R", "kN/m", "lbf/ft", "lbf/in"]);
+};
+
+tests["a temperature unit and a temperature-difference unit are different units"] = function () {
+  ["K", "C", "F", "R"].forEach(function (a) {
+    assert.throws(function () {
+      convert(1).from(a);
+    }, /Ambiguous unit/);
+    assert.strictEqual(convert().describe(a, "Temperature").measure, "Temperature");
+    assert.strictEqual(convert().describe(a, "Temperature-difference").measure, "Temperature-difference");
+  });
+  assert.throws(function () {
+    convert(5).from("K", "Temperature").to("K", "Temperature-difference");
+  }, /Cannot convert incompatible measures/);
+  assert.strictEqual(convert(10).from("C", "Temperature-difference").to("K"), 10);
+  assert.strictEqual(convert(0).from("C", "Temperature").to("K"), 273.15);
+};
+
 // Ambiguous abbreviation, no measure: a clear error, never a silent pick.
-Object.keys(shared).forEach(function (a) {
+Object.keys(shared).filter(function (a) {
+  return shared[a][0] === "LineLoad";
+}).forEach(function (a) {
   tests["from(" + a + ") without a measure throws, naming the measures"] = function () {
     assert.throws(
       function () {

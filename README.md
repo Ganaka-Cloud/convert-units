@@ -334,11 +334,28 @@ Supported Units
 * MVARh
 * GVARh
 
+### Temperature difference
+
+`Temperature` converts points on a scale, so it adds the Celsius and Fahrenheit offsets. A change in
+temperature converts by scale only, so it is its own measure, `Temperature-difference` (SI base `K`):
+
+```js
+convert(10).from('C', 'Temperature-difference').to('K', 'Temperature-difference') // 10
+convert(18).from('F', 'Temperature-difference').to('K', 'Temperature-difference') // 10
+convert(9).from('R', 'Temperature-difference').to('K', 'Temperature-difference') // 5
+convert(0).from('C', 'Temperature').to('K', 'Temperature') // 273.15 (a point, not a change)
+```
+
+Units: `K` = 1 K, `C` = 1 K, `F` = 5/9 K, `R` = 5/9 K (NIST SP 811 (2008) 4.2.1.1 and Appendix B.8).
+They use the same abbreviations as `Temperature`, so `K`, `C`, `F` and `R` are shared and need the
+measure (see below).
+
 ### Shared abbreviations
 
 A unit is identified by its measure and its abbreviation. A few abbreviations belong to more than
 one measure because the quantities have the same dimension: `N/m`, `N/mm`, `kN/m`, `lbf/in` and
-`lbf/ft` are in both `LineLoad` and `Stiffness` (see `scripts/sharedAbbreviations.js`). Pass the
+`lbf/ft` are in both `LineLoad` and `Stiffness`, and `K`, `C`, `F` and `R` are in both `Temperature`
+and `Temperature-difference` (see `scripts/sharedAbbreviations.js`). Pass the
 measure as the second argument of `from` and `to`:
 
 ```js
