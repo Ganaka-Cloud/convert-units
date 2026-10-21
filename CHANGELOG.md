@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.13.0] - 2026-10-21
+
+New measure **Temperature-difference** (a change or interval, not a point on a scale), and `K`, `C`, `F`, `R` become shared abbreviations.
+
+- New measure **Temperature-difference** (SI base `K`, a kelvin difference): `K` = 1 K, `C` (delta degree Celsius) = 1 K, `F` (delta degree Fahrenheit) = 5/9 K, `R` (degree Rankine difference) = 5/9 K. Scale only, no offset: `convert(10).from('C', 'Temperature-difference').to('K', 'Temperature-difference')` is 10, `convert(18).from('F', 'Temperature-difference').to('K', 'Temperature-difference')` is 10. Source: NIST SP 811 (2008) 4.2.1.1 (a Celsius interval equals the kelvin interval) and Appendix B.8 (a Fahrenheit or Rankine interval is 5/9 K). Metric anchor `K`, imperial anchor `F`.
+- `K`, `C`, `F` and `R` are now shared by Temperature and Temperature-difference (list in `scripts/sharedAbbreviations.js`), by the shared-abbreviation rule of 2.12.0. `Re` stays Temperature only.
+- Behaviour change (breaking for Temperature by abbreviation alone): `convert(0).from('C').to('K')` and `describe('C')` now throw `Ambiguous unit C: it belongs to the measures Temperature, Temperature-difference...`. Consumers that convert temperatures by abbreviation alone must pass `'Temperature'`: `convert(0).from('C', 'Temperature').to('K')`. `.to` with no measure resolves inside the measure of `from`. `convert().possibilities()` with no origin and no measure lists `K`, `C`, `F` and `R` twice. Every other abbreviation behaves as before.
+- `pint-check`: mapped to pint `kelvin`, `delta_degC`, `delta_degF`, `degR`; `reference.json` regenerated (pint 0.26.1).
+- Registry: `scripts/gen-registry.js` emits `Temperature-difference` with siunit `K` and imperialunit `F`. Run it again after upgrading.
+
 ## [2.12.0] - 2026-10-20
 
 New measures, and units are now identified by (measure, abbreviation).

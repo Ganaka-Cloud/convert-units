@@ -817,6 +817,12 @@
       "lbf*ft/rad": "force_pound * foot / radian",
       "kip*in/rad": "kip * inch / radian",
       "kip*ft/rad": "kip * foot / radian"
+    },
+    "Temperature-difference": {
+      "K": "kelvin",
+      "C": "delta_degC",
+      "F": "delta_degF",
+      "R": "degR"
     }
   }
 }

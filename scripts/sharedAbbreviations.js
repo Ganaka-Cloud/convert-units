@@ -10,4 +10,10 @@ module.exports = {
   "kN/m": ["LineLoad", "Stiffness"],
   "lbf/in": ["LineLoad", "Stiffness"],
   "lbf/ft": ["LineLoad", "Stiffness"],
+  // Temperature-difference reuses the symbols of Temperature: a change of 10 C is 10 K, but
+  // 10 C as a point on the scale is 283.15 K.
+  K: ["Temperature", "Temperature-difference"],
+  C: ["Temperature", "Temperature-difference"],
+  F: ["Temperature", "Temperature-difference"],
+  R: ["Temperature", "Temperature-difference"],
 };
