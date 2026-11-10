@@ -387,7 +387,11 @@ tests['all possibilities'] = function () {
         'N/m', 'kN/m', 'MN/m', 'N/mm', 'kN/mm', 'lbf/in', 'lbf/ft', 'kip/in',
         'N*m/rad', 'kN*m/rad', 'MN*m/rad', 'lbf*in/rad', 'lbf*ft/rad', 'kip*in/rad', 'kip*ft/rad',
         // Temperature-difference shares K, C, F and R with Temperature, so they are listed twice
-        'K', 'C', 'F', 'R'
+        'K', 'C', 'F', 'R',
+        // Resistance-per-length, Linear-density and Root-pressure
+        'Ω/m', 'mΩ/m', 'μΩ/m', 'Ω/km', 'Ω/ft', 'Ω/kft', 'Ω/mi',
+        'kg/m', 'g/m', 'kg/km', 'lb/ft', 'lb/in', 'lb/yd',
+        'sqrt(Pa)', 'sqrt(kPa)', 'sqrt(MPa)', 'sqrt(GPa)', 'sqrt(psi)', 'sqrt(ksi)'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

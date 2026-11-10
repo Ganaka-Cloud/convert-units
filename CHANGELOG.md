@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.14.0] - 2026-11-10
+
+Three new measures, for engineering quantities that had no unit: a line's impedance per length, a belt's mass per length, and the elastic coefficient of contact stress. No existing unit changes, and none of the new abbreviations is shared.
+
+- New measure **Resistance-per-length** (SI base `Ω/m`): `Ω/m`, `mΩ/m`, `μΩ/m`, `Ω/km`, `Ω/ft`, `Ω/kft`, `Ω/mi`. For a conductor's series resistance or reactance per length (IEC 60909 line and cable data). Imperial anchor `Ω/ft` = 1/0.3048 Ω/m.
+- New measure **Linear-density** (SI base `kg/m`): `kg/m`, `g/m`, `kg/km`, `lb/ft`, `lb/in`, `lb/yd`. For the mass per length of a belt, chain, cable or bar. Imperial anchor `lb/ft` = 0.45359237/0.3048 kg/m.
+- New measure **Root-pressure** (SI base `sqrt(Pa)`): `sqrt(Pa)`, `sqrt(kPa)`, `sqrt(MPa)`, `sqrt(GPa)`, `sqrt(psi)`, `sqrt(ksi)`. For the elastic coefficient of Hertz contact stress (ISO 6336 Z_E, AGMA C_p), quoted in √MPa or √psi. Imperial anchor `sqrt(psi)` = √(4.4482216152605/0.0254²) √Pa; 2300 √psi = 190.98 √MPa.
+- Every factor follows from the exact definitions in `lib/constants.js`, and `pint-check` maps all 19 units (pint 0.26.1; `reference.json` regenerated). Pint has no kilofoot, so `Ω/kft` maps to `ohm / (1000 * foot)`.
+- Registry: `scripts/gen-registry.js` emits the three measures. The `sqrt(…)` units render as `$\sqrt{Pa}$` and so on (new entries in `LATEX_OVERRIDES`). Run it again after upgrading.
+
 ## [2.13.0] - 2026-10-21
 
 New measure **Temperature-difference** (a change or interval, not a point on a scale), and `K`, `C`, `F`, `R` become shared abbreviations.

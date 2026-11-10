@@ -350,6 +350,44 @@ Units: `K` = 1 K, `C` = 1 K, `F` = 5/9 K, `R` = 5/9 K (NIST SP 811 (2008) 4.2.1.
 They use the same abbreviations as `Temperature`, so `K`, `C`, `F` and `R` are shared and need the
 measure (see below).
 
+### Resistance per length
+A conductor's series resistance or reactance per unit length, as line and cable data give it
+(SI base `Ω/m`):
+* Ω/m
+* mΩ/m
+* μΩ/m
+* Ω/km
+* Ω/ft
+* Ω/kft
+* Ω/mi
+
+```js
+convert(0.32).from('Ω/km').to('Ω/m') // 0.00032
+```
+
+### Linear density
+Mass per unit length of a belt, chain, cable or bar (SI base `kg/m`):
+* kg/m
+* g/m
+* kg/km
+* lb/ft
+* lb/in
+* lb/yd
+
+### Root pressure
+The square root of a pressure, the unit of the elastic coefficient in contact (Hertz) stress
+(ISO 6336 Z_E, AGMA C_p), SI base `sqrt(Pa)`:
+* sqrt(Pa)
+* sqrt(kPa)
+* sqrt(MPa)
+* sqrt(GPa)
+* sqrt(psi)
+* sqrt(ksi)
+
+```js
+convert(2300).from('sqrt(psi)').to('sqrt(MPa)') // 190.98, AGMA's steel-on-steel value
+```
+
 ### Shared abbreviations
 
 A unit is identified by its measure and its abbreviation. A few abbreviations belong to more than
