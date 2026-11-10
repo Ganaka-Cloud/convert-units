@@ -823,6 +823,31 @@
       "C": "delta_degC",
       "F": "delta_degF",
       "R": "degR"
+    },
+    "Resistance-per-length": {
+      "Ω/m": "ohm / meter",
+      "mΩ/m": "milliohm / meter",
+      "μΩ/m": "microohm / meter",
+      "Ω/km": "ohm / kilometer",
+      "Ω/ft": "ohm / foot",
+      "Ω/kft": { "pint": "ohm / (1000 * foot)", "why": "Pint has no kilofoot; 1 kft = 1000 international feet." },
+      "Ω/mi": "ohm / mile"
+    },
+    "Linear-density": {
+      "kg/m": "kilogram / meter",
+      "g/m": "gram / meter",
+      "kg/km": "kilogram / kilometer",
+      "lb/ft": "pound / foot",
+      "lb/in": "pound / inch",
+      "lb/yd": "pound / yard"
+    },
+    "Root-pressure": {
+      "sqrt(Pa)": "pascal ** 0.5",
+      "sqrt(kPa)": "kilopascal ** 0.5",
+      "sqrt(MPa)": "megapascal ** 0.5",
+      "sqrt(GPa)": "gigapascal ** 0.5",
+      "sqrt(psi)": "psi ** 0.5",
+      "sqrt(ksi)": "ksi ** 0.5"
     }
   }
 }
