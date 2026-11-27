@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.15.0] - 2026-11-27
+
+New measure **Linear-power** (SI base `W/m`), for power per unit length: a fuel rod's linear heat rate q', a heater cable's rating, a line's loss per length. No existing unit changes, and none of the new abbreviations is shared.
+
+- Units: `W/m`, `W/cm`, `kW/m`, `MW/m`, `Btu/hr/ft`, `kW/ft`. Imperial anchor `Btu/hr/ft` = 1055.05585262/(3600 × 0.3048) W/m = 0.9615193 W/m (NIST SP 811 App. B.8: Btu_IT/h = 0.2930711 W, ft = 0.3048 m exactly); `kW/ft` = 1000/0.3048 W/m.
+- `pint-check` maps all six units (pint 0.26.1; `reference.json` regenerated). Registry: run `scripts/gen-registry.js` again after upgrading.
+
 ## [2.14.0] - 2026-11-10
 
 Three new measures, for engineering quantities that had no unit: a line's impedance per length, a belt's mass per length, and the elastic coefficient of contact stress. No existing unit changes, and none of the new abbreviations is shared.

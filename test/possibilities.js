@@ -391,7 +391,9 @@ tests['all possibilities'] = function () {
         // Resistance-per-length, Linear-density and Root-pressure
         'Ω/m', 'mΩ/m', 'μΩ/m', 'Ω/km', 'Ω/ft', 'Ω/kft', 'Ω/mi',
         'kg/m', 'g/m', 'kg/km', 'lb/ft', 'lb/in', 'lb/yd',
-        'sqrt(Pa)', 'sqrt(kPa)', 'sqrt(MPa)', 'sqrt(GPa)', 'sqrt(psi)', 'sqrt(ksi)'
+        'sqrt(Pa)', 'sqrt(kPa)', 'sqrt(MPa)', 'sqrt(GPa)', 'sqrt(psi)', 'sqrt(ksi)',
+        // Linear-power
+        'W/m', 'W/cm', 'kW/m', 'MW/m', 'Btu/hr/ft', 'kW/ft'
   ];
   // merge currency codes
   expected = expected.concat(getCurrencyCodes());

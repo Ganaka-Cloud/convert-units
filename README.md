@@ -388,6 +388,19 @@ The square root of a pressure, the unit of the elastic coefficient in contact (H
 convert(2300).from('sqrt(psi)').to('sqrt(MPa)') // 190.98, AGMA's steel-on-steel value
 ```
 
+### Linear power
+Power per unit length, such as a fuel rod's linear heat rate q' (SI base `W/m`):
+* W/m
+* W/cm
+* kW/m
+* MW/m
+* Btu/hr/ft
+* kW/ft
+
+```js
+convert(20).from('kW/m').to('W/cm') // 200
+```
+
 ### Shared abbreviations
 
 A unit is identified by its measure and its abbreviation. A few abbreviations belong to more than

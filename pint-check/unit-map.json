@@ -848,6 +848,14 @@
       "sqrt(GPa)": "gigapascal ** 0.5",
       "sqrt(psi)": "psi ** 0.5",
       "sqrt(ksi)": "ksi ** 0.5"
+    },
+    "Linear-power": {
+      "W/m": "watt / meter",
+      "W/cm": "watt / centimeter",
+      "kW/m": "kilowatt / meter",
+      "MW/m": "megawatt / meter",
+      "Btu/hr/ft": "Btu_it / hour / foot",
+      "kW/ft": "kilowatt / foot"
     }
   }
 }
